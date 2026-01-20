@@ -57,9 +57,9 @@ const USE_CASE_ITEMS = [
 export default function Navbar() {
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-white/60 border-dullwhite">
            
-            <div className="mx-auto px-6 py-2 md:py-0 flex justify-between items-center">
+            <div className="mx-auto lg:px-20 sm:px-10 px-4 py-2 md:py-0 flex justify-between items-center">
                 <Link href="/" className="flex items-center py-2">
                     <Image
                         src="/logo.png"
@@ -70,10 +70,9 @@ export default function Navbar() {
                         className="rounded-full"
                     />
                 </Link>
-
                 
                 <div className="flex gap-10">
-                    <div className="hidden md:flex">
+                    <div className="hidden lg:flex">
                         <NavigationMenu className="h-14 flex items-center">
                             <NavigationMenuList className="flex items-center">
                                 <NavigationMenuItem>
@@ -133,7 +132,7 @@ export default function Navbar() {
                         </NavigationMenu>
                     </div>
                     
-                    <div className="hidden md:flex gap-4 items-center">
+                    <div className="hidden lg:flex gap-4 items-center">
                         <Link href="/signin" className="btn-sm btn-secondary cursor-pointer">
                             Sign in
                         </Link>
@@ -142,7 +141,7 @@ export default function Navbar() {
                         </Link>
                     </div>
                 </div>
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     <Sheet>
                         <SheetTrigger asChild>
                             <button className="p-2">

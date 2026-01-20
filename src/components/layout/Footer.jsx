@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className=" w-full relative ">
@@ -16,9 +19,20 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-semibold text-slate-900">
-              ContractKit
-            </h3>
+            <Link href="/" className="flex items-center py-2 gap-3">
+              <Image
+                src="/logo.png"
+                alt="LegitCheck logo"
+                width={100}
+                height={60}
+                priority
+                className="rounded-full"
+              />
+              <h3 className="font-semibold text-slate-900">
+                Sanatani sena
+              </h3>
+            </Link>
+            
             <p className="mt-3 text-sm text-slate-600 leading-relaxed">
               Fast, affordable contract risk analysis for freelancers and small agencies.
             </p>

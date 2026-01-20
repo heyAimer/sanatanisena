@@ -7,6 +7,8 @@
   --color-saffron-soft: #ffb366;
   --color-saffron-dark: #cc6f1d;
 
+  --color-discord:#5865F2;
+
   --color-maroon: #7b1e1e;
   --color-cream: #fff7e6;
   --color-sandal: #f4e8d1;
@@ -15,7 +17,7 @@
 
   --color-text: #2a1f16;
   --color-muted: #6b5e54;
-  --color-border: #eadfcf;
+  --color-border: #ecdbc3;
 
   --color-gold: #d4af37;
   --color-kesar-glow: rgba(242, 140, 40, 0.25);
@@ -34,10 +36,6 @@
   --font-body: var(--font-hind);
   --font-heading: var(--font-poppins);
   --font-sanskrit: var(--font-devanagari);
-}
-
-* {
-  border-color: var(--color-border);
 }
 
 html {
@@ -60,25 +58,11 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading), system-ui, sans-serif;
-  font-weight: 600;
   letter-spacing: -0.015em;
 }
 
-h1 {
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-}
-
-h2 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-}
-
-h3 {
-  font-size: 1.4rem;
-}
-
-small,
 .text-muted {
-  color: var(--color-muted);
+  color:#d46402;
 }
 
 .text-sanskrit {
@@ -87,6 +71,15 @@ small,
   line-height: 1.9;
 }
 
+.border-white{
+  border-color: var(--color-bg) ;
+}
+.border-dullwhite{
+  border-color: var(--color-border);
+}
+.bg-white{
+  background-color: var(--color-bg);
+}
 a {
   text-decoration: none;
   transition: color 0.2s ease;
@@ -109,27 +102,80 @@ a {
   border-radius: 10px;
 }
 
-.bg-sacred {
-  background:
-    radial-gradient(
-      circle at top,
-        rgba(242, 140, 40, 0.08),
-      transparent 60%
-    ),
-    var(--color-bg);
-}
+.bg-saffron-gradient {
+  position: relative;
+  overflow: hidden;
 
-.divider-temple {
-  height: 1px;
+  /* Base warm saffron → cream gradient */
   background: linear-gradient(
-    to right,
-    transparent,
-    var(--color-gold),
-    transparent
+    to bottom,
+    #f8a55c 0%,
+    #fbc38a 35%,
+    #fde7cf 65%,
+    #fffdf8 100%
   );
 }
 
-@keyframes diyaGlow {
+.bg-saffron-gradient::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 120%;
+  height: 70%;
+
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 200, 140, 0.25),
+    transparent 70%
+  );
+
+  filter: blur(50px);
+  opacity: 0.9;
+  z-index: 0;
+}
+.bg-saffron-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 255, 255, 0.25),
+    transparent 60%
+  );
+
+  z-index: 0;
+}
+
+.bg-saffron-gradient2 {
+  /* Base warm saffron → cream gradient */
+  background: linear-gradient(
+    to bottom right,
+    #ee7903 0%,
+    #ff9d3b 65%,
+    #e47608 100%
+  );
+}
+
+.bg-saffron-gradientBR {
+  position: relative;
+  overflow: hidden;
+
+  /* Base warm saffron → cream gradient */
+  background: linear-gradient(
+    to bottom right,
+    #ffd7b0 0%,
+    #fde7cf 65%,
+    #ffd7b0 100%
+  );
+}
+
+@keyframes objGlow {
   from {
     box-shadow: 0 0 12px rgba(242, 140, 40, 0.2);
   }
@@ -138,12 +184,36 @@ a {
   }
 }
 
-.animate-diya {
-  animation: diyaGlow 3s ease-in-out infinite alternate;
+@keyframes objFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-obj {
+  animation: objFloat 3s ease-in-out infinite;
+}
+
+.color-discord{
+  @apply border-2 font-semibold transition-all duration-200 ease-out;
+  border-color: var(--color-discord);
+  color:var(--color-discord);
+  border-radius: var(--radius-sm)
+}
+
+.color-discord:hover {
+  background-color: var(--color-discord);
+  color:white;
 }
 
 .btn-primary {
-  @apply font-medium text-white transition;
+  @apply font-medium text-white transition-all duration-200 ease-out border-2;
   background: linear-gradient(
     135deg,
     var(--color-saffron),
@@ -153,15 +223,34 @@ a {
   box-shadow: var(--shadow-soft);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.btn-secondary {
-  @apply border-2 font-semibold;
-  border-color: linear-gradient(
-    120deg,
-    var(--color-saffron),
-    var(--color-saffron-dark)
+
+.btn-primary:hover {
+  box-shadow: 0 8px 20px rgba(255, 153, 51, 0.35);
+  background: linear-gradient(
+    135deg,
+    var(--color-saffron-dark),
+    var(--color-saffron)
   );
-  color:var(--color-saffron-dark);
+}
+
+.btn-secondary {
+  @apply border-2 font-semibold transition-all duration-200 ease-out;
+  border-color: var(--color-saffron-dark);
+  color: var(--color-saffron-dark);
   border-radius: var(--radius-sm);
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 153, 51, 0.08);
+  color: var(--color-saffron);
+  border-color: var(--color-saffron);
+}
+
+.btn-secondary:active,
+.btn-primary:active,
+.color-discord:active {
+  transform: scale(0.96);
 }
 
 .btn-sm {
@@ -173,7 +262,7 @@ a {
 }
 
 .btn-lg {
-  @apply px-6 py-3 text-lg;
+  @apply px-6 py-3 text-xl;
 }
 
 .card-sacred {
