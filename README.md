@@ -40,3 +40,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 * Hind
 * Poppings or iner
 * Tiro Devananagari sanskrit
+
+(api logic jidhar lagega wo features me jaiga)
+(only ui thing goes in component folder)
+(routing goes in app folder)

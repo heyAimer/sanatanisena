@@ -1,7 +1,7 @@
 const CTAsection = () => {
     return (
         <section className="relative overflow-hidden py-20 ">
-            <div className="mx-auto max-w-6xl px-6 text-center">
+            <div className="mx-auto max-w-7xl px-6 text-center">
                 {/* Heading */}
                 <h2 className="text-3xl md:text-4xl font-semibold">
                 Become Part of the Sanatan Movement

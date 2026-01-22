@@ -3,6 +3,8 @@ import { Poppins} from "next/font/google";
 import {Tiro_Devanagari_Sanskrit } from "next/font/google";
 import "./globals.css";
 import "../styles/main.scss";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 
 const hind = Hind({
   subsets: ["latin"],
@@ -31,6 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      
       <body
         className={`
           antialiased
@@ -40,8 +43,13 @@ export default function RootLayout({ children }) {
           ${devanagari.variable}
         `}
       >
-        {children}
+        <Navbar />
+        <main className="">
+          {children}
+        </main>
+        <Footer/>
       </body>
+     
     </html>
   );
 }

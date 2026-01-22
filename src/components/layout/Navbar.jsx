@@ -2,7 +2,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { Menu } from "lucide-react";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,51 +20,45 @@ import {
 } from "@/components/ui/sheet"
 import Image from "next/image";
 
-const PRODUCT_ITEMS = [
-  {
-    title: "How it works",
-    href: "#how-it-works",
-    description:
-      "Upload a contract and get clear risk highlights in under a minute.",
-  },
-  {
-    title: "Risk analysis",
-    href: "#risk-analysis",
-    description:
-      "Instantly spot payment, IP, scope creep, and termination risks.",
-  }
+const nav = [
+    {
+        id: 1,
+        name: "Home",
+        href:"/"
+    },
+    {
+        id: 2,
+        name: "About",
+        href:"/about"
+    },
+    {
+        id: 3,
+        name: "Blogs",
+        href:"/blogs"
+    },
+    {
+        id: 4,
+        name: "Donate",
+        href:"/donate"
+    },
+    {
+        id: 5,
+        name: "Extrass",
+        href:"/donate"
+    },
 ]
-
-const USE_CASE_ITEMS = [
-  {
-    title: "Freelancers",
-    href: "/freelancers",
-    description: "Avoid unfair clauses and protect your payment.",
-  },
-  {
-    title: "Small agencies",
-    href: "/agencies",
-    description: "Catch scope creep and risky client terms early.",
-  },
-  {
-    title: "Designers & developers",
-    href: "/creators",
-    description: "Understand IP ownership and usage rights clearly.",
-  },
-]
-
-export default function Navbar() {
-
+export default function Navbar() {                                         
+    const [open, setOpen] = React.useState(false);
     return (
-        <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-white/60 border-dullwhite">
+        <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-neutral-100/60 border-dullwhite">
            
-            <div className="mx-auto lg:px-20 sm:px-10 px-4 py-2 md:py-0 flex justify-between items-center">
-                <Link href="/" className="flex items-center py-2">
+            <div className="mx-auto max-w-7xl md:py-0 flex justify-between items-center sm:px-10 px-6 ">
+                <Link href="/" className="flex items-center py-2 gap-2">
                     <Image
                         src="/logo.png"
-                        alt="LegitCheck logo"
-                        width={60}
-                        height={60}
+                        alt="sanatanisena logo"
+                        width={45}
+                        height={40}
                         priority
                         className="rounded-full"
                     />
@@ -75,59 +68,13 @@ export default function Navbar() {
                     <div className="hidden lg:flex">
                         <NavigationMenu className="h-14 flex items-center">
                             <NavigationMenuList className="flex items-center">
-                                <NavigationMenuItem>
-                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                                    <Link href="#hero">Home</Link>
-                                    </NavigationMenuLink>
-                                </NavigationMenuItem>
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>Join</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <ul className="grid gap-4 md:w-[400px] lg:w-[500px] p-4">
-                                            {
-                                                PRODUCT_ITEMS.map((item) => (
-                                                    <ListItem
-                                                        key={item.title}
-                                                        title={item.title}
-                                                        href={item.href}
-                                                    >
-                                                        {item.description}
-                                                    </ListItem>
-                                                ))
-                                            }
-                                        </ul>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
-
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>Contact</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                    <ul className="grid gap-4 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px] p-4">
-                                        {USE_CASE_ITEMS.map((component) => (
-                                        <ListItem
-                                            key={component.title}
-                                            title={component.title}
-                                            href={component.href}
-                                        >
-                                            {component.description}
-                                        </ListItem>
-                                        ))}
-                                    </ul>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
-
-                                <NavigationMenuItem>
-                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                                    <Link href="#pricing">About</Link>
-                                    </NavigationMenuLink>
-                                </NavigationMenuItem>
-
-                                <NavigationMenuItem>
-                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                                    <Link href="#pricing">Extra</Link>
-                                    </NavigationMenuLink>
-                                </NavigationMenuItem>
-
+                                {nav.map((item) => (
+                                    <NavigationMenuItem key={item.id}>
+                                        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                        <Link href={item.href}>{item.name}</Link>
+                                        </NavigationMenuLink>
+                                    </NavigationMenuItem>
+                                ))}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>
@@ -142,19 +89,19 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="lg:hidden">
-                    <Sheet>
+                    <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
                             <button className="p-2">
                                 <Menu className="h-6 w-6"/>
                             </button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-80 px-6 bg-[#fffdf8]">
+                        <SheetContent side="right" className="w-80 px-6 bg-neutral-100">
                             <VisuallyHidden>
                                 <SheetTitle>
                                     mobile navigation
                                 </SheetTitle>
                             </VisuallyHidden>
-                            <MobileNav />
+                            <MobileNav closeSheet={() => setOpen(false)} />
                         </SheetContent>
                     </Sheet>
                 </div>
@@ -163,73 +110,24 @@ export default function Navbar() {
     )
 }
 
-function MobileNav() {
+function MobileNav({ closeSheet }) {
     return (
         <nav className="mt-8 flex flex-col gap-6 font-semibold">
-            {/* PRODUCT */}
-            <div>
-                <p className="mb-4 text-sm text-muted-foreground">Product</p>
-                <div className="flex flex-col gap-2">
-                {PRODUCT_ITEMS.map((item) => (
-                    <Link key={item.title} href={item.href}>
-                    {item.title}
-                    </Link>
-                ))}
-                </div>
-            </div>
-
-            {/* USE CASES */}
-            <div>
-                <p className="mb-4 text-sm text-muted-foreground">Use cases</p>
-                <div className="flex flex-col gap-2">
-                {USE_CASE_ITEMS.map((item) => (
-                    <Link key={item.title} href={item.href}>
-                    {item.title}
-                    </Link>
-                ))}
-                </div>
-            </div>
-
-            <Link href="/pricing">Pricing</Link>
-
-            <div className="border-t pt-6 flex flex-col gap-3 text-center text-sm font-medium">
-                <Link href="/signin" className="btn-md btn-secondary cursor-pointer">
+            {nav.map((items) => {
+                return (
+                    <div key={items.id}>
+                        <Link href={items.href} className="mb-4 text-sm text-muted-foreground" onClick={closeSheet}>{items.name}</Link>
+                    </div>
+                )
+            })}
+            <div className="border-t border-dullwhite pt-6 flex flex-col gap-3 text-center text-sm font-medium">
+                <Link href="/signin" className="btn-md btn-secondary cursor-pointer" onClick={closeSheet}>
                     Sign in
                 </Link>
-                <Link href="/tryFree" className="btn-primary btn-md cursor-pointer ">
+                <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
                     Try free analysis
                 </Link>
             </div>
          </nav>
     )
-}
-
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}) {
-    return (
-        <li {...props}> 
-            <NavigationMenuLink asChild>
-                <Link
-                    href={href}
-                    className="
-                        block rounded-md p-3
-                        transition-colors
-                        hover:bg-accent
-                        focus:bg-accent
-                        focus:outline-none
-                    "
-                >
-                    <div className="text-md leading-none font-medium mb-1">{title}</div>
-                    <p className="text-muted-foreground line-clamp-2 text-[14px] leading-snug">
-                        {children}
-                    </p>
-                </Link>
-            </NavigationMenuLink>
-        </li>
-    )
-    
 }

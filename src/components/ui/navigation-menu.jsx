@@ -45,7 +45,7 @@ function NavigationMenuItem({
   return (
     <NavigationMenuPrimitive.Item
       data-slot="navigation-menu-item"
-      className={cn("relative", className)}
+      className={cn("relative hover:bg-neutral-200/50 rounded-sm", className)}
       {...props} />
   );
 }
