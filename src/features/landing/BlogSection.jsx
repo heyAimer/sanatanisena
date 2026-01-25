@@ -61,7 +61,7 @@ const BlogSection = () => {
             
                             <div className="p-5">
                             <span className="mb-2 inline-block rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700 border">
-                                {blog.category}sdf
+                                {blog.category}
                             </span>
             
                             <h3 className="mt-3 text-lg font-semibold">

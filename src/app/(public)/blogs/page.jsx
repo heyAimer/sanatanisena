@@ -1,13 +1,7 @@
-
+import BlogPage from "@/features/blogs/BlogPage";
 
 const page = () => {
-    return (
-        // <BlogList/>
-        // <BlogList admin/>
-        <div>
-            hello
-        </div>
-    );
+    return <BlogPage />;
 }
 export default page;
 export const metadata = {
@@ -15,3 +9,6 @@ export const metadata = {
   description:
     "Read Blogs!",
 };
+
+// <BlogList/>
+        // <BlogList admin/>

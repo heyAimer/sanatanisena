@@ -1,8 +1,8 @@
-import BlogSection from "@/features/dashboard/BlogSection";
-import CTAsection from "@/features/dashboard/CTAsection";
-import HeroSection from "@/features/dashboard/HeroSection";
-import JoinDCsection from "@/features/dashboard/JoinDCsection";
-import WhatWeDo from "@/features/dashboard/WhatWeDo";
+import BlogSection from "@/features/landing/BlogSection";
+import CTAsection from "@/features/landing/CTAsection";
+import HeroSection from "@/features/landing/HeroSection";
+import JoinDCsection from "@/features/landing/JoinDCsection";
+import WhatWeDo from "@/features/landing/WhatWeDo";
 
 export default function DashboardPage() {
     return (
