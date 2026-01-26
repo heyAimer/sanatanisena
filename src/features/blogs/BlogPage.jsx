@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const blogs = [
   {
@@ -92,9 +93,11 @@ const BlogPage = () => {
                         ))}
                     </div>
 
-                    <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
-                        Write a Blog
-                    </Button>
+                    <Link href="/blogs/contribute">
+                        <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
+                            Write a Blog
+                        </Button>
+                    </Link>
                 </div>
                 {/* <div className="flex flex-col items-center justify-center px-6 text-center">
 
