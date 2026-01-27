@@ -19,6 +19,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 const nav = [
     {
@@ -91,9 +92,9 @@ export default function Navbar() {
                 <div className="lg:hidden">
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
-                            <button className="p-2">
+                            <Button className="p-2">
                                 <Menu className="h-6 w-6"/>
-                            </button>
+                            </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-80 px-6 bg-neutral-100">
                             <VisuallyHidden>
