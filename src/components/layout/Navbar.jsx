@@ -83,12 +83,15 @@ export default function Navbar() {
         console.log("clicekd logout")
         try {
             setLoading(true);
-            const response = await fetch(`${BASE_URL}/logout`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            const response = await axios.post(`${BASE_URL}/logout`,
+                {},
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
             console.log(response);
             toast.success("Logout successfully!")
@@ -147,8 +150,8 @@ export default function Navbar() {
                             Try free analysis
                         </Link>
                     </div>
-                    {/* <Button onClick={handleLogout}>Logout</Button> */}
-                    <Button className="btn-sm btn-secondary cursor-pointer mt-2" onClick={handlecheck}>check auth</Button>
+                    <Button onClick={handleLogout}>Logout</Button>
+                    <Button className="btn-sm btn-secondary cursor-pointer mt-4" onClick={handlecheck}>check auth</Button>
                 </div>
                 <div className="lg:hidden">
                     <Sheet open={open} onOpenChange={setOpen}>
