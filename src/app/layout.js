@@ -3,8 +3,6 @@ import { Poppins} from "next/font/google";
 import {Tiro_Devanagari_Sanskrit } from "next/font/google";
 import "./globals.css";
 import "../styles/main.scss";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 
 const hind = Hind({
   subsets: ["latin"],
@@ -43,11 +41,7 @@ export default function RootLayout({ children }) {
           ${devanagari.variable}
         `}
       >
-        <Navbar />
-        <main className="">
           {children}
-        </main>
-        <Footer/>
       </body>
      
     </html>

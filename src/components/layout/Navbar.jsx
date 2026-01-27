@@ -20,6 +20,10 @@ import {
 } from "@/components/ui/sheet"
 import Image from "next/image";
 import { Button } from "../ui/button";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const nav = [
     {
@@ -48,8 +52,63 @@ const nav = [
         href:"/donate"
     },
 ]
-export default function Navbar() {                                         
-    const [open, setOpen] = React.useState(false);
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export default function Navbar() {     
+    const router = useRouter();
+    const [open, setOpen] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+    const [user, setUser] = useState(false);
+
+    const handlecheck = async() => {
+        try {
+            const response = await axios.get(`${BASE_URL}/checkauth`,
+                { withCredentials: true }
+            );
+            console.log(response);
+            setUser(response.data.isUser);
+        } catch (err) {
+           if (axios.isAxiosError(err)) {
+                if (err.response?.status === 401) {
+                    setUser(false);
+                    return;
+                }
+            }
+            console.error("Unexpected error", err);
+            setUser(false);
+        }
+    }
+
+     const handleLogout = async () => {
+        console.log("clicekd logout")
+        try {
+            setLoading(true);
+            const response = await fetch(`${BASE_URL}/logout`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            console.log(response);
+            toast.success("Logout successfully!")
+            console.log("logout successful!")
+            router.push("/");
+        } catch (err) {
+            if (axios.isAxiosError(err)) {
+                const message =
+                err.response?.data?.message || "OTP verification failed";
+                toast.error(message);
+            } else {
+                toast.error("Something went wrong");
+            }
+
+            console.error("Error during Logout ", err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-neutral-100/60 border-dullwhite">
            
@@ -61,7 +120,7 @@ export default function Navbar() {
                         width={45}
                         height={40}
                         priority
-                        className="rounded-full"
+                        className="rounded-full w-auto h-auto"
                     />
                 </Link>
                 
@@ -88,12 +147,14 @@ export default function Navbar() {
                             Try free analysis
                         </Link>
                     </div>
+                    {/* <Button onClick={handleLogout}>Logout</Button> */}
+                    <Button className="btn-sm btn-secondary cursor-pointer mt-2" onClick={handlecheck}>check auth</Button>
                 </div>
                 <div className="lg:hidden">
                     <Sheet open={open} onOpenChange={setOpen}>
-                        <SheetTrigger asChild>
-                            <Button className="p-2">
-                                <Menu className="h-6 w-6"/>
+                        <SheetTrigger asChild >
+                            <Button>
+                                <Menu style={{height:28, width:28}}/>
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-80 px-6 bg-neutral-100">

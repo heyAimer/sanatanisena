@@ -10,7 +10,7 @@ const HeroSection = () => {
                     alt="hanuman ji"
                     width={300}
                     height={300}
-                    className="z-10 sm:hidden mb-8"
+                    className="z-10 sm:hidden mb-8 w-auto h-auto"
                     priority
                 />
                 <div className="leading-none flex flex-col gap-8 sm:p-8 sm:text-start text-center sm:items-start items-center">

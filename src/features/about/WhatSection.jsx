@@ -38,7 +38,7 @@ const WhatSection = () => {
                             <div key={items.title} className="relative">
                                 <Image
                                     src={items.icon}
-                                    alt="LegitCheck logo"
+                                    alt="Sanatani sena logo"
                                     height={items.height}
                                     width={items.width}
                                     priority

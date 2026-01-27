@@ -39,7 +39,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center py-2 gap-3">
               <Image
                 src="/logo.png"
-                alt="LegitCheck logo"
+                alt="Sanatani sena logo"
                 width={50}
                 height={50}
                 priority
@@ -85,7 +85,7 @@ export default function Footer() {
                     >
                       <Image
                         src={item.icon}
-                        alt="LegitCheck logo"
+                        alt="Sanatani sena logo"
                         height={item.height}
                         width={item.width}
                         priority

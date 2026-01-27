@@ -58,6 +58,7 @@ const BlogPage = () => {
                                             src={blog.image}
                                             alt={blog.title}
                                             fill
+                                            sizes="200"
                                             className="object-cover"
                                         />
                                     </div>
