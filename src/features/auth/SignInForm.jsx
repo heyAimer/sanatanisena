@@ -43,7 +43,11 @@ export default function SignInForm() {
       const response = await axios.post(`${BASE_URL}/login`, {
         email: form.email,
         password: form.password,
-      });
+      },
+      {
+        withCredentials: true,
+      }
+      );
       console.log("SignIn response:", response);
 
       toast.success("Signin successful");

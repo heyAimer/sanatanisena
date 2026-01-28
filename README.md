@@ -44,3 +44,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 (api logic jidhar lagega wo features me jaiga)
 (only ui thing goes in component folder)
 (routing goes in app folder)
+
+-------------------------------
+### SystemDesign: 
+
+Page loads
+↓
+Auth status = UNKNOWN
+↓
+Show loading state (white / shimmer)
+↓
+Server responds
+↓
+Auth status = TRUE or FALSE
+↓
+Render correct UI ONCE

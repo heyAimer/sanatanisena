@@ -1,7 +1,8 @@
 "use client"
 import * as React from "react"
+import { useEffect } from "react";
 import Link from "next/link"
-import { Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,10 +21,18 @@ import {
 } from "@/components/ui/sheet"
 import Image from "next/image";
 import { Button } from "../ui/button";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "@/utils/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useMediaQuery } from "@/utils/hooks/useMediaQuery";
 
 const nav = [
     {
@@ -52,65 +61,52 @@ const nav = [
         href:"/donate"
     },
 ]
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function Navbar() {     
-    const router = useRouter();
+export default function Navbar() {   
+    const { isUser } = useAuth();
     const [open, setOpen] = useState(false);
-    const [isLoading, setLoading] = useState(false);
-    const [user, setUser] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    const handlecheck = async() => {
-        try {
-            const response = await axios.get(`${BASE_URL}/checkauth`,
-                { withCredentials: true }
-            );
-            console.log(response);
-            setUser(response.data.isUser);
-        } catch (err) {
-           if (axios.isAxiosError(err)) {
-                if (err.response?.status === 401) {
-                    setUser(false);
-                    return;
-                }
-            }
-            console.error("Unexpected error", err);
-            setUser(false);
+    //  const handleLogout = async () => {
+    //     console.log("clicekd logout")
+    //     try {
+    //         setLoading(true);
+    //         const response = await axios.post(`${BASE_URL}/logout`,
+    //             {},
+    //             {
+    //                 withCredentials: true
+    //             }
+    //         );
+    //         checkAuth();
+    //         console.log("logout: ",response);
+    //         toast.success("Logout successfully!")
+    //         console.log("logout successful!")
+    //         router.push("/");
+    //     } catch (err) {
+    //         if (axios.isAxiosError(err)) {
+    //             const message =
+    //             err.response?.data?.message || "OTP verification failed";
+    //             toast.error(message);
+    //         } else {
+    //             toast.error("Something went wrong");
+    //         }
+
+    //         console.error("Error during Logout ", err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
+
+    const isDesktop = useMediaQuery("(min-width: 1024px)");
+    
+    useEffect(() => {
+        if (isDesktop && open) {
+            setOpen(false);
         }
-    }
-
-     const handleLogout = async () => {
-        console.log("clicekd logout")
-        try {
-            setLoading(true);
-            const response = await axios.post(`${BASE_URL}/logout`,
-                {},
-                {
-                    withCredentials: true,
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-
-            console.log(response);
-            toast.success("Logout successfully!")
-            console.log("logout successful!")
-            router.push("/");
-        } catch (err) {
-            if (axios.isAxiosError(err)) {
-                const message =
-                err.response?.data?.message || "OTP verification failed";
-                toast.error(message);
-            } else {
-                toast.error("Something went wrong");
-            }
-
-            console.error("Error during Logout ", err);
-        } finally {
-            setLoading(false);
+        if (!isDesktop && menuOpen) {
+            setMenuOpen(false);
         }
-    }
+    }, [isDesktop, open, menuOpen]);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-neutral-100/60 border-dullwhite">
@@ -142,16 +138,45 @@ export default function Navbar() {
                         </NavigationMenu>
                     </div>
                     
-                    <div className="hidden lg:flex gap-4 items-center">
-                        <Link href="/signin" className="btn-sm btn-secondary cursor-pointer">
-                            Sign in
-                        </Link>
-                        <Link href="/upload" className="btn-sm btn-primary cursor-pointer shadow-blue-300 shadow-md hover:shadow-none">
-                            Try free analysis
-                        </Link>
-                    </div>
-                    <Button onClick={handleLogout}>Logout</Button>
-                    <Button className="btn-sm btn-secondary cursor-pointer mt-4" onClick={handlecheck}>check auth</Button>
+                    {isUser ?
+                        (
+                            <div className="hidden lg:flex gap-4 items-center">
+                                <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen} modal={false}>
+                                    <DropdownMenuTrigger asChild>
+                                        <Image
+                                            src="/profilePic.png"
+                                            alt="profile"
+                                            width={45}
+                                            height={40}
+                                            priority
+                                            className="rounded-full w-auto h-auto cursor-pointer"
+                                        />
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent >
+                                        <DropdownMenuGroup className="w-full">
+                                        <DropdownMenuLabel className="border-b border-neutral-300">My Account</DropdownMenuLabel>
+                                            <DropdownMenuItem className="justify-between cursor-pointer btn-secondary hover:bg-orange-100 my-1 mt-2">
+                                                <span>Logout</span>
+                                                <LogOut className="h-4 w-4 text-red-700" />
+                                        </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </div>
+                        )
+                        :
+                
+                        (
+                            <div className="hidden lg:flex gap-4 items-center">
+                                <Link href="/signin" className="btn-sm btn-secondary cursor-pointer">
+                                    Sign in
+                                </Link>
+                                <Link href="/upload" className="btn-sm btn-primary cursor-pointer shadow-blue-300 shadow-md hover:shadow-none">
+                                    Try free analysis
+                                </Link>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className="lg:hidden">
                     <Sheet open={open} onOpenChange={setOpen}>
@@ -176,6 +201,14 @@ export default function Navbar() {
 }
 
 function MobileNav({ closeSheet }) {
+    const { isUser, loading } = useAuth();
+     if (loading) {
+        return (
+        <header className="h-16 bg-white">
+            hello
+        </header>
+        );
+    }
     return (
         <nav className="mt-8 flex flex-col gap-6 font-semibold">
             {nav.map((items) => {
@@ -185,14 +218,30 @@ function MobileNav({ closeSheet }) {
                     </div>
                 )
             })}
-            <div className="border-t border-dullwhite pt-6 flex flex-col gap-3 text-center text-sm font-medium">
-                <Link href="/signin" className="btn-md btn-secondary cursor-pointer" onClick={closeSheet}>
-                    Sign in
-                </Link>
-                <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
-                    Try free analysis
-                </Link>
-            </div>
+            {
+                isUser ?
+                (
+                    <div className="border-t border-dullwhite pt-6 flex flex-col gap-3 text-center text-sm font-medium">
+                        <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
+                            Your Profile
+                        </Link>
+                        <Link href="/" className="btn-sm btn-secondary cursor-pointer">
+                            Logout
+                        </Link>
+                    </div>
+                )
+                :
+                (
+                    <div className="border-t border-dullwhite pt-6 flex flex-col gap-3 text-center text-sm font-medium">
+                        <Link href="/signin" className="btn-md btn-secondary cursor-pointer" onClick={closeSheet}>
+                            Sign in
+                        </Link>
+                        <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
+                            Try free analysis
+                        </Link>
+                    </div>
+                )
+            }
          </nav>
     )
 }

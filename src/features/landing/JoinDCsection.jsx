@@ -82,6 +82,7 @@ export default function JoinDCsection() {
                                 width={350}
                                 height={350}
                                 priority
+                                className="w-auto h-auto"
                             />
                         </div>
                     </div>

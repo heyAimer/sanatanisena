@@ -23,7 +23,7 @@ const HeroSection = () => {
                         Start your journey with us today!
                     </h3>
 
-                    <Button className="btn-primary btn-lg text-2xl w-fit">
+                    <Button className="btn-primary py-6 px-6 text-xl w-fit">
                         Get Started
                     </Button>
 

@@ -38,9 +38,6 @@ export default function OtpVerify() {
         {otp},
         {
           withCredentials: true,
-          headers: {
-          "Content-Type": "application/json",
-          }
         }
       );
       console.log("OTP verify response:", response);

@@ -15,7 +15,7 @@ export default function SignInPage() {
           width={45}
           height={40}
           priority
-          className="rounded-full"
+          className="rounded-full w-auto h-auto"
         />   
       </Link>
       <div className="w-full max-w-md space-y-8">

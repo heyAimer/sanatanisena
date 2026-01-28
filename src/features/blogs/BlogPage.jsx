@@ -59,7 +59,7 @@ const BlogPage = () => {
                                             alt={blog.title}
                                             fill
                                             sizes="200"
-                                            className="object-cover"
+                                            className="object-cover w-auto h-auto"
                                         />
                                     </div>
                                 }
@@ -108,6 +108,7 @@ const BlogPage = () => {
                         width={200}
                         height={100}
                         priority
+                        className"w-auto h-auto
                     />
 
                     <div className="max-w-4xl">

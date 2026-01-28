@@ -42,7 +42,7 @@ const WhatSection = () => {
                                     height={items.height}
                                     width={items.width}
                                     priority
-                                    className="absolute -top-7 left-2"
+                                    className="absolute -top-7 left-2 w-auto h-auto"
                                 />
                                 <div className="border border-dullwhite px-4 py-6 rounded-md ">
                                     <h3 className="text-xl font-semibold mb-3 mt-1">{items.title}</h3>

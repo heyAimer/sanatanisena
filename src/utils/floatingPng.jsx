@@ -8,7 +8,8 @@ export default function FloatingPng() {
           alt="Diya"
           width={400}
           height={400}
-          priority
+        priority
+        className="w-auto h-auto"
         />
     </div>
   );

@@ -55,7 +55,7 @@ const BlogSection = () => {
                                 src={blog.image}
                                 alt={blog.title}
                                 fill
-                                className="object-contain"
+                                className="object-contain w-auto h-auto"
                             />
                             </div>}
             
@@ -75,7 +75,7 @@ const BlogSection = () => {
                         </article>
                         ))}
                     </div>
-                    <button className="btn-primary btn-md">
+                    <button className="btn-primary py-3 px-6 text-lg">
                         Read Community Writings
                     </button>
                 </div>

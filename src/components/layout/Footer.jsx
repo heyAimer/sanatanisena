@@ -43,7 +43,7 @@ export default function Footer() {
                 width={50}
                 height={50}
                 priority
-                className="rounded-full"
+                className="rounded-full w-auto h-auto"
               />
               <h3 className="font-semibold text-3xl text-slate-900">
                 Sanatani sena
@@ -89,6 +89,7 @@ export default function Footer() {
                         height={item.height}
                         width={item.width}
                         priority
+                        className="w-auto h-auto"
                       />
                     </Link>
                   </div>
