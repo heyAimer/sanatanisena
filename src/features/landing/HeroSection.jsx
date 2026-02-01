@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 const HeroSection = () => {
     return (
@@ -23,9 +24,9 @@ const HeroSection = () => {
                         Start your journey with us today!
                     </h3>
 
-                    <Button className="btn-primary py-6 px-6 text-xl w-fit">
-                        Get Started
-                    </Button>
+                    <div className="bg-saffron-gradient2 p-2 rounded-full text-white">
+                       <ChevronDown size={20} />
+                    </div>
 
                 </div>
             

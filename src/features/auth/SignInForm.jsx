@@ -49,14 +49,14 @@ export default function SignInForm() {
       }
       );
       console.log("SignIn response:", response);
-
       toast.success("Signin successful");
 
+      router.push("/");
+      
       setForm({
         email: "",
         password: "",
       });
-      router.push("/");
       
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -65,7 +65,7 @@ export default function SignInForm() {
         email: "",
         password: "",
       })
-        toast.error(message);
+        setError(message);
       } else {
         setError("Something went wrong. Please try again.");
       }
@@ -128,13 +128,13 @@ export default function SignInForm() {
                 required
                 disabled={isLoading}
               />
-            </div>
 
-            {error && (
-              <p className="text-sm text-red-600">
-                {error}
-              </p>
-            )}
+               {error && (
+                  <p className="text-sm text-red-600 mt-2">
+                    {error}
+                  </p>
+                )}
+            </div>
             
             <div className="flex">
               <Button type="submit" disabled={isLoading} className="btn-primary text-md w-full">

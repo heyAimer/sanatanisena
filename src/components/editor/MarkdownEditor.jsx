@@ -21,14 +21,23 @@ export default function MarkdownEditor({ value, onChange }) {
   const H2 = { ...heading2, icon: <strong>H2</strong>, name: "H2" };
   const H3 = { ...heading3, icon: <strong>H3</strong>, name: "H3" };
 
+  const MAX_CHARS = 2000;
+  const countChars = (text = "") => text.length;
+
   return (
     <div data-color-mode="light" className="rounded-md overflow-hidden border-neutral-100 border-2">
       <MDEditor
         value={value}
-        onChange={onChange}
+        onChange={(val) => {
+          const chars = countChars(val || "");
+          if (chars <= MAX_CHARS) {
+            onChange(val);
+          }
+        }}
+
         height={400}
         className="p-4"
-        preview="edit"
+        preview="live"
         textareaProps={{
           placeholder:
             "Write with clarity and respect. This knowledge will guide many...",
@@ -43,7 +52,14 @@ export default function MarkdownEditor({ value, onChange }) {
           H2,
           H3
         ]}
-        />
+      />
+      <p
+        className={`text-sm text-right px-3 py-2 ${
+          countChars(value) > 1900 ? "text-red-500" : "text-gray-400"
+        }`}
+      >
+        {countChars(value)} / {MAX_CHARS} characters
+      </p>
     </div>
   );
 }

@@ -63,6 +63,10 @@ export default function SignUpForm() {
       
       toast.success("Signup successful! Check your email for the OTP to verify your account");
 
+      setTimeout(() => {
+        router.push("signup/otp");
+      },800)
+      
       setForm({
         username:"",
         email: "",
@@ -71,10 +75,6 @@ export default function SignUpForm() {
         agreed: false,
       })
 
-      setTimeout(() => {
-        router.push("signup/otp");
-      },800)
-      
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.data?.message || "Signup failed";

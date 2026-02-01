@@ -2,7 +2,7 @@
 import * as React from "react"
 import { useEffect } from "react";
 import Link from "next/link"
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, Crown } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -63,40 +63,10 @@ const nav = [
 ]
 
 export default function Navbar() {   
-    const { isUser } = useAuth();
+    const { isUser,isAdmin, logout } = useAuth();
     const [open, setOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-
-    //  const handleLogout = async () => {
-    //     console.log("clicekd logout")
-    //     try {
-    //         setLoading(true);
-    //         const response = await axios.post(`${BASE_URL}/logout`,
-    //             {},
-    //             {
-    //                 withCredentials: true
-    //             }
-    //         );
-    //         checkAuth();
-    //         console.log("logout: ",response);
-    //         toast.success("Logout successfully!")
-    //         console.log("logout successful!")
-    //         router.push("/");
-    //     } catch (err) {
-    //         if (axios.isAxiosError(err)) {
-    //             const message =
-    //             err.response?.data?.message || "OTP verification failed";
-    //             toast.error(message);
-    //         } else {
-    //             toast.error("Something went wrong");
-    //         }
-
-    //         console.error("Error during Logout ", err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
-
+    
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     
     useEffect(() => {
@@ -123,7 +93,7 @@ export default function Navbar() {
                     />
                 </Link>
                 
-                <div className="flex gap-10">
+                <div className={`flex ${isUser? 'gap-4' : 'gap-10'}`}>
                     <div className="hidden lg:flex">
                         <NavigationMenu className="h-14 flex items-center">
                             <NavigationMenuList className="flex items-center">
@@ -146,19 +116,30 @@ export default function Navbar() {
                                         <Image
                                             src="/profilePic.png"
                                             alt="profile"
-                                            width={45}
-                                            height={40}
+                                            width={25}
+                                            height={20}
                                             priority
                                             className="rounded-full w-auto h-auto cursor-pointer"
                                         />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent >
                                         <DropdownMenuGroup className="w-full">
-                                        <DropdownMenuLabel className="border-b border-neutral-300">My Account</DropdownMenuLabel>
-                                            <DropdownMenuItem className="justify-between cursor-pointer btn-secondary hover:bg-orange-100 my-1 mt-2">
+                                            <DropdownMenuLabel className="border-b border-neutral-300">My Account</DropdownMenuLabel>
+                                            {isAdmin && (
+                                                <Link href="/admin/blogs">
+                                                    <DropdownMenuItem className="justify-between  cursor-pointer btn-primary mt-2 border border-orange-300"
+                                                    >
+                                                        <span>Admin</span>
+                                                        <Crown className="h-4 w-4" />
+                                                    </DropdownMenuItem>
+                                                </Link>
+                                            )}
+                                            <DropdownMenuItem className="justify-between  cursor-pointer btn-secondary hover:bg-orange-100 my-1 mt-2"
+                                            onClick={logout}
+                                            >
                                                 <span>Logout</span>
                                                 <LogOut className="h-4 w-4 text-red-700" />
-                                        </DropdownMenuItem>
+                                            </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
@@ -171,8 +152,8 @@ export default function Navbar() {
                                 <Link href="/signin" className="btn-sm btn-secondary cursor-pointer">
                                     Sign in
                                 </Link>
-                                <Link href="/upload" className="btn-sm btn-primary cursor-pointer shadow-blue-300 shadow-md hover:shadow-none">
-                                    Try free analysis
+                                <Link href="/signup" className="btn-sm border-1 border-[#f28c28] btn-primary cursor-pointer shadow-blue-300 shadow-md hover:shadow-none">
+                                    Sign up
                                 </Link>
                             </div>
                         )
@@ -201,14 +182,7 @@ export default function Navbar() {
 }
 
 function MobileNav({ closeSheet }) {
-    const { isUser, loading } = useAuth();
-     if (loading) {
-        return (
-        <header className="h-16 bg-white">
-            hello
-        </header>
-        );
-    }
+    const { isUser,isAdmin, logout } = useAuth();
     return (
         <nav className="mt-8 flex flex-col gap-6 font-semibold">
             {nav.map((items) => {
@@ -219,15 +193,23 @@ function MobileNav({ closeSheet }) {
                 )
             })}
             {
-                isUser ?
-                (
-                    <div className="border-t border-dullwhite pt-6 flex flex-col gap-3 text-center text-sm font-medium">
-                        <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
-                            Your Profile
-                        </Link>
-                        <Link href="/" className="btn-sm btn-secondary cursor-pointer">
-                            Logout
-                        </Link>
+                isUser ? (
+                    <div className="border-t border-dullwhite pt-4">
+                        <div className="mb-4">
+                            Your Account
+                        </div>
+                        {isAdmin && (
+                            <div className="justify-center items-center gap-4 flex  cursor-pointer btn-md btn-primary mt-2 border border-orange-300">
+                                <Link href="/admin/blogs">
+                                    Admin
+                                </Link>
+                                <Crown className="h-5 w-5" />
+                            </div>
+                        )}
+                        <div className=" justify-center items-center gap-4 flex  cursor-pointer btn-md btn-secondary mt-2 border border-orange-300 text-red-700" onClick={logout}>
+                                Logout
+                            <LogOut className="h-5 w-5 text-red-700" />
+                        </div>
                     </div>
                 )
                 :
@@ -236,8 +218,8 @@ function MobileNav({ closeSheet }) {
                         <Link href="/signin" className="btn-md btn-secondary cursor-pointer" onClick={closeSheet}>
                             Sign in
                         </Link>
-                        <Link href="/tryFree" className="btn-primary btn-md cursor-pointer" onClick={closeSheet}>
-                            Try free analysis
+                        <Link href="/signup" className="btn-md border-1 border-[#f28c28] btn-primary cursor-pointer shadow-blue-300 shadow-md hover:shadow-none">
+                            Sign up
                         </Link>
                     </div>
                 )

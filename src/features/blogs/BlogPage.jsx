@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,7 +59,7 @@ const BlogPage = () => {
                                             src={blog.image}
                                             alt={blog.title}
                                             fill
-                                            sizes="200"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover w-auto h-auto"
                                         />
                                     </div>

@@ -59,3 +59,6 @@ Server responds
 Auth status = TRUE or FALSE
 ↓
 Render correct UI ONCE
+
+-------------------------
+#### (server cant call client component)

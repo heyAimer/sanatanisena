@@ -1,76 +1,158 @@
-import BlogServer from "./BlogServer";
+'use client';
+import MarkdownEditor from "@/components/editor/MarkdownEditor";
+import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
+import MDEditor from "@uiw/react-md-editor";
+import axios from "axios";
+import { CheckCircle, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { use, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-export default async function BlogInfo({ slug, preview }) {
-  const { blog, notFound } = await BlogServer({ slug, preview });
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-  if (notFound) {
-    return (
-      <div className="min-h-screen bg-[#fffdf8] flex items-center justify-center text-gray-500">
-        <p>This article does not exist or is not yet published.</p>
-      </div>
-    );
+const BlogInfo = ({ slug }) => {
+  const [blog, setBlog] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [verify, setIsVerify] = useState(false);
+
+  const TITLE_LIMIT = 80;
+  const DESC_LIMIT = 2000;
+
+  console.log("Fetching blog with SLUG:", slug); 
+
+  const handleVerifyBlog = async () => {
+    try {
+      setIsVerify(true);
+      const response = await axios.post(
+        `${BASE_URL}/blog/verify`,
+        {
+          blogid: slug,
+        },
+        { withCredentials: true }
+      );
+    } catch (err) {
+      if(axios.isAxiosError(err)) {
+        console.error("Axios error:", err.response);
+      }
+      console.error("Something went wrong", err.response?.data || err.message);
+      toast.error(err.response?.data?.message || "An error occurred. Please try again.");
+    } finally {
+      setIsVerify(false);
+    }
+  }
+  const getBlogInfo = async () => {
+    console.log("Getting blog info for slug:", slug);
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/blog?blogid=${slug}`,
+        {withCredentials: true}
+      );
+
+      console.log("Blog fetch response:", response);
+
+      const blog = response.data.data;
+      setBlog(blog);
+      setTitle(blog.title || "");
+      setContent(blog.content || "");
+
+    } catch (err) {
+      if(axios.isAxiosError(err)) {
+        console.error("Axios error:", err.response);
+      }
+      console.error("Blog fetch failed:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "An error occurred while fetching the blog. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+
+  }
+  useEffect(() => {
+    if(!slug) return;
+    getBlogInfo();
+  }, [slug]);
+
+  if (loading) {
+    return <div className="text-center font-semibold sm:text-2xl text-xl py-12">Loading blog...</div>
+  }
+  if (error) {
+    return <div className="text-center font-semibold sm:text-2xl text-xl py-12 text-red-600">{error}</div>
   }
 
   return (
-    <main className="min-h-screen bg-[#fffdf8] py-24 px-6">
-      <article className="max-w-3xl mx-auto space-y-12">
+    <section className="w-full py-10">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* Preview Banner */}
-        {preview && (
-          <div className="bg-yellow-100 border border-yellow-300 text-yellow-900 px-4 py-3 rounded-lg text-sm text-center">
-            You are viewing this article in <strong>Preview Mode</strong>. It is not visible to the public yet.
-          </div>
-        )}
-
-        {/* Status Badge */}
-        {blog.status !== "published" && (
-          <div className="flex justify-center">
-            <span className="px-4 py-1 rounded-full text-sm bg-gray-200 text-gray-700">
-              {blog.status.toUpperCase()}
-            </span>
-          </div>
-        )}
-
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 text-center leading-tight">
-          {blog.title}
-        </h1>
-
-        {/* Meta */}
-        <div className="text-center text-gray-500 text-sm">
-          <p>
-            By <span className="font-medium text-gray-700">{blog.author}</span>
-            {blog.publishedAt && ` • ${blog.publishedAt}`}
-          </p>
-        </div>
-
-        {/* Cover Image */}
-        {blog.coverImage && (
-          <div className="rounded-2xl overflow-hidden">
+        {blog.cover_image && (
+          <div className="rounded-2xl overflow-hidden shadow-lg bg-black">
             <img
-              src={blog.coverImage}
-              alt={blog.title}
-              className="w-full object-cover"
+              src={blog.cover_image}
+              alt={title}
+              className="w-full max-h-[500px] object-contain"
             />
           </div>
         )}
 
-        {/* Content */}
-        <div className="prose prose-lg max-w-none prose-gray">
-          <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <div className="text-center space-y-4 flex justify-center items-center bg-neutral-100 rounded-md px-6 py-2 mt-10 mb-4">
+          <input
+            value={title}
+            onChange={(e) => {
+              if (e.target.value.length <= TITLE_LIMIT) {
+                setTitle(e.target.value);
+              }
+            }}
+            className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition h-14 my-auto"
+            placeholder="Enter blog title..."
+          />
+          <p className={`text-sm mt-1 ${
+            title.length > TITLE_LIMIT - 10 ? "text-red-500" : "text-gray-400"
+          }`}>
+            {title.length}/{TITLE_LIMIT}
+          </p>
         </div>
 
-        {/* Footer */}
-        <div className="pt-16 border-t border-gray-200 text-center space-y-4">
-          <p className="text-gray-600">
-            May this knowledge guide your path.
-          </p>
-          <p className="text-orange-600 font-medium">
-            Jai Shree Ram 🚩
-          </p>
+        <div className="bg-neutral-100 rounded-md px-6 py-6 space-y-2">
+          <MarkdownEditor value={content} onChange={setContent} />
         </div>
 
-      </article>
-    </main>
-  );
+
+        <div className="flex flex-col text-sm text-gray-500 mt-10 mb-4 justify-end items-end text-lg px-2">
+          <span>By {blog.author}</span>
+          {blog.published_at
+            && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+          }
+        </div>
+
+        <div className="pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col justify-between items-center">
+          <div>
+            <p className="text-gray-600 italic">
+              May this knowledge guide your path.
+            </p>
+            <p className="text-orange-600 font-semibold">
+              Jai Shree Ram 🚩
+            </p>
+          </div>
+
+          <div onClick={handleVerifyBlog}>
+              <button className="flex sm:border-3 border border-orange-600 rounded-full px-6 py-2 text-orange-600 hover:bg-orange-50 transition text-sm font-semibold sm:text-xl mx-3 cursor-pointer active:scale-95">
+              {verify ? 
+                <div className="flex gap-3 items-center justify-center">
+                  <Loader2 className="animate-spin" size={18} />
+                  Verifying...
+                </div>
+                : 
+                <div className="flex gap-2 items-center justify-center ">
+                  <CheckCircle size={25}  />
+                  Verify
+                </div>}
+              </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  )
 }
+export default BlogInfo;
