@@ -1,15 +1,13 @@
-import BlogInfo from "@/features/blogs/BlogInfo";
+
+import BlogInfoAdmin from "@/features/blogs/BlogInfoAdmin";
 
 export default async function BlogSlugPage({ params }) {
   const resolvedParams = await params;
 
   const { slug } = resolvedParams;
-
-  console.log("SLUG", slug);
-  console.log("PARAMS:, ", params);
   
   return (
-    <BlogInfo
+    <BlogInfoAdmin
       slug={slug}
     />
   );

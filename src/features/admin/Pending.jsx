@@ -1,6 +1,8 @@
 'use client';
+
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -83,7 +85,9 @@ export default function Pending() {
 
         {/* Table */}
         {loading ?
-          <div className="text-center font-semibold text-xl sm:text-2xl sm:mt-40 mt-30">Loading unverified articles...</div>
+          <div className="flex items-center justify-center px-8 mx-auto space-y-6 py-40">
+              <Loader2 className="animate-spin" size={50}/>
+          </div>
           :
           data.length > 0 &&
           <div className="bg-white border border-gray-200 rounded-md sm:rounded-2xl overflow-hidden shadow-sm">

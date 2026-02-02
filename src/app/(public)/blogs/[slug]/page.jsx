@@ -1,13 +1,11 @@
 import BlogInfo from "@/features/blogs/BlogInfo";
 
-export default async function BlogSlugPage({ params, searchParams }) {
-  const { slug } = params;
-  const isPreview = searchParams?.preview === "true";
-
+export default async function BlogSlugPage({ params }) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   return (
     <BlogInfo
       slug={slug}
-      preview={isPreview}
     />
   );
 }
