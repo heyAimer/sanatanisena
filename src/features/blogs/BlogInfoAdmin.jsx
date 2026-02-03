@@ -117,7 +117,7 @@ const BlogInfoAdmin = ({ slug }) => {
                             setTitle(e.target.value);
                             }
                         }}
-                        className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto"
+                        className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto h-12"
                         placeholder="Enter blog title..."
                         />
                         <p className={`text-sm mt-1 ${
@@ -131,7 +131,7 @@ const BlogInfoAdmin = ({ slug }) => {
                 }
                 </div>
 
-                    <div className={`rounded-md px-6 py-6 space-y-2`}>
+                    <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
                         {isAdmin &&
                             (<MarkdownEditor value={content} onChange={setContent} />)}
                     </div>
