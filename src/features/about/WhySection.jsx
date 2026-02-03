@@ -37,7 +37,9 @@ const WhySection = () => {
                         {whyPoints.map((item, index) => (
                             <div
                             key={index}
-                            className="rounded-md border border-dullwhite bg-[#fffdf8] py-3 px-4"
+                            className="rounded-md border border-dullwhite bg-[#fffdf8] py-3 px-4 transition
+                            hover:shadow-inner hover:shadow-orange-300/40
+                            hover:scale-99"
                             >
                                 <h3 className="text-lg font-semibold text-orange-700">
                                     {item.title}

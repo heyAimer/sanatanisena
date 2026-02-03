@@ -32,7 +32,7 @@ export default function WhatWeDo() {
     return (
         <section className="bg-white py-10 my-10 px-4 space-y-16 lg:px-16 px-5">
             <div className="mx-auto max-w-7xl ">
-                <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 text-center">
+                <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 text-center mb-4">
                     Our Mission – Awakening Sanatan Consciousness
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 items-center">

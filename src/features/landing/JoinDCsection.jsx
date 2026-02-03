@@ -97,7 +97,7 @@ export default function JoinDCsection() {
                             {discordFeatures.map((items) => {
                                 const Icon = items.icon;
                                 return (
-                                    <li key={items.id} className="flex items-center gap-4 rounded-md bg-white px-4 py-4 backdrop-blur">
+                                    <li key={items.id} className="flex items-center gap-4 rounded-md bg-white px-4 py-4 backdrop-blur hover:shadow-lg hover:scale-98 transition">
                                         <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-saffron-gradientBR">
                                             <Icon className="h-5 w-5 text-[#cc6f1d]" />
                                         </div>

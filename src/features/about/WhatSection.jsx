@@ -35,7 +35,9 @@ const WhatSection = () => {
                 <div className="grid md:grid-cols-3 gap-12">
                     {whatWeDo.map((items) => {
                         return(
-                            <div key={items.title} className="relative">
+                            <div key={items.title} className="relative hover:-translate-y-1 
+                            hover:rotate-1 hover:scale-[1] hover:shadow-md
+                            transition rounded-md">
                                 <Image
                                     src={items.icon}
                                     alt="Sanatani sena logo"
