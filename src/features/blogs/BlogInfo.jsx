@@ -17,7 +17,7 @@ const BlogInfo = ({ slug }) => {
   const getBlogInfo = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/blog?blogid=${slug}`,
+        `${BASE_URL}/public/bloginfo?blogid=${slug}`,
         {withCredentials: true}
       );
 

@@ -1,5 +1,6 @@
 'use client';
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/utils/AuthContext";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
 import axios from "axios";
 import { Loader, Loader2 } from "lucide-react";
@@ -14,10 +15,13 @@ const BlogPage = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
+    const { isUser, isAdmin } = useAuth();
+    console.log(isUser, isAdmin);
+
     const handleFetchUnverifiedBlogs = async () => {
         try {
         setLoading(true);
-        const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=verified`,
+        const response = await axios.get(`${BASE_URL}/public/blogs?page=0`,
             {withCredentials: true}
         );
         console.log("All blogs:", response.data.data);
@@ -128,17 +132,17 @@ const BlogPage = () => {
                                 ))}
                             </div>
 
-                            <Link href="/blogs/contribute">
+                            {isUser && <Link href="/blogs/contribute">
                                 <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
                                     Write a Blog
                                 </Button>
-                            </Link>
+                            </Link>}
                                 
                         </div>
                     )
                 }
                 
-                {/* <div className="flex flex-col items-center justify-center px-6 text-center">
+                {!data && <div className="flex flex-col items-center justify-center px-6 text-center">
 
                     <Image
                         src="/omDark.png"
@@ -146,7 +150,7 @@ const BlogPage = () => {
                         width={200}
                         height={100}
                         priority
-                        className"w-auto h-auto
+                        className = "w-auto h-auto"
                     />
 
                     <div className="max-w-4xl">
@@ -168,7 +172,7 @@ const BlogPage = () => {
                     <Button className="btn-primary sm:text-2xl sm:py-6 sm:px-6 text-lg mt-10">
                         Write a Blog
                     </Button>
-                </div> */}
+                </div>}
             </div>
         </section>
     );

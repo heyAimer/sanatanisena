@@ -39,7 +39,7 @@ export default function Pending() {
   const handleFetchUnverifiedBlogs = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=unverified`,
+      const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=all`,
         {withCredentials: true}
       );
       console.log("Unverified blogs:", response.data.data);
@@ -75,7 +75,7 @@ export default function Pending() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-semibold text-gray-900">
-              Unverified Articles
+              All Articles
             </h1>
             <p className="text-gray-500 mt-1">
               Articles submitted by contributors, awaiting editorial approval.
