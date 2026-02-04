@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const CTAsection = () => {
     return (
         <section className="relative overflow-hidden py-20 ">
@@ -19,27 +21,27 @@ const CTAsection = () => {
 
                 {/* CTA Buttons */}
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
+                <Link
                     href="/join"
                     className="btn-primary btn-lg"
                 >
                     Join the Movement
-                </a>
+                </Link>
 
-                <a
-                    href="https://discord.gg/your-discord-link"
+                <Link
+                    href="https://discord.gg/paT2rjaW"
                     target="_blank"
                     className="color-discord btn-lg"
                 >
                     Join Discord
-                </a>
+                </Link>
 
-                <a
-                    href="/support-dharma"
+                <Link
+                    href="/donate"
                     className="btn-secondary btn-lg"
                 >
                     Support Dharma <span className="ml-1">(सेवा)</span>
-                </a>
+                </Link>
                 </div>
 
                 {/* Closing line */}

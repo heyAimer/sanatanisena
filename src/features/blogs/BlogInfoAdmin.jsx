@@ -1,8 +1,10 @@
 'use client';
 import MarkdownEditor from "@/components/editor/MarkdownEditor";
+import { Button } from "@/components/ui/button";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
 import axios from "axios";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -12,11 +14,14 @@ const BlogInfoAdmin = ({ slug }) => {
   const [blog, setBlog] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [verify, setIsVerify] = useState(false);
   const [verified, setVerified] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const router = useRouter();
 
   const TITLE_LIMIT = 80;
 
@@ -77,6 +82,26 @@ const BlogInfoAdmin = ({ slug }) => {
       setIsVerify(false);
     }
   }
+  const handleDelete = async (blogid) => {
+    try {
+      setDeleteLoading(true);
+      const response = await axios.delete(
+        `${BASE_URL}/blog`,
+        {
+          data:{id:blogid},
+          withCredentials: true 
+        }
+      );
+      console.log("Blog verify response:", response);
+      router.push("/admin/blogs");
+      toast.success(response.data.message);
+    } catch (err) {
+      console.log(err)
+      toast.error(err.response?.data?.message || "Please try again.");
+    } finally {
+      setDeleteLoading(false);
+    }
+  }
 
   useEffect(() => {
     if(!slug) return;
@@ -92,99 +117,112 @@ const BlogInfoAdmin = ({ slug }) => {
     return <div className="text-center font-semibold sm:text-2xl text-xl py-12 text-red-600">{error}</div>
   }
 
-    return (
-        <section className="w-full py-10 bg-neutral-100">
-            <div className="max-w-7xl mx-auto px-6">
+  return (
+    <section className="w-full py-10 bg-neutral-100">
+      <div className="max-w-7xl mx-auto px-6">
 
-                {blog.cover_image && (
-                <div className="rounded-2xl overflow-hidden shadow-lg bg-black">
-                    <img
-                    src={blog.cover_image}
-                    alt={title}
-                    className="w-full max-h-[500px] object-contain"
-                    />
-                </div>
-                )}
+        {blog.cover_image && (
+        <div className="rounded-2xl overflow-hidden shadow-lg bg-black">
+            <img
+            src={blog.cover_image}
+            alt={title}
+            className="w-full max-h-[500px] object-contain"
+            />
+        </div>
+        )}
 
-                <div className={`text-center space-y-4 flex justify-center items-center bg-[#ffffff] rounded-md px-6 py-4 mt-10 mb-4 gap-6`}>
-                { isAdmin && 
-                    (
-                    <>
-                        <input
-                        value={title}
-                        onChange={(e) => {
-                            if (e.target.value.length <= TITLE_LIMIT) {
-                            setTitle(e.target.value);
-                            }
-                        }}
-                        className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto h-12"
-                        placeholder="Enter blog title..."
-                        />
-                        <p className={`text-sm mt-1 ${
-                            title.length > TITLE_LIMIT - 10 ? "text-red-500" : "text-gray-400"
-                        }`}>
-                            {title.length}/{TITLE_LIMIT}
-                        </p>
-                    </>
-                    )
-                
-                }
-                </div>
-
-                    <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
-                        {isAdmin &&
-                            (<MarkdownEditor value={content} onChange={setContent} />)}
-                    </div>
-                    
-
-                    <div className="flex flex-col text-sm text-gray-500 mt-10 mb-4 justify-end items-end text-lg px-2">
-                    <span>By {blog.author}</span>
-                    {blog.published_at
-                        && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+        <div className={`text-center space-y-4 flex justify-center items-center bg-[#ffffff] rounded-md px-6 py-4 mt-10 mb-4 gap-6`}>
+        { isAdmin && 
+            (
+            <>
+                <input
+                value={title}
+                onChange={(e) => {
+                    if (e.target.value.length <= TITLE_LIMIT) {
+                    setTitle(e.target.value);
                     }
+                }}
+                className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto h-12"
+                placeholder="Enter blog title..."
+                />
+                <p className={`text-sm mt-1 ${
+                    title.length > TITLE_LIMIT - 10 ? "text-red-500" : "text-gray-400"
+                }`}>
+                    {title.length}/{TITLE_LIMIT}
+                </p>
+            </>
+            )
+        
+        }
+        </div>
+
+        <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
+            {isAdmin &&
+                (<MarkdownEditor value={content} onChange={setContent} />)}
+        </div>
+                  
+
+        <div className="flex text-sm text-gray-500 mt-10 mb-4 justify-between items-end text-lg px-2">
+          <Button className="flex gap-2 btn-md bg-red-500 rounded-sm cursor-pointer" onClick={() => handleDelete(blog.id)}>
+            {deleteLoading ? 
+              <Loader2 size={20} />  
+              :
+              <>
+                <Trash2 className="text-white" size={20} />
+                <span className="text-white">Delete</span>
+              </>
+            }
+          </Button>
+          <div className="flex flex-col items-end">
+            <span>By {blog.author}</span>
+            {blog.published_at
+                && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+            }
+          </div>
+                  
+        </div>
+              
+
+        <div className={`pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col ${isAdmin ? "justify-between" : "justify-center"} justify-between items-center`}>
+        <div>
+            <p className="text-gray-600 italic">
+            May this knowledge guide your path.
+            </p>
+            <p className="text-orange-600 font-semibold">
+            Jai Shree Ram 🚩
+            </p>
+        </div>
+
+        {isAdmin && <div onClick={handleVerifyBlog}>
+            <button className="flex sm:border-3 border border-orange-600 rounded-full px-6 py-2 text-orange-600 hover:bg-orange-50 transition text-sm font-semibold sm:text-xl mx-3 cursor-pointer active:scale-95">
+            {verified === true ? 
+                (
+                <div className="flex gap-2 items-center justify-center ">
+                    <CheckCircle size={25}  />
+                    Verified
+                </div>
+                )
+                : 
+                (
+                verify ? 
+                    <div className="flex gap-3 items-center justify-center">
+                    <Loader2 className="animate-spin" size={18} />
+                    Verifying...
                     </div>
-                
+                    : 
+                    <div className="flex gap-2 items-center justify-center ">
+                    <CheckCircle size={25}  />
+                    Verify
+                    </div>
+                ) 
+            }
+            </button>
+        </div>}
+        </div>
 
-                <div className={`pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col ${isAdmin ? "justify-between" : "justify-center"} justify-between items-center`}>
-                <div>
-                    <p className="text-gray-600 italic">
-                    May this knowledge guide your path.
-                    </p>
-                    <p className="text-orange-600 font-semibold">
-                    Jai Shree Ram 🚩
-                    </p>
-                </div>
-
-                {isAdmin && <div onClick={handleVerifyBlog}>
-                    <button className="flex sm:border-3 border border-orange-600 rounded-full px-6 py-2 text-orange-600 hover:bg-orange-50 transition text-sm font-semibold sm:text-xl mx-3 cursor-pointer active:scale-95">
-                    {verified === true ? 
-                        (
-                        <div className="flex gap-2 items-center justify-center ">
-                            <CheckCircle size={25}  />
-                            Verified
-                        </div>
-                        )
-                        : 
-                        (
-                        verify ? 
-                            <div className="flex gap-3 items-center justify-center">
-                            <Loader2 className="animate-spin" size={18} />
-                            Verifying...
-                            </div>
-                            : 
-                            <div className="flex gap-2 items-center justify-center ">
-                            <CheckCircle size={25}  />
-                            Verify
-                            </div>
-                        ) 
-                    }
-                    </button>
-                </div>}
-                </div>
-
-            </div>
-        </section>
-    )
+      </div>
+    </section>
+  )
 }
 
 export default BlogInfoAdmin;

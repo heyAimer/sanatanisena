@@ -2,7 +2,7 @@
 
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
 import axios from "axios";
-import { Loader2 } from "lucide-react";
+import { BadgeCheck, Eye, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -36,27 +36,24 @@ export default function Pending() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleFetchUnverifiedBlogs = async () => {
+  const handleFetcBlogs = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=all`,
         {withCredentials: true}
       );
-      console.log("Unverified blogs:", response.data.data);
+      console.log("vrified unverified blogs:", response.data.data);
       setData(response.data.data);
     } catch (err) {
-      if(axios.isAxiosError(err)) {
-        console.error("Axios error:", err.response);
-        setError(err.response?.data?.message || "An error occurred while fetching unverified blogs.Try again.");
-      }
-      toast.error("Failed to fetch unverified blogs.");
+      toast.error(err.response.data);
+      setError("Failed to fetch unverified blogs")
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    handleFetchUnverifiedBlogs();
+    handleFetcBlogs();
   }, []);
 
   if(error) {
@@ -68,7 +65,7 @@ export default function Pending() {
   }
 
   return (
-    <section className="min-h-screen bg-[#fffdf8] px-10 py-12">
+    <section className="min-h-screen px-10 pb-12 pt-16">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* Header */}
@@ -86,49 +83,115 @@ export default function Pending() {
         {/* Table */}
         {loading ?
           <div className="flex items-center justify-center px-8 mx-auto space-y-6 py-40">
-              <Loader2 className="animate-spin" size={50}/>
+            <Loader2 className="animate-spin" size={50}/>
           </div>
           :
           data.length > 0 &&
           <div className="bg-white border border-gray-200 rounded-md sm:rounded-2xl overflow-hidden shadow-sm">
-            <table className="w-full text-left">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr className="text-sm text-gray-600">
-                  <th className="sm:px-6 sm:py-4 font-medium px-4 py-2">Title</th>
-                  <th className="px-6 py-4 font-medium hidden sm:table-cell">Author</th>
-                  <th className="px-6 py-4 font-medium hidden md:table-cell">Submitted</th>
-                  <th className="sm:px-6 sm:py-4 font-medium px-4 py-2">Actions</th>
-                </tr>
-              </thead>
+              <div className="hidden lg:block">
+                <table className="w-full table-fixed text-left">
+                  <colgroup>
+                    <col className="w-[40%]" />
+                    <col className="w-[20%]" />
+                    <col className="w-[20%]" />
+                    <col className="w-[20%]" />
+                  </colgroup>
+                  
+                  <thead className="bg-gray-50 border-b border-gray-200">
+                    <tr className="text-sm text-gray-600">
+                      <th className="font-medium px-4 py-2">Title</th>
+                      <th className="px-6 py-4 font-medium ">Author</th>
+                      <th className="px-6 py-4 font-medium ">Submitted</th>
+                      <th className="font-medium px-4 py-2">Actions</th>
+                    </tr>
+                  </thead>
+                </table>
+              
+                <div className="max-h-[calc(100vh-320px)] overflow-y-auto">
+                  <table className="w-full text-left">
+                    <colgroup>
+                      <col className="w-[40%]" />
+                      <col className="w-[20%]" />
+                      <col className="w-[20%]" />
+                      <col className="w-[20%]" />
+                    </colgroup>
+                    <tbody>
+                      {data.map((blog) => (
+                        <tr
+                          key={blog.id}
+                          className="border-b last:border-b-0 hover:bg-gray-50 transition"
+                        >
+                          <td className="font-medium text-gray-900 max-w-[400px] truncate text-lg px-4 py-4">
+                            {blog.title}
+                          </td>
+                          <td className="px-6 py-5 text-gray-700">
+                            {blog.author}
+                          </td>
+                          <td className="px-6 py-5 text-gray-500">
+                            {useUTCtoIST(blog.published_at)}
+                          </td>
+                          <td className="sm:px-2">
+                            <Link href={`/admin/blogs/${blog.id}`}>
+                              <button className={`sm:border-2 border rounded-sm px-3 py-1 ${blog.verified? 'text-green-600 border-green-600 hover:bg-green-50  ' : "text-orange-600 border-orange-600 hover:bg-orange-50  "}  transition text-xs sm:text-lg mx-3 cursor-pointer flex items-center gap-2`}>
+                              {blog.verified ? <BadgeCheck className="text-green-600" size={22} /> : <Eye className="text-orange-600" size={22} />}
+                                Preview
+                              </button>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              {/* =============Mobile//tab============ */}
+              <div className="lg:hidden">
+                <table className="w-full text-left table-fixed">
+                  <colgroup>
+                    <col className="w-[50%] sm:w-[90%]" />
+                    <col className="w-[50%] sm: w-[10%]" />
+                  </colgroup>
 
-              <tbody>
-                {data.map((blog) => (
-                  <tr
-                    key={blog.id}
-                    className="border-b last:border-b-0 hover:bg-gray-50 transition"
-                  >
-                    <td className="sm:px-6 sm:py-5 font-medium text-gray-900 max-w-[120px]  md:max-w-[400px] truncate sm:text-lg text-xs px-4 py-4">
-                      {blog.title}
-                    </td>
-                    <td className="px-6 py-5 text-gray-700 hidden sm:table-cell">
-                      {blog.author}
-                    </td>
-                    <td className="px-6 py-5 text-gray-500 hidden md:table-cell">
-                      {useUTCtoIST(blog.published_at)}
-                    </td>
-                    <td className="sm:px-2">
-                      <Link href={`/admin/blogs/${blog.id}`}>
-                        <button className="sm:border-2 border border-orange-600 rounded-sm px-3 py-1 text-orange-600 hover:bg-orange-50 transition text-xs sm:text-lg mx-3 cursor-pointer">
-                          Preview
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  <thead className="bg-gray-50 border-b">
+                    <tr className="text-sm text-gray-600">
+                      <th className="px-4 py-3">Title</th>
+                      <th className="sm:pl-22 pl-10 py-3">Action</th>
+                    </tr>
+                  </thead>
+                </table>
+
+                <div className="max-h-[550px] overflow-y-auto">
+                  <table className="w-full table-fixed">
+                    <colgroup>
+                      <col className="w-[50%] sm:w-[90%]" />
+                      <col className="w-[50%] sm: w-[10%]" />
+                    </colgroup>
+
+                    <tbody>
+                      {data.map((blog) => (
+                        <tr key={blog.id} className="border-b hover:bg-gray-50 ">
+                          <td className="font-medium text-gray-900 max-w-[120px] truncate text-sm sm:text-md px-4 py-8">
+                            {blog.title}
+                          </td>
+                          <td className="sm:pl-20 pl-8">
+                            <Link href={`/admin/blogs/${blog.id}`}>
+                              <button className={`sm:border-2 border rounded-sm px-3 py-1 ${blog.verified? 'text-green-600 border-green-600 hover:bg-green-50  ' : "text-orange-600 border-orange-600 hover:bg-orange-50  "}  transition text-xs sm:text-lg mx-3 cursor-pointer flex items-center gap-2`}>
+                              {blog.verified ? <BadgeCheck className="text-green-600" size={22} /> : <Eye className="text-orange-600" size={22} />}
+                                Preview
+                              </button>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
           </div>
-        }
+          
+          
+          }
 
         {/* Empty state (when no pending blogs) */}
         {mockPendingBlogs.length === 0 && (

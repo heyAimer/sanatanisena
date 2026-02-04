@@ -1,4 +1,5 @@
 'use client';
+import MarkdownRenderer from "@/components/editor/MarkdownRenderer";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/utils/AuthContext";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
@@ -88,31 +89,34 @@ const BlogPage = () => {
                     :
                     (
                         <div className = "flex flex-col items-center px-4 py-6">
-                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                                 {data.map((blog) => (
-                                    <Link href={`/blogs/${blog.id}`} key={blog.id}>
                                         <article
-                                            className="rounded-xl border card-sacred"
+                                            className="rounded-xl border card-sacred" key={blog.id}
                                         >
-                                            <div className="hover:shadow-lg transition rounded-lg">
+                                            <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
 
-                                                {blog.cover_image &&
-                                                    <div className="relative h-50 w-full">
-                                                        <Image
-                                                            src={blog.cover_image}
-                                                            alt="image"
-                                                            fill
-                                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                                            className="object-cover w-auto h-auto"
-                                                        />
-                                                    </div>
-                                                }
-                                                
+                                                <Link href={`/blogs/${blog.id}`} key={blog.id}>
+                                                    {blog.cover_image &&
+                                                        <div className="relative h-50 w-full">
+                                                            <Image
+                                                                src={blog.cover_image}
+                                                                alt="image"
+                                                                fill
+                                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                                className="object-cover w-auto  rounded-t-lg"
+                                                            />
+                                                        </div>
+                                                    }
+                                                </Link>
                                                 <div className="py-4">
                                                     <div className="px-5 space-y-2">
-                                                        <h3 className="text-lg font-semibold">
+                                                        <h3 className="text-lg font-semibold line-clamp-1">
                                                             {blog.title}
                                                         </h3>
+                                                    </div>
+                                                    <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
+                                                           {blog.content}
                                                     </div>
                                                     
                                                     <div className="px-4 flex items-center gap-2 py-2 mt-2">
@@ -128,8 +132,7 @@ const BlogPage = () => {
                                                 </div>
                                             
                                             </div>
-                                        </article>  
-                                    </Link>
+                                        </article>
                                 ))}
                             </div>
 
