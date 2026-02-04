@@ -30,7 +30,7 @@ export const cards = [
 
 export default function WhatWeDo() {
     return (
-        <section className="bg-white py-10 my-10 px-4 space-y-16 lg:px-16 px-5">
+        <section className="bg-white pt-20 pb-10 my-10 px-4 space-y-16 lg:px-16 px-5" id="what-we-do" >
             <div className="mx-auto max-w-7xl ">
                 <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 text-center mb-4">
                     Our Mission – Awakening Sanatan Consciousness

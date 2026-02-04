@@ -6,6 +6,7 @@ import axios from "axios";
 import { Loader, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,9 +16,14 @@ const BlogPage = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const { isUser, isAdmin } = useAuth();
-    console.log(isUser, isAdmin);
+    const { isUser } = useAuth();
 
+    const pathname = usePathname();
+
+    useEffect(() => {
+    window.scrollTo(0, 0);
+    }, [pathname]);
+    
     const handleFetchUnverifiedBlogs = async () => {
         try {
         setLoading(true);
@@ -86,46 +92,41 @@ const BlogPage = () => {
                                 {data.map((blog) => (
                                     <Link href={`/blogs/${blog.id}`} key={blog.id}>
                                         <article
-                                            className="overflow-hidden rounded-xl border card-sacred"
+                                            className="rounded-xl border card-sacred"
                                         >
-                                            {blog.cover_image &&
-                                                <div className="relative h-50 w-full">
-                                                    <Image
-                                                        src={blog.cover_image}
-                                                        alt="image"
-                                                        fill
-                                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                                        className="object-cover w-auto h-auto"
-                                                    />
-                                                </div>
-                                            }
-                                            
-                                            <div className="py-4">
-                                                <div className="px-5 space-y-2">
-                                                    <h3 className="text-lg font-semibold">
-                                                        {blog.title}
-                                                    </h3>
-                                                    
-                                                    {/* <span className="inline-block rounded-full bg-orange-50 px-4 py-1 text-xs font-medium text-orange-700 border">
-                                                        {blog.content}
-                                                    </span> */}
-                                                    {/* <MarkdownRenderer
-                                                        content={blog.content
-                                                        }
-                                                        className="inline-block rounded-full bg-orange-50 px-4 py-1 text-xs font-medium text-orange-700 border"
-                                                    /> */}
-                                                </div>
+                                            <div className="hover:shadow-lg transition rounded-lg">
+
+                                                {blog.cover_image &&
+                                                    <div className="relative h-50 w-full">
+                                                        <Image
+                                                            src={blog.cover_image}
+                                                            alt="image"
+                                                            fill
+                                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                                            className="object-cover w-auto h-auto"
+                                                        />
+                                                    </div>
+                                                }
                                                 
-                                                <div className="px-4 flex items-center gap-2 py-2 mt-5">
-                                                    <img
-                                                        src="./bholenath.png"
-                                                        className="h-10 w-10 object-cover rounded-full"
-                                                    />
-                                                    <div className="leading-none text-[14px] space-y-1">
-                                                        <p className="font-semibold">{ blog.author}</p>
-                                                        <p>{ useUTCtoIST(blog.published_at)}</p>
+                                                <div className="py-4">
+                                                    <div className="px-5 space-y-2">
+                                                        <h3 className="text-lg font-semibold">
+                                                            {blog.title}
+                                                        </h3>
+                                                    </div>
+                                                    
+                                                    <div className="px-4 flex items-center gap-2 py-2 mt-2">
+                                                        <img
+                                                            src="./bholenath.png"
+                                                            className="h-10 w-10 object-cover rounded-full"
+                                                        />
+                                                        <div className="leading-none text-[14px] space-y-1">
+                                                            <p className="font-semibold">{ blog.author}</p>
+                                                            <p>{ useUTCtoIST(blog.published_at)}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            
                                             </div>
                                         </article>  
                                     </Link>

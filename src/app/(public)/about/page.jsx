@@ -6,7 +6,7 @@ import WhySection from "@/features/about/WhySection";
 
 const page = () => {
     return (
-        <section className="w-full bg-[#fffdf8] text-gray-800">
+        <section className="w-full text-gray-800">
             <HeroSection />
             <WhySection />
             <WhatSection/>

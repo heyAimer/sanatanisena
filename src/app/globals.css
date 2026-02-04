@@ -340,3 +340,22 @@ a {
     transform: translateX(100%);
   }
 }
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+}
+
+.animate-chevron {
+  animation: floatDown 1.8s ease-in-out infinite;
+}
