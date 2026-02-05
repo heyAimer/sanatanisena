@@ -3,17 +3,44 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/utils/AuthContext";
 import usefetchblogs from "@/utils/hooks/usefetchblogs";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
+import axios from "axios";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect} from "react";
+import { useEffect, useState } from "react";
 
-const BlogPage = () => {
-    const {data, loading, error, refetch} = usefetchblogs("/public/blogs?page=0");
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export default function History() {
+    // const {data, loading, error, refetch} = usefetchblogs("/blogs?page=0&scope=user");
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { isUser } = useAuth();
 
     const pathname = usePathname();
+    const fetchbloghistory = async() => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=user`,
+                { withCredentials: true }
+            );
+            setData(response.data.data);
+        } catch (err) {
+            if (axios.isAxiosError(err)) {
+                setError(err.response?.data?.message || "An error occurred while fetching verified blogs.Try again.");
+            }
+            toast.error("Failed to fetch verified blogs.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchbloghistory();
+    }, []);
 
     useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,10 +72,10 @@ const BlogPage = () => {
             <div className="max-w-7xl mx-auto sm:px-6 relative">
                 <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
-                        Sanatan Knowledge Vault
+                        Your Seva Through Sacred Words
                     </h1>
                     <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-                        A curated collection of verified articles on Sanatan Dharma, yoga, scriptures, and timeless wisdom — written to guide, awaken, and inspire every seeker.
+                        View, manage, and revisit every blog you have written — a digital record of your service to Dharma and seekers.
                     </p>
                 </div>
 
@@ -70,17 +97,17 @@ const BlogPage = () => {
                                             <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
 
                                                 
-                                                    {blog.cover_image &&
-                                                        <div className="relative h-50 w-full">
-                                                            <Image
-                                                                src={blog.cover_image}
-                                                                alt="image"
-                                                                fill
-                                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                                                className="object-cover w-auto  rounded-t-lg"
-                                                            />
-                                                        </div>
-                                                    }
+                                                {blog.cover_image &&
+                                                    <div className="relative h-50 w-full">
+                                                        <Image
+                                                            src={blog.cover_image}
+                                                            alt="image"
+                                                            fill
+                                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                                            className="object-cover w-auto  rounded-t-lg"
+                                                        />
+                                                    </div>
+                                                }
                                                 <div className="py-4">
                                                     <div className="px-5 space-y-2">
                                                         <h3 className="text-lg font-semibold line-clamp-1">
@@ -154,4 +181,3 @@ const BlogPage = () => {
         </section>
     );
 }
-export default BlogPage;

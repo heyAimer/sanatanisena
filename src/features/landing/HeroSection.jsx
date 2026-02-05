@@ -6,7 +6,6 @@ import { ChevronDown } from "lucide-react";
 const HeroSection = () => {
     const scrollToWhatWeDo = () => {
         const section = document.getElementById("what-we-do");
-        console.log("whatwedo huh")
         if (section) {
             section.scrollIntoView({
             behavior: "smooth",

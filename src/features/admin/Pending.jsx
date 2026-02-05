@@ -42,7 +42,6 @@ export default function Pending() {
       const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=all`,
         {withCredentials: true}
       );
-      console.log("vrified unverified blogs:", response.data.data);
       setData(response.data.data);
     } catch (err) {
       toast.error(err.response.data);

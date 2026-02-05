@@ -32,8 +32,6 @@ const BlogInfoAdmin = ({ slug }) => {
         {withCredentials: true}
       );
 
-      console.log("Blog fetch response:", response);
-
       const blog = response.data.data;
 
       setBlog(blog);
@@ -54,7 +52,6 @@ const BlogInfoAdmin = ({ slug }) => {
   const handleVerifyBlog = async () => {
     try {
       setIsVerify(true);
-      console.log("blog to verify: ", blog);
       const jsonBody = {
           id: blog.id,
           author:blog.author,
@@ -68,7 +65,6 @@ const BlogInfoAdmin = ({ slug }) => {
         jsonBody,
         { withCredentials: true }
       );
-      console.log("Blog verify response:", response);
       setVerified(true);
       toast.success("Blog verified successfully!");
       getBlogInfo();
@@ -92,11 +88,9 @@ const BlogInfoAdmin = ({ slug }) => {
           withCredentials: true 
         }
       );
-      console.log("Blog verify response:", response);
       router.push("/admin/blogs");
       toast.success(response.data.message);
     } catch (err) {
-      console.log(err)
       toast.error(err.response?.data?.message || "Please try again.");
     } finally {
       setDeleteLoading(false);

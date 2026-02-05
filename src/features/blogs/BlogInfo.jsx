@@ -21,8 +21,6 @@ const BlogInfo = ({ slug }) => {
         {withCredentials: true}
       );
 
-      console.log("Blog fetch response:", response);
-
       const blog = response.data.data;
 
       setBlog(blog);

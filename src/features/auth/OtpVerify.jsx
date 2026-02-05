@@ -40,7 +40,6 @@ export default function OtpVerify() {
           withCredentials: true,
         }
       );
-      console.log("OTP verify response:", response);
       toast.success(response.data.message || "OTP verified successfully!");
       router.push("/");
     } catch (err) {

@@ -59,9 +59,8 @@ export default function SignUpForm() {
       },
       { withCredentials: true }
       );
-      console.log("Signup successful:", response); 
       
-      toast.success("Signup successful! Check your email for the OTP to verify your account");
+      toast.success(response.data.message);
 
       setTimeout(() => {
         router.push("signup/otp");

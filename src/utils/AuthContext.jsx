@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     const logout = async () => {
-        console.log("clicekd logout")
         try {
             setLoading(true);
             const response = await axios.post(`${BASE_URL}/logout`,
@@ -30,8 +29,7 @@ export function AuthProvider({ children }) {
             );
             setIsUser(false);
             setIsAdmin(false);
-            console.log("logout: ",response);
-            toast.success("Logout successfully!")
+            toast.success(response.data?.message)
             router.push("/");
         } catch (err) {
             if (axios.isAxiosError(err)) {
@@ -53,7 +51,6 @@ export function AuthProvider({ children }) {
             const response = await axios.get(`${BASE_URL}/checkauth`,
                 { withCredentials: true }
             );
-            console.log("CHECK AUTH:", response);
             setIsUser(response.data.isUser);
             setIsAdmin(response.data.isAdmin);
             setLoading(false);

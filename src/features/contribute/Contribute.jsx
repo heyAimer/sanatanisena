@@ -61,8 +61,7 @@ const Contribute = () => {
                 },
                 {withCredentials: true}
             )
-            console.log(response);
-            toast.success("Blog submitted for review successfully!");
+            toast.success(response.data.message);
             router.push("/blogs");
         } catch (err) {
             console.error("Error creating blog:", err);

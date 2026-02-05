@@ -2,7 +2,7 @@
 import * as React from "react"
 import { useEffect } from "react";
 import Link from "next/link"
-import { LogOut, Menu, Crown } from "lucide-react";
+import { LogOut, Menu, Crown, History } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -134,6 +134,13 @@ export default function Navbar() {
                                                     </DropdownMenuItem>
                                                 </Link>
                                             )}
+                                            <Link href="/history">
+                                                <DropdownMenuItem className="justify-between cursor-pointer btn-sm hover:bg-blue-100 text-blue-700 hover:text-blue-500 border-blue-700 border-2 my-1 mt-2 font-semibold"
+                                                >      
+                                                    <span>History</span>
+                                                    <History className="h-4 w-4 text-blue-600" />
+                                                </DropdownMenuItem>
+                                            </Link>
                                             <DropdownMenuItem className="justify-between  cursor-pointer btn-secondary hover:bg-orange-100 my-1 mt-2"
                                             onClick={logout}
                                             >

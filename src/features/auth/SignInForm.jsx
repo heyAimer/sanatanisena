@@ -48,8 +48,7 @@ export default function SignInForm() {
         withCredentials: true,
       }
       );
-      console.log("SignIn response:", response);
-      toast.success("Signin successful");
+      toast.success(response.data.message);
 
       router.push("/");
       
