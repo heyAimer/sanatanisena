@@ -42,6 +42,19 @@ const BlogPage = () => {
     
     return (
         <section className="pb-12 pt-4 sm:py-14">
+            <div className="absolute inset-0 pointer-events-none -z-10">
+
+                {/* Top Left */}
+                <div className="absolute top-40 left-20 w-60 h-60 rounded-full bg-[#ffb366] animate-float-slow" />
+
+                <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+                {/* Bottom Right */}
+                <div className="absolute bottom-4 right-12 w-[400px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+                <div className="absolute bottom-6 right-72 w-40 h-20 rounded-full bg-[#ffb366] animate-float-fast" />
+
+            </div>
             <div className="max-w-7xl mx-auto sm:px-6 relative">
                 <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">

@@ -62,11 +62,11 @@ export default function Footer() {
           <div className="flex flex-col items-center mt-4 ">
             <ul className="space-y-3 text-sm flex flex-col items-center md:items-start">
               <li className="font-semibold text-[16px]">Quick Links</li>
-              <li><a href="#how-it-works" className="text-slate-600 hover:text-blue-600">Home</a></li>
-              <li><a href="#features" className="text-slate-600 hover:text-blue-600">About</a></li>
-              <li><a href="#use-cases" className="text-slate-600 hover:text-blue-600">Blogs</a></li>
-              <li><a href="/pricing" className="text-slate-600 hover:text-blue-600">Contact us</a></li>
-              <li><a href="/sample-report" className="text-slate-600 hover:text-blue-600">Support Dharma</a></li>
+              <li><Link href="/" className="text-slate-600 hover:text-blue-600">Home</Link></li>
+              <li><Link href="/about" className="text-slate-600 hover:text-blue-600">About</Link></li>
+              <li><Link href="/blogs" className="text-slate-600 hover:text-blue-600">Blogs</Link></li>
+              <li><Link href="/donate" className="text-slate-600 hover:text-blue-600">Contact us</Link></li>
+              <li><Link href="/donate" className="text-slate-600 hover:text-blue-600">Support Dharma</Link></li>
             </ul>
           </div>
 

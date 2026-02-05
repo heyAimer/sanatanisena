@@ -31,6 +31,13 @@ const links = [
 export default function Donate() {
   return (
     <section className="pb-12 pt-8 sm:pb-20">
+      <div className="absolute inset-0 pointer-events-none -z-10">
+
+        <div className="absolute top-40 left-20 w-60 h-60 rounded-full bg-[#ffb366] animate-float-slow" />
+
+        <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+      </div>
+      
       <div className="max-w-7xl mx-auto px-8 space-y-20">
 
         {/* Header */}
@@ -157,8 +164,15 @@ export default function Donate() {
         </div>
 
         {/* Closing */}
-        <div className="text-center space-y-6">
-          <p className="text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center space-y-6 relative">
+          <div className="absolute inset-0 pointer-events-none -z-10">
+
+            <div className="absolute bottom-4 right-0 w-[200px] h-[80px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+            <div className="absolute bottom-10 right-0 w-40 h-20 rounded-full bg-[#ffb366] animate-float-fast" />
+
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto relative">
             Whether you contribute or not, you are always welcome here.
             Reading, learning, sharing, and joining the community is also Seva.
           </p>

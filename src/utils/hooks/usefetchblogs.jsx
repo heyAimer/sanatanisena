@@ -37,5 +37,5 @@ const usefetchblogs = (endpoint , enabled = true) => {
     return {
         data,loading,error, refetch:fetchBlogs
     }
-}    
+}  
 export default usefetchblogs;

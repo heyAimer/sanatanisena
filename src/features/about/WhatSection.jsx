@@ -26,7 +26,21 @@ const whatWeDo = [
 
 const WhatSection = () => {
     return (
-        <section className="my-10 sm:py-20 py-10">
+        <section className="my-10 sm:py-20 py-10 relative">
+            <div className="absolute inset-0 pointer-events-none -z-10">
+
+                {/* Top Left */}
+                <div className="absolute top-0 left-20 w-40 h-40 rounded-full bg-[#ffb366] animate-float-slow" />
+
+                <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+                {/* Bottom Right */}
+                <div className="absolute bottom-2 right-12 w-[400px] h-[80px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+                <div className="absolute bottom-6 right-72 w-40 h-20 rounded-full bg-[#ffb366] animate-float-fast" />
+
+            </div>
+
             <div className="max-w-7xl mx-auto sm:px-10 px-6">
                 <h2 className="text-3xl font-semibold mb-12 sm:text-start text-center">
                 What We Do
@@ -37,7 +51,7 @@ const WhatSection = () => {
                         return(
                             <div key={items.title} className="relative hover:-translate-y-1 
                             hover:rotate-1 hover:scale-[1] hover:shadow-md
-                            transition rounded-md">
+                            transition rounded-md bg-white">
                                 <Image
                                     src={items.icon}
                                     alt="Sanatani sena logo"

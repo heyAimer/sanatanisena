@@ -3,13 +3,38 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/utils/AuthContext";
 import usefetchblogs from "@/utils/hooks/usefetchblogs";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
-import { Loader2 } from "lucide-react";
+import axios from "axios";
+import { Loader2, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import toast from "react-hot-toast";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function History() {
     const { isUser } = useAuth();
     const { data, loading, error, refetch } = usefetchblogs("/blogs?page=0&scope=user" , isUser);
+    const [deletingId, setDeletingId] = useState(null);
+
+    const handleDelete = async (blogid) => {
+        try {
+            setDeletingId(blogid);
+            const response = await axios.delete(
+                `${BASE_URL}/blog`,
+                {
+                data:{id:blogid},
+                withCredentials: true 
+                }
+            );
+            toast.success(response.data.message);
+            refetch();
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Please try again.");
+        } finally {
+            setDeletingId(null);
+        }
+    }
 
     if(error) {
         return (
@@ -31,83 +56,97 @@ export default function History() {
     return (
         <section className="pb-12 pt-4 sm:py-14">
             <div className="max-w-7xl mx-auto sm:px-6 relative">
-                <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
-                        Your Seva Through Sacred Words
-                    </h1>
-                    <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-                        View, manage, and revisit every blog you have written — a digital record of your service to Dharma and seekers.
-                    </p>
-                </div>
+                {data.length > 0 && <>
+                    <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
+                            Your Seva Through Sacred Words
+                        </h1>
+                        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+                            View, manage, and revisit every blog you have written — a digital record of your service to Dharma and seekers.
+                        </p>
+                    </div>
 
-                {loading ?
-                    (
-                        <div className="flex flex-col items-center justify-center px-8 mx-auto space-y-6 py-40">
-                            <Loader2 className="animate-spin" size={50}/>
-                        </div>
-                    )
-                    :
-                    (
-                        <div className = "flex flex-col items-center px-4 py-6">
-                            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                {data.map((blog) => (
-                                    <Link href={`/blogs/${blog.id}`} key={blog.id}>
+                    {loading ?
+                        (
+                            <div className="flex flex-col items-center justify-center px-8 mx-auto space-y-6 py-40">
+                                <Loader2 className="animate-spin" size={50}/>
+                            </div>
+                        )
+                        :
+                        (
+                            <div className = "flex flex-col items-center px-4 py-6">
+                                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                    {data.map((blog) => (
                                         <article
                                             className="rounded-xl border card-sacred" key={blog.id}
-                                        >
+                                            >
                                             <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
-
                                                 
-                                                {blog.cover_image &&
-                                                    <div className="relative h-50 w-full">
-                                                        <Image
-                                                            src={blog.cover_image}
-                                                            alt="image"
-                                                            fill
-                                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                                            className="object-cover w-auto  rounded-t-lg"
-                                                        />
+                                                <Link href={`/blogs/${blog.id}`}>
+                                                    <div className="z-10">
+                                                        {blog.cover_image &&
+                                                            <div className="relative h-50 w-full mb-4">
+                                                                <Image
+                                                                    src={blog.cover_image}
+                                                                    alt="image"
+                                                                    fill
+                                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                                    className="object-cover w-auto  rounded-t-lg"
+                                                                />
+                                                            </div>
+                                                        }
+                                                        <div className="px-5 space-y-2">
+                                                            <h3 className="text-lg font-semibold line-clamp-1">
+                                                                {blog.title}
+                                                            </h3>
+                                                        </div>
+                                                        <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
+                                                            {blog.content}
+                                                        </div>
                                                     </div>
-                                                }
-                                                <div className="py-4">
-                                                    <div className="px-5 space-y-2">
-                                                        <h3 className="text-lg font-semibold line-clamp-1">
-                                                            {blog.title}
-                                                        </h3>
-                                                    </div>
-                                                    <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
-                                                           {blog.content}
-                                                    </div>
-                                                    
-                                                    <div className="px-4 flex items-center gap-2 py-2 mt-2">
-                                                        <img
-                                                            src="./bholenath.png"
-                                                            className="h-10 w-10 object-cover rounded-full"
-                                                        />
-                                                        <div className="leading-none text-[14px] space-y-1">
-                                                            <p className="font-semibold">{ blog.author}</p>
-                                                            <p>{ useUTCtoIST(blog.published_at)}</p>
+                                                </Link>
+                                                <div className="z-20">
+                                                    <div className="px-4 flex items-center justify-between gap-2 py-2 mt-2 z-20">
+                                                        <div className="flex gap-2  items-center">
+                                                            <img
+                                                                src="./bholenath.png"
+                                                                className="h-10 w-10 object-cover rounded-full"
+                                                            />
+                                                            <div className="leading-none text-[14px] space-y-1">
+                                                                <p className="font-semibold">{ blog.author}</p>
+                                                                <p>{ useUTCtoIST(blog.published_at)}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="pr-3">
+                                                            <div className="flex cursor-pointer px-2 py-2 hover:bg-red-100 rounded-sm " onClick={() => handleDelete(blog.id)}>
+                                                                {deletingId === blog.id ? 
+                                                                <Loader2 size={20} />  
+                                                                :
+                                                                <>
+                                                                    <Trash2 className="text-red-600" size={24} />
+                                                                </>
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             
                                             </div>
                                         </article>
-                                    </Link>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
 
-                            {isUser && <Link href="/blogs/contribute">
-                                <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
-                                    Write a Blog
-                                </Button>
-                            </Link>}
-                                
-                        </div>
-                    )
-                }
-                
-                {!data && <div className="flex flex-col items-center justify-center px-6 text-center">
+                                {isUser && <Link href="/blogs/contribute">
+                                    <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
+                                        Write a Blog
+                                    </Button>
+                                </Link>}
+                                    
+                            </div>
+                        )
+                    }
+                </>}
+                {data.length === 0 && <div className="flex flex-col items-center justify-center px-6 text-center -mt-10">
 
                     <Image
                         src="/omDark.png"

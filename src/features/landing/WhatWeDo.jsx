@@ -30,7 +30,22 @@ export const cards = [
 
 export default function WhatWeDo() {
     return (
-        <section className="bg-white pt-20 pb-10 my-10 px-4 space-y-16 lg:px-16 px-5" id="what-we-do" >
+        <section className="relative bg-white pt-20 pb-10 my-10 px-4 space-y-16 lg:px-16 px-5" id="what-we-do" >
+
+            <div className="absolute inset-0 pointer-events-none">
+
+                {/* Top Left */}
+                <div className="absolute top-24 left-10 w-80 h-80 rounded-full bg-[#ffb366] animate-float-slow" />
+
+                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+                {/* Bottom Right */}
+                <div className="absolute bottom-50 right-12 w-[420px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+                <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+
+            </div>
+
             <div className="mx-auto max-w-7xl ">
                 <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 text-center mb-4">
                     Our Mission – Awakening Sanatan Consciousness
@@ -67,7 +82,7 @@ export default function WhatWeDo() {
                 {cards.map((items) => {
                     const Icon = items.icon;
                     return (
-                        <div key={items.title} className="border border-dullwhite rounded-2xl p-6 text-center hover:shadow-lg transition">
+                        <div key={items.title} className="border border-dullwhite rounded-2xl p-6 text-center hover:shadow-lg transition bg-white z-10">
                             <div className="flex justify-center mb-4 text-orange-600">
                                 <Icon size={36} />
                             </div>

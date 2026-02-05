@@ -2,7 +2,22 @@ import Link from "next/link";
 
 const CTAsection = () => {
     return (
-        <section className="relative overflow-hidden py-20 ">
+        <section className="relative py-20 ">
+            
+            <div className="absolute inset-0 pointer-events-none">
+
+                {/* Top Left */}
+                <div className="absolute top-2 left-20 w-40 h-40 rounded-full bg-[#ffb366] animate-float-slow" />
+
+                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+                {/* Bottom Right */}
+                <div className="absolute bottom-20 right-12 w-[400px] h-[100px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+                <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+
+            </div>
+
             <div className="mx-auto max-w-7xl px-6 text-center">
                 {/* Heading */}
                 <h2 className="text-3xl md:text-4xl font-semibold">

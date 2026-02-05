@@ -359,3 +359,70 @@ a {
 .animate-chevron {
   animation: floatDown 1.8s ease-in-out infinite;
 }
+
+/* ============ BLOBS =================== */
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-25px) translateX(10px);
+  }
+}
+
+@keyframes floatFast {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+}
+
+/* Glow breathing */
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.50;
+    filter: blur(90px);
+  }
+  50% {
+    opacity: 0.70;
+    filter: blur(120px);
+  }
+}
+
+/* Combine floating + glowing */
+.animate-float-slow {
+  animation:
+    floatSlow 6s ease-in-out infinite,
+    glowPulse 3s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation:
+    floatFast 5s ease-in-out infinite,
+    glowPulse 3s ease-in-out infinite;
+}
+
+/* =========2====== */
+
+@keyframes waveMove {
+  0% { background-position: 0% 50% }
+  100% { background-position: 200% 50% }
+}
+
+.energy-wave {
+  background: linear-gradient(
+    120deg,
+    #efbc88 20%,
+    #ffb366 40%,
+    #f28c28 60%,
+    #efbc88 80%
+  );
+  background-size: 200% 100%;
+  animation: waveMove 4s linear infinite;
+  opacity: 0.50;
+  filter: blur(80px);
+}
+/* =================== 3 ============== */

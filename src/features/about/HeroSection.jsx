@@ -3,7 +3,8 @@ import Image from "next/image";
 const HeroSection = () => {
     return (
         <section className="max-w-7xl mx-auto px-6 text-center relative my-10">
-            <div className="grid md:grid-cols-2 grid-cols-1 items-center place-items-center">
+            <div className="absolute inset-0 energy-wave -z-10 sm:flex hidden" />
+            <div className="grid md:grid-cols-2 grid-cols-1 items-center place-items-center relative z-10">
                 <div className="flex justify-center items-center animate-obj">
                     <Image
                         src="/durgaMa.png"
