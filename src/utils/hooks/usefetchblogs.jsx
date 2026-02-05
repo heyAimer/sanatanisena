@@ -7,12 +7,13 @@ const { useState, useCallback, useEffect } = require("react");
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const usefetchblogs = (endpoint) => {
+const usefetchblogs = (endpoint , enabled = true) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
     const fetchBlogs = useCallback(async () => {
+        if (!enabled) return;
         try {
             setLoading(true);
             setError(null);
@@ -28,10 +29,10 @@ const usefetchblogs = (endpoint) => {
         } finally {
             setLoading(false);
         }
-    }, [endpoint]);
+    }, [endpoint, enabled]);
     useEffect(() => {
-        fetchBlogs()
-    }, [fetchBlogs]);
+        if (enabled) fetchBlogs();
+    }, [fetchBlogs,enabled]);
 
     return {
         data,loading,error, refetch:fetchBlogs

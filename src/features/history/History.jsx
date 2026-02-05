@@ -3,60 +3,21 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/utils/AuthContext";
 import usefetchblogs from "@/utils/hooks/usefetchblogs";
 import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
-import axios from "axios";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function History() {
-    // const {data, loading, error, refetch} = usefetchblogs("/blogs?page=0&scope=user");
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const { isUser } = useAuth();
-
-    const pathname = usePathname();
-    const fetchbloghistory = async() => {
-        try {
-            setLoading(true);
-            setError(null);
-            const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=user`,
-                { withCredentials: true }
-            );
-            setData(response.data.data);
-        } catch (err) {
-            if (axios.isAxiosError(err)) {
-                setError(err.response?.data?.message || "An error occurred while fetching verified blogs.Try again.");
-            }
-            toast.error("Failed to fetch verified blogs.");
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        fetchbloghistory();
-    }, []);
-
-    useEffect(() => {
-    window.scrollTo(0, 0);
-    }, [pathname]);
+    const { data, loading, error, refetch } = usefetchblogs("/blogs?page=0&scope=user" , isUser);
 
     if(error) {
         return (
         <div className="flex flex-col items-center justify-center px-8 mx-auto min-h-screen space-y-6">
             <p className="text-red-600 font-semibold sm:text-xl text-lg">⚠️{error}</p>
             <h2 className="sm:text-2xl text-md font-semibold ">
-                Please pause for a moment
+                Something went wrong.
             </h2>
-            <p className="text-neutral-600 max-w-md text-center">
-                Our servers are receiving many seekers right now.  
-                Please wait a short while before continuing.
-            </p>
             <button
                 onClick={refetch}
                 className="px-6 py-2 btn-primary text-xl cursor"

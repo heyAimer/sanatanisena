@@ -4,8 +4,3 @@ const page = () => {
     return <History/>;
 }
 export default page;
-export const metadata = {
-  title: "Your history",
-  description:
-    "Your history of sanatani sena",
-};
