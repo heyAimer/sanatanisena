@@ -18,9 +18,12 @@ const BlogInfoAdmin = ({ slug }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [verify, setIsVerify] = useState(false);
+  const [update, setUpdated] = useState(false);
   const [verified, setVerified] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [originalContent, setOriginalContent] = useState(""); 
 
+  const isContentChanged = content !== originalContent;
   const router = useRouter();
 
   const TITLE_LIMIT = 80;
@@ -39,6 +42,7 @@ const BlogInfoAdmin = ({ slug }) => {
       setTitle(blog.title || "");
       setContent(blog.content || "");
       setVerified(blog.verified);
+      setOriginalContent(blog.content);
 
     } catch (err) {
       if(axios.isAxiosError(err)) {
@@ -49,14 +53,16 @@ const BlogInfoAdmin = ({ slug }) => {
       setLoading(false);
     }
   }
+
   const handleVerifyBlog = async () => {
     try {
+      setUpdated(true);
       setIsVerify(true);
       const jsonBody = {
           id: blog.id,
           author:blog.author,
-          title: blog.title,
-          content: blog.content,
+          title: title,
+          content: content,
           coverImage: blog.cover_image,
           verified: true
       }
@@ -65,8 +71,9 @@ const BlogInfoAdmin = ({ slug }) => {
         jsonBody,
         { withCredentials: true }
       );
-      setVerified(true);
-      toast.success("Blog verified successfully!");
+      toast.success(response.data.message);
+      setOriginalContent(content);
+      router.push("/admin/blogs");
       getBlogInfo();
     } catch (err) {
       if(axios.isAxiosError(err)) {
@@ -76,6 +83,7 @@ const BlogInfoAdmin = ({ slug }) => {
       toast.error(err.response?.data?.message || "An error occurred. Please try again.");
     } finally {
       setIsVerify(false);
+      setUpdated(false);
     }
   }
   const handleDelete = async (blogid) => {
@@ -187,33 +195,40 @@ const BlogInfoAdmin = ({ slug }) => {
             </p>
         </div>
 
-        {isAdmin && <div onClick={handleVerifyBlog}>
-            <button className="flex sm:border-3 border border-orange-600 rounded-full px-6 py-2 text-orange-600 hover:bg-orange-50 transition text-sm font-semibold sm:text-xl mx-3 cursor-pointer active:scale-95">
+        {isAdmin && <div>
+            <button
+              onClick={handleVerifyBlog}
+              disabled={!isContentChanged}
+              className={`flex sm:border-3 border 
+              ${verified === true ? "border-green-600 text-green-600 hover:bg-green-50 " : "border-orange-600 text-orange-600 hover:bg-orange-50"} 
+              ${!isContentChanged ? "opacity-0 cursor-not-allowed pointer-events-none" : "cursor-pointer"}
+              rounded-full px-6 py-2 transition text-sm font-semibold sm:text-xl mx-3 active:scale-95`}
+            >
             {verified === true ? 
-                (
-                <div className="flex gap-2 items-center justify-center ">
-                    <CheckCircle size={25}  />
-                    Verified
+              (
+              <div className="flex gap-2 items-center justify-center">
+                <CheckCircle size={25}  />
+                {update? "Updating..." :"Update"}
+              </div>
+              )
+              : 
+              (
+              verify ? 
+                <div className="flex gap-3 items-center justify-center">
+                <Loader2 className="animate-spin" size={18} />
+                Verifying...
                 </div>
-                )
                 : 
-                (
-                verify ? 
-                    <div className="flex gap-3 items-center justify-center">
-                    <Loader2 className="animate-spin" size={18} />
-                    Verifying...
-                    </div>
-                    : 
-                    <div className="flex gap-2 items-center justify-center ">
-                    <CheckCircle size={25}  />
-                    Verify
-                    </div>
-                ) 
+                <div className="flex gap-2 items-center justify-center ">
+                <CheckCircle size={25}  />
+                Verify
+                </div>
+              ) 
             }
             </button>
-        </div>}
+          </div>
+          }
         </div>
-
       </div>
     </section>
   )

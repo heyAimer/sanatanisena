@@ -172,10 +172,11 @@ export default function History() {
                         “When the student is ready, the teacher appears.”
                         </blockquote>
                     </div>
-
-                    <Button className="btn-primary sm:text-2xl sm:py-6 sm:px-6 text-lg mt-10">
-                        Write a Blog
-                    </Button>
+                    <Link href="/blogs/contribute">
+                        <Button className="btn-primary sm:text-2xl sm:py-6 sm:px-6 text-lg mt-10" >
+                            Write a Blog
+                        </Button>
+                    </Link>
                 </div>}
             </div>
         </section>
