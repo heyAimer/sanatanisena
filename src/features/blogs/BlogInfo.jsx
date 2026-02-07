@@ -13,14 +13,13 @@ const BlogInfo = ({ slug }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-
   const getBlogInfo = async () => {
     try {
       const response = await axios.get(
         `${BASE_URL}/public/bloginfo?blogid=${slug}`,
         {withCredentials: true}
       );
-
+      
       const blog = response.data.data;
 
       setBlog(blog);

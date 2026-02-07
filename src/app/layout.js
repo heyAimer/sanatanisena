@@ -3,7 +3,7 @@ import { Poppins} from "next/font/google";
 import {Tiro_Devanagari_Sanskrit } from "next/font/google";
 import "./globals.css";
 import "../styles/main.scss";
-import { Toaster } from "react-hot-toast";
+import ToasterProvider from "@/utils/ToastProvider";
 
 const hind = Hind({
   subsets: ["latin"],
@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
         `}
       >
         {children}
-        <Toaster position="top-right"/>
+        <ToasterProvider/>
       </body>
      
     </html>

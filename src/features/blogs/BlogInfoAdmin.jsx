@@ -159,8 +159,8 @@ const BlogInfoAdmin = ({ slug }) => {
         </div>
 
         <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
-            {isAdmin &&
-                (<MarkdownEditor value={content} onChange={setContent} />)}
+          {isAdmin &&
+              (<MarkdownEditor value={content} onChange={setContent} />)}
         </div>
                   
 

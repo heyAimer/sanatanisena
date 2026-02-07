@@ -16,8 +16,10 @@ export default function History() {
     const { isUser } = useAuth();
     const { data, loading, error, refetch } = usefetchblogs("/blogs?page=0&scope=user" , isUser);
     const [deletingId, setDeletingId] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
 
-    const handleDelete = async (blogid) => {
+    const confirmDelete  = async (blogid) => {
         try {
             setDeletingId(blogid);
             const response = await axios.delete(
@@ -29,6 +31,8 @@ export default function History() {
             );
             toast.success(response.data.message);
             refetch();
+            setShowDeleteModal(false);
+             setDeleteId(null);
         } catch (err) {
             toast.error(err.response?.data?.message || "Please try again.");
         } finally {
@@ -82,7 +86,7 @@ export default function History() {
                                             >
                                             <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
                                                 
-                                                <Link href={`/blogs/${blog.id}`}>
+                                                <Link href={`/history/blog/${blog.id}`}>
                                                     <div className="z-10">
                                                         {blog.cover_image &&
                                                             <div className="relative h-50 w-full mb-4">
@@ -118,7 +122,10 @@ export default function History() {
                                                             </div>
                                                         </div>
                                                         <div className="pr-3">
-                                                            <div className="flex cursor-pointer px-2 py-2 hover:bg-red-100 rounded-sm " onClick={() => handleDelete(blog.id)}>
+                                                            <div className="flex cursor-pointer px-2 py-2 hover:bg-red-100 rounded-sm " onClick={() => {
+                                                                setDeleteId(blog.id);
+                                                                setShowDeleteModal(true);
+                                                            }}>
                                                                 {deletingId === blog.id ? 
                                                                 <Loader2 size={20} />  
                                                                 :
@@ -179,6 +186,51 @@ export default function History() {
                     </Link>
                 </div>}
             </div>
+
+            {showDeleteModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                    
+                    <div
+                    className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                    onClick={() => setShowDeleteModal(false)}
+                    />
+
+                    {/* Modal Box */}
+                    <div className="relative z-10 bg-white rounded-lg shadow-xl w-[90%] max-w-md py-6 px-8 animate-scaleIn">
+                    <h2 className="text-xl font-bold text-gray-800">
+                        Delete this blog?
+                    </h2>
+
+                    <p className="text-gray-600 mt-2">
+                        This action cannot be undone. Are you sure you want to permanently delete this blog?
+                    </p>
+
+                    <div className="flex justify-end gap-4 mt-6">
+                        <button
+                        onClick={() => setShowDeleteModal(false)}
+                        className="px-4 py-2 rounded-sm border hover:bg-gray-100 cursor-pointer"
+                        >
+                        Cancel
+                        </button>
+
+                        <button
+                        onClick={() => confirmDelete(deleteId)}
+                        disabled={deletingId === deleteId}
+                        className="px-4 py-2 rounded-sm bg-red-600 text-white hover:bg-red-700 flex items-center gap-2 cursor-pointer"
+                        >
+                        {deletingId === deleteId ? (
+                            <>
+                            <Loader2 className="animate-spin" size={16} />
+                            Deleting...
+                            </>
+                        ) : (
+                            "Delete"
+                        )}
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
