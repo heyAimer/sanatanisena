@@ -94,14 +94,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center mt-4">
+          <div className="flex flex-col items-center mt-8">
             <div className="space-y-3 flex flex-col items-center md:items-start">
-              <h3 className="font-semibold text-[16px]">Community</h3>
-              <div className="flex gap-4">
+              <h3 className="font-semibold text-3xl text-center md:text-left">Community</h3>
+              <div className="flex gap-0.5">
                 {socialLinks.map((item) => (
                   <div key={item.name} className="flex justify-center items-center rounded-sm">
                     <Link
-                      href="https://discord.gg/YOUR_DISCORD_LINK"
+                      href= {item.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-white"
@@ -110,7 +110,7 @@ export default function Footer() {
                       <img
                         src={item.icon}
                         alt="Sanatani sena logo"
-                        className="w-6 h-6 opacity-70 group-hover:opacity-100 transition"
+                        className="w-10 h-10 group-hover:opacity-100 transition"
                       />
                     </Link>
                   </div>
