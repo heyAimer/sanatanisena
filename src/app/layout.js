@@ -27,9 +27,10 @@ const devanagari = Tiro_Devanagari_Sanskrit({
 export const metadata = {
   title: "Sanatani sena",
   description: "Sanatani Sena is a community for Sanatanis to learn, grow, and connect through timeless wisdom, shared knowledge, and spiritual development.",
+  metadataBase: new URL("https://www.sanatanisena.in"),
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/Server_Banner.jpg",
+    apple: "/Server_Banner.jpg",
   },
   
   openGraph: {
@@ -54,9 +55,8 @@ export const metadata = {
     title: "Sanatani Sena",
     description:
       "Sanatani Sena is a community for Sanatanis to learn, grow, and connect through timeless wisdom, shared knowledge, and spiritual development.",
-    images: ["/Server_Banner.jpg"],
+    images: ["https://www.sanatanisena.in/Server_Banner.jpg"],
   },
-
 };
 
 export default function RootLayout({ children }) {
