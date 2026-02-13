@@ -3,15 +3,6 @@ import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 const HeroSection = () => {
-    const scrollToWhatWeDo = () => {
-        const section = document.getElementById("what-we-do");
-        if (section) {
-            section.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            });
-        }
-    };
     return (
         <section className="lg:px-16 px-5 sm:py-0 py-6 bg-saffron-gradient">
             <div className="mx-auto max-w-7xl flex flex-col sm:flex-row sm:justify-between justify-center items-center sm:justify-items-center sm:h-[665px]">
@@ -39,21 +30,6 @@ const HeroSection = () => {
                         </div>
                     </Link>
                 </div>
-            
-                {/* <div className="absolute left-150">
-                    <Image
-                        src="/hanumanji.png"
-                        alt="hanuman ji"
-                        width={550}
-                        height={550}
-                        className="z-10 hidden sm:flex
-                            sm:w-72
-                            md:w-96
-                            lg:w-150
-                            h-auto"
-                        priority
-                    />
-                </div> */}
                 <Image
                     src="/hanumanji.png"
                     alt="hanuman ji"

@@ -26,7 +26,8 @@ const devanagari = Tiro_Devanagari_Sanskrit({
 
 export const metadata = {
   title: "Sanatani sena",
-  description: "Satyamev jayatey",
+  description: "Sanatani Sena is a community for Sanatanis to learn, grow, and connect through timeless wisdom, shared knowledge, and spiritual development.",
+  icon:"/Server_Banner.jpg"
 };
 
 export default function RootLayout({ children }) {
