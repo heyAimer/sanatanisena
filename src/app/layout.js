@@ -40,9 +40,9 @@ export const metadata = {
     siteName: "Sanatani Sena",
     images: [
       {
-        url: "/Server_Banner.jpg",
-        width:'auto',
-        height: 'auto',
+        url: "https://www.sanatanisena.in/Server_Banner.jpg",
+        width: 1200,
+        height: 630,
         alt: "Sanatani Sena",
       },
     ],
