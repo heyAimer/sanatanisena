@@ -1,8 +1,7 @@
 'use client'
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
-
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 const HeroSection = () => {
     const scrollToWhatWeDo = () => {
         const section = document.getElementById("what-we-do");
@@ -33,10 +32,12 @@ const HeroSection = () => {
                         A sacred gathering of Sanatani hearts, united to learn, remember, and live the timeless wisdom of Sanatana Dharma.
                     </h3>
 
-                    <div className="bg-saffron-gradient2 p-2 rounded-full text-white cursor-pointer hover:scale-110 hover:shadow-md hover:shadow-orange-300 transition z-10 animate-chevron" onClick={scrollToWhatWeDo}>
-                       <ChevronDown size={20}/> 
-                    </div>
-
+                    <Link href="https://discord.com/servers/sanatani-sena-1192481727185158144" className="cursor-pointer z-40">
+                        <div className="bg-saffron-gradient2 py-2 px-4 rounded-full text-white cursor-pointer hover:scale-105 hover:shadow-sm hover:shadow-orange-300 transition duration-200 flex gap-2 items-center">
+                            <p className="text-xl font-semibold pl-4">Join us</p>
+                            <ChevronRight size={24}/>
+                        </div>
+                    </Link>
                 </div>
             
                 {/* <div className="absolute left-150">

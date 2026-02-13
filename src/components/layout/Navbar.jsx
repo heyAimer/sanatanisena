@@ -33,6 +33,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useMediaQuery } from "@/utils/hooks/useMediaQuery";
+import { usePathname } from "next/navigation";
 
 const nav = [
     {
@@ -63,6 +64,7 @@ const nav = [
 ]
 
 export default function Navbar() {   
+    const pathname = usePathname();
     const { isUser,isAdmin, logout } = useAuth();
     const [open, setOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -170,7 +172,7 @@ export default function Navbar() {
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild >
                             <Button>
-                                <Menu style={{height:28, width:28}}/>
+                                <Menu style={{height:28, width:28,cursor: 'pointer',pointerEvents: 'auto'}}/>
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-80 px-6 bg-neutral-100">
@@ -213,9 +215,16 @@ function MobileNav({ closeSheet }) {
                                 <Crown className="h-5 w-5" />
                             </div>
                         )}
-                        <div className=" justify-center items-center gap-4 flex  cursor-pointer btn-md btn-secondary mt-2 border border-orange-300 text-red-700" onClick={logout}>
+                        <Link href="/history">
+                            <div className="hover:bg-blue-100 text-blue-700 hover:text-blue-500 border-blue-700 border-2 font-semibold justify-center items-center gap-4 flex  cursor-pointer btn-md  mt-2 rounded-sm " onClick={closeSheet}
+                            >      
+                                <span>History</span>
+                                <History className="h-4 w-4 text-blue-600" />
+                            </div>
+                        </Link>
+                        <div className=" justify-center items-center gap-4 flex  cursor-pointer btn-md rounded-sm mt-2 border-2 border-red-700 text-red-700 hover:bg-red-100" onClick={logout}>
                                 Logout
-                            <LogOut className="h-5 w-5 text-red-700" />
+                            <LogOut className="h-5 w-5 text-orange-700" />
                         </div>
                     </div>
                 )

@@ -4,7 +4,7 @@ import Link from "next/link";
 const socialLinks = [
   {
     name: "Discord",
-    href: "https://discord.gg/YOUR_DISCORD_LINK",
+    href: "https://discord.gg/MMHtzjmyp8",
     icon: "/discord.png",
     alt: "Sanatani Sena Discord",
     width: 40,
@@ -20,9 +20,33 @@ const socialLinks = [
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/YOUR_TWITTER",
+    href: "https://x.com/sanatanisenadc",
     icon: "/tw.png",
     alt: "Sanatani Sena Twitter",
+    width: 40,
+    height:40
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/sanatanisenadiscord",
+    icon: "/instagram.png",
+    alt: "Sanatani Sena instagram",
+    width: 40,
+    height:40
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61573534160679",
+    icon: "/fb.png",
+    alt: "Sanatani Sena facebook",
+    width: 40,
+    height:40
+  },
+  {
+    name: "Reddit",
+    href: "https://www.reddit.com/u/Sanatani_Sena",
+    icon: "/reddit.png",
+    alt: "Sanatani Sena reddit",
     width: 40,
     height:40
   }
@@ -83,13 +107,10 @@ export default function Footer() {
                       className="hover:text-white"
                       aria-label={item.name}
                     >
-                      <Image
+                      <img
                         src={item.icon}
                         alt="Sanatani sena logo"
-                        height={item.height}
-                        width={item.width}
-                        priority
-                        className="w-auto h-auto"
+                        className="w-6 h-6 opacity-70 group-hover:opacity-100 transition"
                       />
                     </Link>
                   </div>

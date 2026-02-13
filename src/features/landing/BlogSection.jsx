@@ -36,6 +36,7 @@ const blogs = [
 ];
 
 const BlogSection = () => {
+    
     return (
         <section className="w-full py-10 my-10 px-6 md:px-16 bg-background">
             <div className="max-w-7xl mx-auto relative">
@@ -51,44 +52,47 @@ const BlogSection = () => {
 
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 my-10 ">
                         {blogs.map((blog) => (
-                            <article
-                                className="rounded-xl border card-sacred transition-all duration-300 cursor-pointer "
-                                key={blog.id}
-                            >
-                                <div className="hover:shadow-lg transition rounded-lg">
-                                    {blog.cover_image &&
-                                        <div className="relative h-50 w-full">
-                                            <Image
-                                                src={blog.cover_image}
-                                                alt="image"
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                                className="object-cover w-auto h-auto"
-                                            />
-                                        </div>
-                                    }
+                        <article
+                            className="rounded-xl border card-sacred" key={blog.id}
+                        >
+                            <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
+
+                                
+                                {blog.cover_image &&
+                                    <div className="relative h-50 w-full">
+                                        <Image
+                                            src={blog.cover_image}
+                                        alt="image"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="object-cover w-auto  rounded-t-lg"
+                                    />
+                                    </div>
+                                }
+                                <div className="py-4">
+                                    <div className="px-5 space-y-2">
+                                        <h3 className="text-lg font-semibold line-clamp-1">
+                                            {blog.title}
+                                        </h3>
+                                    </div>
+                                    <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
+                                            {blog.content}
+                                    </div>
                                     
-                                    <div className="py-4">
-                                        <div className="px-5 space-y-2">
-                                            <h3 className="text-lg font-semibold">
-                                                {blog.title}
-                                            </h3>
-                                            
-                                        </div>
-                                        
-                                        <div className="px-4 flex items-center gap-2 py-2 mt-2">
-                                            <img
-                                                src="./bholenath.png"
-                                                className="h-10 w-10 object-cover rounded-full"
-                                            />
-                                            <div className="leading-none text-[14px] space-y-1">
-                                                <p className="font-semibold">{ blog.author}</p>
-                                                <p>{ useUTCtoIST(blog.published_at)}</p>
-                                            </div>
+                                    <div className="px-4 flex items-center gap-2 py-2 mt-2">
+                                        <img
+                                            src="./bholenath.png"
+                                            className="h-10 w-10 object-cover rounded-full"
+                                        />
+                                        <div className="leading-none text-[14px] space-y-1">
+                                            <p className="font-semibold">{ blog.author}</p>
+                                            <p>{ useUTCtoIST(blog.published_at)}</p>
                                         </div>
                                     </div>
                                 </div>
-                            </article>  
+                            
+                            </div>
+                        </article>
                         ))}
                     </div>
                     <Link href="/blogs">

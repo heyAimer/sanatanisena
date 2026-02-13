@@ -32,7 +32,7 @@ const WhatSection = () => {
                 {/* Top Left */}
                 <div className="absolute top-0 left-20 w-40 h-40 rounded-full bg-[#ffb366] animate-float-slow" />
 
-                <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+                <div className="absolute top-2 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
 
                 {/* Bottom Right */}
                 <div className="absolute bottom-2 right-12 w-[400px] h-[80px] rounded-full bg-[#f28c28] animate-float-slow" />

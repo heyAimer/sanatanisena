@@ -44,7 +44,7 @@ const CTAsection = () => {
                 </Link>
 
                 <Link
-                    href="https://discord.gg/paT2rjaW"
+                    href="https://discord.gg/MMHtzjmyp8"
                     target="_blank"
                     className="color-discord btn-lg"
                 >

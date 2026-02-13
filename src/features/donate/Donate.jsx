@@ -1,3 +1,5 @@
+import MembershipCard from "@/utils/MemberShipCard";
+
 const links = [
   {
     id: "patreon",
@@ -28,6 +30,42 @@ const links = [
   }
 ];
 
+const membershipPlans = [
+  {
+    id: 1,
+    title: "Shraddhavan (श्रद्धावान)",
+    subtitle: "The Faithful Seeker",
+    description:
+      "A beginner on the Sanatani path who supports Dharma and gains access to exclusive spiritual content.",
+    price: 3,
+    currency: "USD",
+    image: "/shradhawan.png",
+    gradient: "from-orange-600/40 via-orange-500/20 to-transparent",
+  },
+  {
+    id: 2,
+    title: "Upasaka (उपासक)",
+    subtitle: "The Dedicated Practitioner",
+    description:
+      "A deeper practitioner contributing actively to Sanatani Sena with special access and rewards.",
+    price: 5,
+    currency: "USD",
+    image: "upasak.png",
+    gradient: "from-purple-600/40 via-pink-500/20 to-transparent",
+  },
+  {
+    id: 3,
+    title: "Yajman (यजमान)",
+    subtitle: "The Spiritual Patron",
+    description:
+      "A patron who sustains the mission and gets premium blessings, recognition and privileges.",
+    price: 7,
+    currency: "USD",
+    image: "/yajman.png",
+    gradient: "from-yellow-600/40 via-green-500/20 to-transparent",
+  },
+];
+
 export default function Donate() {
   return (
     <section className="pb-12 pt-8 sm:pb-20">
@@ -35,7 +73,7 @@ export default function Donate() {
 
         <div className="absolute top-40 left-20 w-60 h-60 rounded-full bg-[#ffb366] animate-float-slow" />
 
-        <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+        <div className="absolute top-2 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
       </div>
       
       <div className="max-w-7xl mx-auto px-8 space-y-20">
@@ -145,6 +183,11 @@ export default function Donate() {
           </p>
         </div>
 
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center" >
+          {membershipPlans.map((plan) => (
+            <MembershipCard key={plan.id} plan={plan} />
+          ))}
+        </div>
         {/* Transparency */}
         <div className="bg-neutral-50 border border-gray-200 rounded-2xl sm:p-12 p-8 space-y-6">
           <h2 className="text-2xl font-semibold text-center">

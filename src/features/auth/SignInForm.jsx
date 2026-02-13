@@ -11,6 +11,7 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -18,6 +19,7 @@ export default function SignInForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -60,10 +62,6 @@ export default function SignInForm() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.data?.message || "Signin failed";
-        setForm({
-        email: "",
-        password: "",
-      })
         setError(message);
       } else {
         setError("Something went wrong. Please try again.");
@@ -119,7 +117,7 @@ export default function SignInForm() {
               </div>
               <Input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 value={form.password}
                 onChange={handleChange}
@@ -127,6 +125,18 @@ export default function SignInForm() {
                 required
                 disabled={isLoading}
               />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-10 top-32 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5 text-gray-600" />
+                ) : (
+                  <Eye className="h-5 w-5 text-gray-600" />
+                )}
+              </button>
 
                {error && (
                   <p className="text-sm text-red-600 mt-2">
