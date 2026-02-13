@@ -101,7 +101,7 @@ export default function Footer() {
                 {socialLinks.map((item) => (
                   <div key={item.name} className="flex justify-center items-center rounded-sm">
                     <Link
-                      href="https://discord.gg/YOUR_DISCORD_LINK"
+                      href= {item.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-white"
