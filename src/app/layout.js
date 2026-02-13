@@ -29,8 +29,8 @@ export const metadata = {
   description: "Sanatani Sena is a community for Sanatanis to learn, grow, and connect through timeless wisdom, shared knowledge, and spiritual development.",
   metadataBase: new URL("https://www.sanatanisena.in"),
   icons: {
-    icon: "/Server_Banner.jpg",
-    apple: "/Server_Banner.jpg",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   
   openGraph: {
