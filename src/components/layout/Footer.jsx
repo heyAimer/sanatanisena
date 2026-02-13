@@ -94,10 +94,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center mt-4">
+          <div className="flex flex-col items-center mt-3">
             <div className="space-y-3 flex flex-col items-center md:items-start">
-              <h3 className="font-semibold text-[16px]">Community</h3>
-              <div className="flex gap-4">
+              <h3 className="font-semibold text-[16px] sm:ml-[8px]">Community</h3>
+              <div className="flex gap-0">
                 {socialLinks.map((item) => (
                   <div key={item.name} className="flex justify-center items-center rounded-sm">
                     <Link
@@ -110,13 +110,13 @@ export default function Footer() {
                       <img
                         src={item.icon}
                         alt="Sanatani sena logo"
-                        className="w-6 h-6 opacity-70 group-hover:opacity-100 transition"
+                        className="w-10 h-10 group-hover:opacity-100 transition"
                       />
                     </Link>
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-400 sm:ml-[8px]">
                 contact@sanatanisena.org
               </p>
 
