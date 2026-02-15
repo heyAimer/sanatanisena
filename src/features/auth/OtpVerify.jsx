@@ -10,6 +10,22 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// useEffect(() => {
+//   const checkSignupStatus = async () => {
+//     try {
+//       await axios.get(`${BASE_URL}/signup/check`, {
+//         withCredentials: true,
+//       });
+//     } catch (error) {
+//       // 🚫 User did NOT come from signup
+//       toast.error("Please sign up first");
+//       router.replace("/signup");
+//     }
+//   };
+
+//   checkSignupStatus();
+// }, [router]);
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export default function OtpVerify() {
@@ -58,7 +74,20 @@ export default function OtpVerify() {
   };
 
   return (
-      <div className="w-full max-w-sm mx-auto mt-20">
+    <div className="w-full max-w-sm mx-auto mt-20">
+       <div className="absolute inset-0 pointer-events-none md:flex hidden">
+
+        {/* Top Left */}
+        <div className="absolute top-24 left-10 w-80 h-80 rounded-full bg-[#ffb366] animate-float-slow" />
+
+        <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+        {/* Bottom Right */}
+        <div className="absolute bottom-50 right-12 w-[420px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+        <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+
+      </div>
       <Card className="bg-white relative">
         <CardContent>
           <h2 className="text-xl font-semibold mb-4 text-center">

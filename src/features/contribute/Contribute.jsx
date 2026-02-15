@@ -64,7 +64,6 @@ const Contribute = () => {
             toast.success(response.data.message);
             router.push("/blogs");
         } catch (err) {
-            console.error("Error creating blog:", err);
             if(axios.isAxiosError(err)) {
                 console.error("Axios error response:", err.response);
             }

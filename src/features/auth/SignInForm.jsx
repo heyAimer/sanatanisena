@@ -85,8 +85,21 @@ export default function SignInForm() {
 
   return (
     <div className="w-full max-w-md mx-auto">
+      <div className="absolute inset-0 pointer-events-none md:flex hidden">
+
+        {/* Top Left */}
+        <div className="absolute top-24 left-10 w-80 h-80 rounded-full bg-[#ffb366] animate-float-slow" />
+
+        <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+        {/* Bottom Right */}
+        <div className="absolute bottom-50 right-12 w-[420px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+        <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+
+      </div>
       
-      <Card className="relative">
+      <Card className="relative bg-white">
         <CardContent className="relative z-20">
           <form onSubmit={onSubmit} className="space-y-6">
             <div className="">
