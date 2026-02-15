@@ -36,9 +36,7 @@ const membershipPlans = [
     title: "Shraddhavan (श्रद्धावान)",
     subtitle: "The Faithful Seeker",
     description:
-      "A beginner on the Sanatani path who supports Dharma and gains access to exclusive spiritual content.",
-    price: 3,
-    currency: "USD",
+      "A beginner on the Sanatani path supporting Dharma while accessing exclusive guided spiritual content.",
     image: "/shradhawan.png",
     gradient: "from-orange-600/40 via-orange-500/20 to-transparent",
   },
@@ -47,9 +45,7 @@ const membershipPlans = [
     title: "Upasaka (उपासक)",
     subtitle: "The Dedicated Practitioner",
     description:
-      "A deeper practitioner contributing actively to Sanatani Sena with special access and rewards.",
-    price: 5,
-    currency: "USD",
+      "A dedicated practitioner on the Sanatani path contributing actively while accessing exclusive spiritual content.",
     image: "upasak.png",
     gradient: "from-purple-600/40 via-pink-500/20 to-transparent",
   },
@@ -58,10 +54,8 @@ const membershipPlans = [
     title: "Yajman (यजमान)",
     subtitle: "The Spiritual Patron",
     description:
-      "A patron who sustains the mission and gets premium blessings, recognition and privileges.",
-    price: 7,
-    currency: "USD",
-    image: "/yajman.png",
+      "A respected patron on the Sanatani path sustaining missions while accessing exclusive spiritual content.",
+    image: "yajman.png",
     gradient: "from-yellow-600/40 via-green-500/20 to-transparent",
   },
 ];
