@@ -58,8 +58,8 @@ const nav = [
     },
     {
         id: 5,
-        name: "Extrass",
-        href:"/donate"
+        name: "Contact",
+        href:"/contact"
     },
 ]
 

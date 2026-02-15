@@ -1,4 +1,4 @@
-import Contact from "@/features/donate/Contact";
+import Contact from "@/features/contact/Contact";
 
 const page = () => {
     return <Contact/>;
