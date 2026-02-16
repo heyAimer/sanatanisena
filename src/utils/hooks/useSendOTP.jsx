@@ -11,7 +11,6 @@ const useSendOTP = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   const sentOtp = async (email) => {
-    console.log("in sent otp")
     setIsLoading(true);
     setError("");
     try {
@@ -21,15 +20,12 @@ const useSendOTP = () => {
       {
         withCredentials: true,
       });
-      console.log(response);
       if (response.data.status === "Success") {
         toast.success(response.data.message);
         router.push("/signin/forgotpassword/otp");
       }
     } catch (error) {
-      console.log(error)
       if (axios.isAxiosError(error)) {
-        console.log(error)
         const message = error.response?.data?.message || "Failed to send otp. Please try again.";
         setError(message);
       } else {

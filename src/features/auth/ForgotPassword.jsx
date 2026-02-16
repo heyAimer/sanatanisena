@@ -19,7 +19,6 @@ export default function ForgotPassword() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    console.log("hello in submit bro")
     if (!email) {
       toast.error("Please enter your email address");
       return;
