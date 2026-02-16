@@ -5,32 +5,32 @@ import Link from "next/link";
 const blogs = [
   {
     id: 1,
-    title: "Understanding the Eternal Way of Life, Truth, and Cosmic Harmony",
+    title: "Deva, Bhagwān, Iśvara – What’s the Difference?",
     excerpt:
-      "Understanding the eternal principles of Sanatan Dharma and its relevance in modern life.",
-    category: "Dharma",
-    cover_image: "/hanumanji.png",
+      "In everyday conversations, we often use the terms Dev, Bhagwan, and Ishwar interchangeably to refer to the Divine.  But in the world of Sanātana Dharma, these words have very distinct meanings, rooted in deep philosophy and centuries of spiritual understanding.",
+    category: "classification",
+    cover_image: "/whatisdeva.png",
     published_at:"2026-02-01T16:17:39.961021Z",
     author:"Hey_aimer"
   },
   {
     id: 2,
-    title: "Timeless Teachings on Duty, Dharma, Courage, and Ideal Conduct",
+    title: "Sanātana Dharma Basic Guide",
     excerpt:
-      "Key teachings from Shri Ramcharitmanas that guide a righteous life.",
-    category: "Itihas",
+      "The Vedas, dharma is something which holds and supports the universe together and guides societal and individual conduct. The Upaniṣads, dharma is the inner realization of unity, living according to dharma aligns one’s actions with the Self (Ātman) and the ultimate reality (Brahman) to maintain cosmic harmony through right knowledge.",
+    category: "Dharma",
       published_at:"2026-02-01T16:17:39.961021Z",
-    cover_image: "/logo.png",
+    cover_image: "/basicdharma.png",
     author:"Andro_ez"
   },
   {
     id: 3,
-    title: "Experiencing Divine Love Through Faith, Surrender, and Devotion",
+    title: "Is Hinduism a religion or a way of life?",
     excerpt:
-      "How devotion leads the soul towards inner peace and self-realization.",
+      "The belief in and reverence for a supernatural power or powers, regarded as creating and governing the universe. A particular variety of belief in the supernatural , especially when organized into a system of doctrine and practice.",
     category: "Bhakti",
       published_at:"2026-02-01T16:17:39.961021Z",
-    cover_image: "/diyasoft.png",
+    cover_image: "/wayoflife.png",
     author:"Mad_max"
   },
 ];
@@ -76,7 +76,7 @@ const BlogSection = () => {
                                         </h3>
                                     </div>
                                     <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
-                                            {blog.content}
+                                            {blog.excerpt}
                                     </div>
                                     
                                     <div className="px-4 flex items-center gap-2 py-2 mt-2">
