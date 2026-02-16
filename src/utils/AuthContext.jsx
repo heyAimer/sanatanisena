@@ -47,21 +47,27 @@ export function AuthProvider({ children }) {
     }
     
     const checkAuth = async () => {
+        console.log("check auth!");
         try {
             const response = await axios.get(`${BASE_URL}/checkauth`,
                 { withCredentials: true }
             );
             setIsUser(response.data.isUser);
+            console.log("user is: ", response)
             setIsAdmin(response.data.isAdmin);
             setLoading(false);
         } catch (err) {
+            
             if (axios.isAxiosError(err)) {        
                 if (err.response?.status === 401) {
+                    console.log(err);
                     setLoading(false);
+                    router.push("/")
                     return;
                 }
                 setIsUser(false);
                 setIsAdmin(false);
+                router.push("/")
             }
         }finally {
             setLoading(false);

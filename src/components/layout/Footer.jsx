@@ -78,7 +78,7 @@ export default function Footer() {
               Fast, affordable contract risk analysis for freelancers and small agencies.
             </p>
             <p className="mt-4 text-xs text-slate-500 text-center md:text-start">
-              Built for independent professionals. Privacy-first by design.
+              Built for independent professionals. <Link href="/privacy"   className="border-b border-current text-blue-500 hover:text-blue-600">Privacy</Link>-first by design.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default function Footer() {
         <div className="mt-10 border-t border-slate-200 pt-6 flex justify-center items-center">
           
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} ContractKit. All rights reserved.
+            © {new Date().getFullYear()} Sanatani sena. All rights reserved.
           </p>
          
         </div>

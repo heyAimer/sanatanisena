@@ -4,6 +4,7 @@ import useUTCtoIST from "@/utils/hooks/useUTCtoIST";
 import axios from "axios";
 import { BadgeCheck, Eye, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -35,7 +36,7 @@ export default function Pending() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter()
   const handleFetcBlogs = async () => {
     try {
       setLoading(true);
@@ -44,8 +45,11 @@ export default function Pending() {
       );
       setData(response.data.data);
     } catch (err) {
-      toast.error(err.response.data);
-      setError("Failed to fetch unverified blogs")
+      if(axios.isAxiosError(err)) {
+        const message = err.response?.data?.message || "Something went wrong. Try again";
+        toast.error(message);
+        router.push("/")
+      }
     } finally {
       setLoading(false);
     }

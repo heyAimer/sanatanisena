@@ -63,8 +63,7 @@ const nav = [
     },
 ]
 
-export default function Navbar() {   
-    const pathname = usePathname();
+export default function Navbar() {
     const { isUser,isAdmin, logout } = useAuth();
     const [open, setOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);

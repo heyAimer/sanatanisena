@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,22 +9,6 @@ import { Loader2 } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
-// useEffect(() => {
-//   const checkSignupStatus = async () => {
-//     try {
-//       await axios.get(`${BASE_URL}/signup/check`, {
-//         withCredentials: true,
-//       });
-//     } catch (error) {
-//       // 🚫 User did NOT come from signup
-//       toast.error("Please sign up first");
-//       router.replace("/signup");
-//     }
-//   };
-
-//   checkSignupStatus();
-// }, [router]);
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -40,6 +24,25 @@ export default function OtpVerify() {
     if (value.length <= OTP_LENGTH) setOtp(value);
   };
 
+  const checkOTPauth = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/otp/checkauth`,
+            { withCredentials: true }
+        );
+        if (response.data.isUser === false) {
+            router.push("/signup/otp");
+        } else {
+            router.push("/");
+        }
+    } catch (err) {
+    if (axios.isAxiosError(err)) {
+        const message = err.response?.data?.message || "Something went wrong. Try again";
+        toast.error(message);
+        router.push("/")
+    }
+    }
+  }
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,7 +75,10 @@ export default function OtpVerify() {
       setIsLoading(false);
     }
   };
-
+  
+  useEffect(() => {
+    checkOTPauth();
+  },[])
   return (
     <div className="w-full max-w-sm mx-auto mt-20">
        <div className="absolute inset-0 pointer-events-none md:flex hidden">

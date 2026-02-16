@@ -1,11 +1,10 @@
-// src/app/signin/page.jsx
-import OtpVerify from "@/features/auth/OtpVerify";
 
+import OtpVerifyForgotPass from "@/features/auth/OtpVerifyForgotPass";
 export default function OtpPage() {
   return (
       <main className="min-h-screen flex items-center justify-center bg-background">
         <div className="w-full max-w-md space-y-8">
-          <OtpVerify />
+          <OtpVerifyForgotPass />
         </div>
       </main>
     );

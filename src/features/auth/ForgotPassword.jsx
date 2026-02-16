@@ -11,95 +11,37 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useSendOTP from "@/utils/hooks/useSendOTP";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const handleSendOtp = async () => {
-    try {
-      const response = await axios.post(`${BASE_URL}/login/forgotpassword`, {
-        email: form.email
-      });
-      if (response.data.success) {
-        toast.success("OTP has been sent to your email.");
-        setEmail("");
-      } else {
-        setError(response.data.message || "Something went wrong.");
-      }
-    } catch (error) {
-      console.error("Error during signin:", error);
-      toast.error("Something went wrong.");
-    }finally {
-      setIsLoading(false);
-    }
-  }
+  const {sentOtp,isLoading,error } = useSendOTP();
 
   async function onSubmit(e) {
     e.preventDefault();
+    console.log("hello in submit bro")
     if (!email) {
       toast.error("Please enter your email address");
       return;
     }
-
-    setIsLoading(true);
-    handleSendOtp();
-
+     sentOtp(email);
   }
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div
-          className="absolute inset-0 z-0"
-          style={{
-          backgroundImage: `
-              linear-gradient(to right, #e7e5e4 1px, transparent 1px),
-              linear-gradient(to bottom, #e7e5e4 1px, transparent 1px)
-          `,
-          backgroundSize: "20px 20px",
-          backgroundPosition: "0 0, 0 0",
-          maskImage: `
-              repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-              ),
-              repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-              )
-          `,
-          WebkitMaskImage: `
-              repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-              ),
-              repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-              )
-          `,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
-          }}
-      />
+      <div className="absolute inset-0 pointer-events-none md:flex hidden">
+
+        {/* Top Left */}
+        <div className="absolute top-24 left-10 w-80 h-80 rounded-full bg-[#ffb366] animate-float-slow" />
+
+        <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+
+        {/* Bottom Right */}
+        <div className="absolute bottom-50 right-12 w-[420px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
+
+        <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+
+      </div>
       
       <Card className="bg-white relative">
         <CardContent className="relative z-20">
@@ -117,15 +59,21 @@ export default function ForgotPassword() {
                 className="mt-2"
               />
             </div>
-            <Button
-              type="submit"
-              className="btn-primary btn2 cursor-pointer w-full"
-              disabled={isLoading}
-            >
-              {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-              Send reset link
-            </Button>
-
+            <div>
+              {error && (
+                <p className="text-sm text-red-600 mt-2 mb-2 font-semibold">
+                  {error}
+                </p>
+              )} 
+              <Button
+                type="submit"
+                className="btn-primary btn2 cursor-pointer w-full"
+                disabled={isLoading}
+              >
+                {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                Send Otp
+              </Button>
+            </div>
           </form>
 
           <div className="mt-6 text-center text-sm">
