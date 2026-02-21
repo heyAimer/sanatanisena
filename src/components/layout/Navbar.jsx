@@ -207,12 +207,14 @@ function MobileNav({ closeSheet }) {
                             Your Account
                         </div>
                         {isAdmin && (
-                            <div className="justify-center items-center gap-4 flex  cursor-pointer btn-md btn-primary mt-2 border border-orange-300">
-                                <Link href="/admin/blogs">
-                                    Admin
-                                </Link>
-                                <Crown className="h-5 w-5" />
-                            </div>
+                            <Link href="/admin/blogs">
+                                <div className="justify-center items-center gap-4 flex  cursor-pointer btn-md btn-primary mt-2 border border-orange-300">
+                                
+                                        Admin
+                                
+                                    <Crown className="h-5 w-5" />
+                                </div>
+                             </Link>
                         )}
                         <Link href="/history">
                             <div className="hover:bg-blue-100 text-blue-700 hover:text-blue-500 border-blue-700 border-2 font-semibold justify-center items-center gap-4 flex  cursor-pointer btn-md  mt-2 rounded-sm " onClick={closeSheet}

@@ -54,11 +54,6 @@ export default function SignInForm() {
 
       router.push("/");
       
-      setForm({
-        email: "",
-        password: "",
-      });
-      
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.data?.message || "Signin failed";
@@ -119,7 +114,7 @@ export default function SignInForm() {
             </div>
 
             <div className="">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-2 cursor-pointer">
                 <Label htmlFor="password">Password</Label>
                 <Link
                   href="/signin/forgotpassword"
@@ -159,16 +154,16 @@ export default function SignInForm() {
             </div>
             
             <div className="flex">
-              <Button type="submit" disabled={isLoading} className="btn-primary text-md w-full">
+              <Button type="submit" disabled={isLoading} className="btn-primary text-md w-full cursor-pointer">
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Sign in
               </Button>
             </div>
           </form>
           
-          <div className="mt-6 text-center text-sm">
+          <div className="mt-6 text-center text-sm cursor-pointer">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-primary hover:underline font-medium">
+            <Link href="/signup" className="text-primary hover:underline font-medium ">
               Create an account
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -14,6 +14,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export default function SignUpForm() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [form, setForm] = useState({
     username:"",
     email: "",
@@ -65,25 +67,11 @@ export default function SignUpForm() {
       setTimeout(() => {
         router.push("signup/otp");
       },800)
-      
-      setForm({
-        username:"",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        agreed: false,
-      })
 
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.data?.message || "Signup failed";
-        setForm({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        agreed: false,
-      })
-        toast.error(message);
+        setError(message);
       } else {
         setError("Something went wrong. Please try again.");
       }
@@ -177,13 +165,25 @@ export default function SignUpForm() {
               <Input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Create a password"
                 value={form.password}
                 onChange={handleChange}
                 required
                 disabled={isLoading}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-10 top-51 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5 text-gray-600" />
+                ) : (
+                  <Eye className="h-5 w-5 text-gray-600" />
+                )}
+              </button>
+
             </div>
 
             <div className="mb-4">
@@ -191,14 +191,25 @@ export default function SignUpForm() {
                 <Label htmlFor="confirmPassword">Confirm password</Label>
               </div>
               <Input
-                type="password"
                 name="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Re-enter your password"
                 value={form.confirmPassword}
                 onChange={handleChange}
                 disabled={isLoading}
                 required
               />
+                <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-10 top-72 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="h-5 w-5 text-gray-600" />
+                ) : (
+                  <Eye className="h-5 w-5 text-gray-600" />
+                )}
+              </button>
             </div>
             
             <div className="mb-4 flex items-start gap-2">
@@ -240,7 +251,7 @@ export default function SignUpForm() {
           
           <div className="mt-6 text-center text-sm">
             Already have an account?{" "}
-            <Link href="/signin" className="text-primary hover:underline font-medium">
+            <Link href="/signin" className="text-primary hover:underline font-medium cursor-pointer">
               Sign in
             </Link>
           </div>

@@ -4,7 +4,7 @@ const CTAsection = () => {
     return (
         <section className="relative py-20 ">
             
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none -z-10">
 
                 {/* Top Left */}
                 <div className="absolute top-2 left-20 w-40 h-40 rounded-full bg-[#ffb366] animate-float-slow" />
@@ -12,13 +12,13 @@ const CTAsection = () => {
                 <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
 
                 {/* Bottom Right */}
-                <div className="absolute bottom-20 right-12 w-[400px] h-[100px] rounded-full bg-[#f28c28] animate-float-slow" />
+                <div className="absolute bottom-20 right-12 w-[400px] h-[100px] rounded-full bg-[#f28c28] animate-float-slow sm:flex hidden" />
 
-                <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
+                <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast sm:flex hidden" />
 
             </div>
 
-            <div className="mx-auto max-w-7xl px-6 text-center">
+            <div className="mx-auto max-w-7xl px-6 text-center z-20">
                 {/* Heading */}
                 <h2 className="text-3xl md:text-4xl font-semibold">
                 Become Part of the Sanatan Movement
@@ -29,7 +29,7 @@ const CTAsection = () => {
                 Walk the path of <span className="font-medium text-orange-600">Dharma</span>,
                 gain true <span className="font-medium text-orange-600">Gyaan</span>,
                 and contribute to preserving our eternal culture.  
-                <span className="ml-1 italic text-neutral-700 dark:text-neutral-300">
+                <span className="ml-1 italic text-neutral-500 ">
                     (धर्मो रक्षति रक्षितः)
                 </span>
                 </p>

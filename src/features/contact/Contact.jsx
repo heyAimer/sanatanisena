@@ -71,7 +71,7 @@ export default function Contact() {
                 
                 <div className="w-full flex justify-center items-center " >
                     <div className="sm:max-w-xl w-full rounded-2xl border border-gray-100 shadow-lg p-10 bg-white ">
-                        <h2 className="text-3xl font-semibold mb-6 text-center">
+                        <h2 className=" text-2xl md:text-3xl font-semibold mb-6 text-center">
                             Send us a message
                         </h2>
                         {/* <p className="text-stone-700 mb-8">

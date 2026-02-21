@@ -89,7 +89,7 @@ export default function Footer() {
               <li><Link href="/" className="text-slate-600 hover:text-blue-600">Home</Link></li>
               <li><Link href="/about" className="text-slate-600 hover:text-blue-600">About</Link></li>
               <li><Link href="/blogs" className="text-slate-600 hover:text-blue-600">Blogs</Link></li>
-              <li><Link href="/donate" className="text-slate-600 hover:text-blue-600">Contact us</Link></li>
+              <li><Link href="/contact" className="text-slate-600 hover:text-blue-600">Contact us</Link></li>
               <li><Link href="/donate" className="text-slate-600 hover:text-blue-600">Support Dharma</Link></li>
             </ul>
           </div>
