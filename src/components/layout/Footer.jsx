@@ -63,14 +63,14 @@ export default function Footer() {
             <Link href="/" className="flex items-center py-2 gap-3">
               <Image
                 src="/logo.png"
-                alt="Sanatani sena logo"
+                alt="Sanatani Sena logo"
                 width={50}
                 height={50}
                 priority
                 className="rounded-full w-auto h-auto"
               />
               <h3 className="font-semibold text-3xl text-slate-900">
-                Sanatani sena
+                Sanatani Sena
               </h3>
             </Link>
             
@@ -109,7 +109,7 @@ export default function Footer() {
                     >
                       <img
                         src={item.icon}
-                        alt="Sanatani sena logo"
+                        alt="Sanatani Sena logo"
                         className="w-10 h-10 group-hover:opacity-100 transition"
                       />
                     </Link>
@@ -133,7 +133,7 @@ export default function Footer() {
         <div className="mt-10 border-t border-slate-200 pt-6 flex justify-center items-center">
           
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} Sanatani sena. All rights reserved.
+            © {new Date().getFullYear()} Sanatani Sena. All rights reserved.
           </p>
          
         </div>

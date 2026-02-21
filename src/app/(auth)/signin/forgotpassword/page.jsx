@@ -18,6 +18,6 @@ export default function ForgotPasswordPage() {
 }
 
 export const metadata = {
-  title: "Forgot Password - Sanatani sena",
+  title: "Forgot Password - Sanatani Sena",
   description: "Reset your password.",
 };

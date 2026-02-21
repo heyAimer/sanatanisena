@@ -30,6 +30,6 @@ export default function SignUpPage() {
 }
 
 export const metadata = {
-  title: "Sign Up - Sanatani sena",
-  description: "Create your Sanatani sena account",
+  title: "Sign Up - Sanatani Sena",
+  description: "Create your Sanatani Sena account",
 };

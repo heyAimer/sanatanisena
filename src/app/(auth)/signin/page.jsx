@@ -21,7 +21,7 @@ export default function SignInPage() {
       <div className="w-full max-w-md space-y-8">
         <AuthHeader
           title="Welcome back"
-          description="Sign in to your Sanatani sena account."
+          description="Sign in to your Sanatani Sena account."
         />
         <SignInForm />
       </div>
@@ -30,6 +30,6 @@ export default function SignInPage() {
 }
 
 export const metadata = {
-  title: "Sign In - Sanatani sena",
-  description: "Sign in to Sanatani sena.",
+  title: "Sign In - Sanatani Sena",
+  description: "Sign in to Sanatani Sena.",
 };

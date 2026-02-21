@@ -134,7 +134,7 @@ export default function SignUpForm() {
         <div className="absolute bottom-52 right-72 w-40 h-40 rounded-full bg-[#ffb366] animate-float-fast" />
 
       </div>
-      <Card className="relative">
+      <Card className="relative bg-white">
         <CardContent className="relative z-20">
           <form onSubmit={onSubmit} className="space-y-6">
           

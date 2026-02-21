@@ -109,9 +109,10 @@ a {
   /* Base warm saffron → cream gradient */
   background: linear-gradient(
     to bottom,
-    #f8a55c 0%,
-    #fbc38a 35%,
-    #fde7cf 65%,
+    #fffdf8 0%,
+    #fbc38a 20%,
+    #f8a55c 55%,
+    #fbc38a 75%,
     #fffdf8 100%
   );
 }

@@ -55,11 +55,11 @@ export default function JoinDCsection() {
                         <div className="mx-auto">
                             {/* Heading */}
                             <div className="text-center max-w-3xl mx-auto">
-                                <p className="lg:mt-4 mt-8 text-xl font-semibold text-orange-700">
+                                <p className="lg:mt-4 mt-8 text-xl font-semibold text-gray-800">
                                     सत्संग • संवाद • सनातन ज्ञान
                                 </p>
 
-                                <p className="mt-6 text-gray-600 leading-relaxed max-w-lg">
+                                <p className="mt-6 text-gray-800 leading-relaxed max-w-lg">
                                     Become part of a growing Sanatani community where seekers, learners, and practitioners come together to explore the timeless wisdom of
                                     <span className="font-semibold text-gray-800">
                                     {" "}
@@ -69,7 +69,7 @@ export default function JoinDCsection() {
                                     through meaningful discussions, shared learning, and collective growth.
                                 </p>
 
-                                <p className="mt-4 text-gray-700 font-semibold">
+                                <p className="mt-4 text-gray-800 font-semibold">
                                     संगच्छध्वं संवदध्वं
                                 </p>
                             </div>
@@ -77,7 +77,7 @@ export default function JoinDCsection() {
                         </div>
                         <div className="lg:flex justify-center items-center hidden">
                             <Image
-                                src="/dc.png"
+                                src="/discordImg.png"
                                 alt="discord"
                                 width={350}
                                 height={350}
@@ -89,7 +89,7 @@ export default function JoinDCsection() {
                 
                     <div className="mb-16 lg:mt-0 mt-10">
                         <h3 className=" mb-6 text-xl font-semibold text-gray-900 lg:text-start text-center">
-                            Why Join Our Discord? <span className="text-orange-700">धर्म संवाद</span>
+                            Why Join Our Discord? <span>धर्म संवाद</span>
                         </h3>
 
                 
@@ -114,9 +114,9 @@ export default function JoinDCsection() {
                 
                 <div className="flex justify-center items-center lg:hidden absolute z-10 -top-10 w-full left-0">
                     <img
-                        src="/dc.png"
+                        src="/discordImg.png"
                         alt="discord"
-                        className=" rounded-full h-16 w-20 bg-white"
+                        className=" rounded-full h-19 w-20 bg-white border-2 border-white"
                     />
                 </div>
                 <div className="absolute -bottom-10 lg:left-30 left-14 z-10">

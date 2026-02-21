@@ -25,7 +25,7 @@ const devanagari = Tiro_Devanagari_Sanskrit({
 });
 
 export const metadata = {
-  title: "Sanatani sena",
+  title: "Sanatani Sena",
   description: "Sanatani Sena is a community for Sanatanis to learn, grow, and connect through timeless wisdom, shared knowledge, and spiritual development.",
   metadataBase: new URL("https://www.sanatanisena.in"),
   icons: {
