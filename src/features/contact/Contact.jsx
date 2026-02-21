@@ -26,8 +26,6 @@ export default function Contact() {
                 email: form.email,
                 message:form.message
             });
-            if (!res.ok) throw new Error("Something went wrong.Please try again.");
-          
             toast.success(res.data.message);
             setForm({ email: "", message: "" });
         } catch (err) {

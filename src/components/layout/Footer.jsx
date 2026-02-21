@@ -12,7 +12,7 @@ const socialLinks = [
   },
   {
     name: "YouTube",
-    href: "https://www.youtube.com/@SanatanReveals",
+    href: "https://www.youtube.com/@Sanatanisenadiscord",
     icon: "/youtube.png",
     alt: "Sanatan Reveals YouTube",
     width: 40,

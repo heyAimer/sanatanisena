@@ -55,13 +55,13 @@ export default function JoinDCsection() {
                         <div className="mx-auto">
                             {/* Heading */}
                             <div className="text-center max-w-3xl mx-auto">
-                                <p className="lg:mt-4 mt-8 text-xl font-semibold text-gray-800">
+                                <p className="lg:mt-4 mt-8 text-xl font-semibold">
                                     सत्संग • संवाद • सनातन ज्ञान
                                 </p>
 
                                 <p className="mt-6 text-gray-800 leading-relaxed max-w-lg">
                                     Become part of a growing Sanatani community where seekers, learners, and practitioners come together to explore the timeless wisdom of
-                                    <span className="font-semibold text-gray-800">
+                                    <span className="font-semibold text-[#1F1F1F]">
                                     {" "}
                                         Sanatan Dharma 
                                     {" "}
@@ -69,7 +69,7 @@ export default function JoinDCsection() {
                                     through meaningful discussions, shared learning, and collective growth.
                                 </p>
 
-                                <p className="mt-4 text-gray-800 font-semibold">
+                                <p className="mt-4 font-semibold text-[#2E2E2E]">
                                     संगच्छध्वं संवदध्वं
                                 </p>
                             </div>

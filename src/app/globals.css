@@ -157,12 +157,21 @@ a {
   /* Base warm saffron → cream gradient */
   background: linear-gradient(
     to bottom right,
-    #ee7903 0%,
-    #ff9d3b 65%,
-    #e47608 100%
+    #ff8103 0%,
+    #ff9f3e 65%,
+    #ff870f 100%
   );
 }
 
+/* 
+   #6726ff 0%,
+    #2f00ff 25%,
+    #00ccff 35%,
+    #00ff04 55%,
+    #fff306 70%,
+    #ff8001 80%,
+    #ff1f06 100%
+   */
 .bg-saffron-gradientBR {
   position: relative;
   overflow: hidden;

@@ -144,7 +144,7 @@ export default function History() {
                                 </div>
 
                                 {isUser && <Link href="/blogs/contribute">
-                                    <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
+                                    <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10 cursor-pointer">
                                         Write a Blog
                                     </Button>
                                 </Link>}
@@ -180,7 +180,7 @@ export default function History() {
                         </blockquote>
                     </div>
                     <Link href="/blogs/contribute">
-                        <Button className="btn-primary sm:text-2xl sm:py-6 sm:px-6 text-lg mt-10" >
+                        <Button className="btn-primary sm:text-2xl sm:py-6 sm:px-6 text-lg mt-10 cursor-pointer" >
                             Write a Blog
                         </Button>
                     </Link>
