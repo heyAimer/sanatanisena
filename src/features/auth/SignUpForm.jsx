@@ -218,14 +218,14 @@ export default function SignUpForm() {
                 name="agreed"
                 checked={form.agreed}
                 onChange={handleChange}
-                className="mt-1"
+                className="mt-[3px]"
               />
               <p className="text-xs text-slate-600">
-                By creating an account, you agree to the{" "}
-                <Link href="/terms" className="text-blue-600 hover:underline">
+                By creating an account, you agree to our{" "}
+                {/* <Link href="/terms" className="text-blue-600 hover:underline">
                   Terms of Service
                 </Link>{" "}
-                and{" "}
+                and{" "} */}
                 <Link href="/privacy" className="text-blue-600 hover:underline">
                   Privacy Policy
                 </Link>

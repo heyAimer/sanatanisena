@@ -21,7 +21,6 @@ const usefetchblogs = (endpoint , enabled = true) => {
             const response = await axios.get(`${BASE_URL}${endpoint}`,
                 { withCredentials: true }
             );
-            console.log(response);
             setNextBlog(response?.data?.nextBlog)
             setData(response.data?.data);
         } catch (err) {

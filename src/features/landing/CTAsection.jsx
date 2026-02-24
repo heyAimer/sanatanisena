@@ -36,12 +36,12 @@ const CTAsection = () => {
 
                 {/* CTA Buttons */}
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
+                {/* <Link
                     href="/join"
                     className="btn-primary btn-lg"
                 >
                     Join the Movement
-                </Link>
+                </Link> */}
 
                 <Link
                     href="https://discord.gg/MMHtzjmyp8"
@@ -53,7 +53,7 @@ const CTAsection = () => {
 
                 <Link
                     href="/donate"
-                    className="btn-secondary btn-lg"
+                    className="btn-primary btn-lg"
                 >
                     Support Dharma <span className="ml-1">(सेवा)</span>
                 </Link>

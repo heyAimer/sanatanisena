@@ -38,9 +38,10 @@ export default function History() {
                 }
             );
             toast.success(response.data.message);
-            refetch();
+            setAllBlogs(prev => prev.filter(blog => blog.id !== blogid));
+            
             setShowDeleteModal(false);
-             setDeleteId(null);
+            setDeleteId(null);
         } catch (err) {
             toast.error(err.response?.data?.message || "Please try again.");
         } finally {
