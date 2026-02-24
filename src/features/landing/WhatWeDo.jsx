@@ -37,7 +37,7 @@ export default function WhatWeDo() {
                 {/* Top Left */}
                 <div className="absolute top-24 left-10 w-80 h-80 rounded-full bg-[#ffb366] animate-float-slow" />
 
-                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast sm:flex hidden" />
 
                 {/* Bottom Right */}
                 <div className="absolute bottom-50 right-12 w-[420px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />

@@ -9,7 +9,7 @@ const CTAsection = () => {
                 {/* Top Left */}
                 <div className="absolute top-2 left-20 w-40 h-40 rounded-full bg-[#ffb366] animate-float-slow" />
 
-                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+                <div className="absolute top-48 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast hidden md:flex" />
 
                 {/* Bottom Right */}
                 <div className="absolute bottom-20 right-12 w-[400px] h-[100px] rounded-full bg-[#f28c28] animate-float-slow sm:flex hidden" />
