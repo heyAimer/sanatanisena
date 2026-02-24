@@ -112,76 +112,81 @@ const BlogHistory = ({ slug }) => {
             </div>
             )}
 
+          {isAdmin || !verified && 
             <div className={`text-center space-y-4 flex justify-center items-center bg-[#ffffff] rounded-md px-6 py-4 mt-10 mb-4 gap-6`}>
-            { isAdmin && 
-                (
-                <>
-                    <input
-                    value={title}
-                    onChange={(e) => {
-                        if (e.target.value.length <= TITLE_LIMIT) {
-                        setTitle(e.target.value);
-                        }
-                    }}
-                    className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto h-12"
-                    placeholder="Enter blog title..."
-                    />
-                    <p className={`text-sm mt-1 ${
-                        title.length > TITLE_LIMIT - 10 ? "text-red-500" : "text-gray-400"
-                    }`}>
-                        {title.length}/{TITLE_LIMIT}
-                    </p>
-                </>
-                )
-            
-            }
-            </div>
-              <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
-              {!verified ?
-                  (<MarkdownEditor value={content} onChange={setContent} />)
-                  :
-                  (<MarkdownRenderer content={content} />)
-              }
-              </div>
-
-              <div className={`flex text-sm text-gray-500 mt-10 mb-4 justify-end items-end text-lg px-2`}>
-                  <div className="flex flex-col items-end">
-                      <span>By {blog.author}</span>
-                      {blog.published_at
-                          && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+              (
+              <>
+                  <input
+                  value={title}
+                  onChange={(e) => {
+                      if (e.target.value.length <= TITLE_LIMIT) {
+                      setTitle(e.target.value);
                       }
-                  </div>
-              </div>
-              
-
-              <div className={`pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col ${!verified ? "justify-between" : "justify-center"} justify-between items-center`}>
-              <div>
-                  <p className="text-gray-600 italic">
-                  May this knowledge guide your path.
+                  }}
+                  className="w-full text-xl md:text-3xl font-semibold text-gray-900 sm:text-center outline-none transition my-auto h-12"
+                  placeholder="Enter blog title..."
+                  />
+                  <p className={`text-sm mt-1 ${
+                      title.length > TITLE_LIMIT - 10 ? "text-red-500" : "text-gray-400"
+                  }`}>
+                      {title.length}/{TITLE_LIMIT}
                   </p>
-                  <p className="text-orange-600 font-semibold">
-                  Jai Shree Ram 🚩
-                  </p>
-              </div>
-
-              <button
-                onClick={handleVerifyBlog}
-                disabled={!isContentChanged}
-                className={`flex ${!isContentChanged ? "opacity-0 cursor-not-allowed pointer-events-none" : "cursor-pointer"}
-                px-4 py-2 btn-primary transition text-sm font-semibold sm:text-xl  active:scale-95`}
-                >
-                {!verified &&
-                  (
-                  <div className="flex gap-2 items-center justify-center">
-                      {update? "Updating..." :"Update"}
-                  </div>
-                  )
-                }
-              </button>
-              
-              </div>
+              </>
+              )
             </div>
-        </section>
+          }
+          
+          {verified && 
+            <div className={`text-center space-y-4 flex justify-center items-center bg-[#ffffff] rounded-md px-6 py-4 mt-10 mb-4 gap-6 font-bold sm:text-2xl text-xl`}>
+              {title}
+            </div>
+          }
+          <div className={`rounded-md px-6 py-6 space-y-2 bg-[#ffffff] `}>
+          {!verified ?
+              (<MarkdownEditor value={content} onChange={setContent} />)
+              :
+              (<MarkdownRenderer content={content} />)
+          }
+          </div>
+
+          <div className={`flex text-sm text-gray-500 mt-10 mb-4 justify-end items-end text-lg px-2`}>
+              <div className="flex flex-col items-end">
+                  <span>By {blog.author}</span>
+                  {blog.published_at
+                      && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+                  }
+              </div>
+          </div>
+              
+
+          <div className={`pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col ${!verified ? "justify-between" : "justify-center"} justify-between items-center`}>
+          <div>
+              <p className="text-gray-600 italic">
+              May this knowledge guide your path.
+              </p>
+              <p className="text-orange-600 font-semibold">
+              Jai Shree Ram 🚩
+              </p>
+          </div>
+
+          <button
+            onClick={handleVerifyBlog}
+            disabled={!isContentChanged}
+            className={`flex ${!isContentChanged ? "opacity-0 cursor-not-allowed pointer-events-none" : "cursor-pointer"}
+            px-4 py-2 btn-primary transition text-sm font-semibold sm:text-xl  active:scale-95`}
+            >
+            {!verified &&
+              (
+              <div className="flex gap-2 items-center justify-center">
+                  {update? "Updating..." :"Update"}
+              </div>
+              )
+            }
+          </button>
+          
+          </div>
+        </div>
+      </section>
     )
 }
 
