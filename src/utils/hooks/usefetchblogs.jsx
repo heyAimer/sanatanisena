@@ -11,7 +11,8 @@ const usefetchblogs = (endpoint , enabled = true) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+    const [nextBlog, setNextBlog] = useState("");
+
     const fetchBlogs = useCallback(async () => {
         if (!enabled) return;
         try {
@@ -20,6 +21,8 @@ const usefetchblogs = (endpoint , enabled = true) => {
             const response = await axios.get(`${BASE_URL}${endpoint}`,
                 { withCredentials: true }
             );
+            console.log(response);
+            setNextBlog(response?.data?.nextBlog)
             setData(response.data?.data);
         } catch (err) {
             if (axios.isAxiosError(err)) {
@@ -35,7 +38,7 @@ const usefetchblogs = (endpoint , enabled = true) => {
     }, [fetchBlogs,enabled]);
 
     return {
-        data,loading,error, refetch:fetchBlogs
+        data,nextBlog,loading,error, refetch:fetchBlogs
     }
 }  
 export default usefetchblogs;

@@ -33,9 +33,11 @@ const mockPendingBlogs = [
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function Pending() {
+  const [allBlogs, setAllBlogs] = useState([]);
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [nextBlog, setNextBlog] = useState("");
   const router = useRouter()
   const handleFetcBlogs = async () => {
     try {
@@ -43,11 +45,12 @@ export default function Pending() {
       const response = await axios.get(`${BASE_URL}/blogs?page=0&scope=all`,
         {withCredentials: true}
       );
+      console.log("handlejlsdjf: ", response);
       setData(response.data.data);
     } catch (err) {
       if(axios.isAxiosError(err)) {
         const message = err.response?.data?.message || "Something went wrong. Try again";
-        toast.error(message);
+        setError(message);
         router.push("/")
       }
     } finally {
@@ -55,6 +58,23 @@ export default function Pending() {
     }
   }
 
+  const handleLoadMore = () => {
+    if (loading) return;
+    setPage((prev) => prev + 1);
+  };
+    
+  useEffect(() => {
+    if (data) {
+        setAllBlogs((prev) => {
+        const newBlogs = data.filter(
+            (newBlog) => !prev.some((oldBlog) => oldBlog.id === newBlog.id)
+        );
+
+        return [...prev, ...newBlogs];
+        });
+    }
+  }, [data]);
+  
   useEffect(() => {
     handleFetcBlogs();
   }, []);
@@ -68,7 +88,7 @@ export default function Pending() {
   }
 
   return (
-    <section className="min-h-screen px-10 pb-12 pt-16">
+    <section className="min-h-screen px-10 pb-12 pt-8">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* Header */}
@@ -119,7 +139,7 @@ export default function Pending() {
                       <col className="w-[20%]" />
                     </colgroup>
                     <tbody>
-                      {data.map((blog) => (
+                      {allBlogs.map((blog) => (
                         <tr
                           key={blog.id}
                           className="border-b last:border-b-0 hover:bg-gray-50 transition"
@@ -147,7 +167,7 @@ export default function Pending() {
                   </table>
                 </div>
               </div>
-              
+             
               {/* =============Mobile//tab============ */}
               <div className="lg:hidden">
                 <table className="w-full text-left table-fixed">
@@ -191,9 +211,20 @@ export default function Pending() {
                   </table>
                 </div>
               </div>
+
+              {(
+                <div className="flex justify-center items-center border-t border-gray-200 py-4">
+                  <button className="border-2 border-orange-600 text-orange-600 font-semibold rounded-xl py-2 px-5 sm:text-md text-sm transition-all duration-200 disabled:opacity-50 disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed cursor-pointer my-4" onClick={handleLoadMore} disabled={loading || !nextBlog}>
+                    {loading
+                        ? "Loading..."
+                        : nextBlog
+                            ? "View More"
+                            : "No More Blogs"
+                    }
+                  </button>
+                </div>
+              )}
           </div>
-          
-          
           }
 
         {/* Empty state (when no pending blogs) */}

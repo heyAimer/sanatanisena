@@ -55,7 +55,7 @@ export default function JoinDCsection() {
                         <div className="mx-auto">
                             {/* Heading */}
                             <div className="text-center max-w-3xl mx-auto">
-                                <p className="lg:mt-4 mt-8 text-xl font-semibold">
+                                <p className="lg:mt-4 mt-8 text-xl font-semibold text-[#005F02]">
                                     सत्संग • संवाद • सनातन ज्ञान
                                 </p>
 
@@ -69,7 +69,7 @@ export default function JoinDCsection() {
                                     through meaningful discussions, shared learning, and collective growth.
                                 </p>
 
-                                <p className="mt-4 font-semibold text-[#2E2E2E]">
+                                <p className="mt-4 font-semibold text-[#AA2B1D]">
                                     संगच्छध्वं संवदध्वं
                                 </p>
                             </div>
@@ -89,7 +89,7 @@ export default function JoinDCsection() {
                 
                     <div className="mb-16 lg:mt-0 mt-10">
                         <h3 className=" mb-6 text-xl font-semibold text-gray-900 lg:text-start text-center">
-                            Why Join Our Discord? <span>धर्म संवाद</span>
+                            Why Join Our Discord? <span className="text-[#AA2B1D]">धर्म संवाद</span>
                         </h3>
 
                 

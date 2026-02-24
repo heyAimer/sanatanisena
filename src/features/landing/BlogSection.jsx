@@ -96,7 +96,7 @@ const BlogSection = () => {
                         ))}
                     </div>
                     <Link href="/blogs">
-                        <button className="btn-primary py-3 px-6 text-lg">
+                        <button className="btn-primary py-3 px-6 text-lg cursor-pointer">
                             Read Community Writings
                         </button>
                     </Link>

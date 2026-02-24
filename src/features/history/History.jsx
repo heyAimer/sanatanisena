@@ -7,17 +7,25 @@ import axios from "axios";
 import { Loader2, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function History() {
     const { isUser } = useAuth();
-    const { data, loading, error, refetch } = usefetchblogs("/blogs?page=0&scope=user" , isUser);
+    const [page, setPage] = useState(0);
+    const [allBlogs, setAllBlogs] = useState([]);
+
+    const { data, loading, error, nextBlog, refetch } = usefetchblogs(`/blogs?page=${page}&scope=user` , isUser);
     const [deletingId, setDeletingId] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
+
+    const handleLoadMore = () => {
+        if (loading) return;
+        setPage((prev) => prev + 1);
+    };
 
     const confirmDelete  = async (blogid) => {
         try {
@@ -40,6 +48,18 @@ export default function History() {
         }
     }
 
+    useEffect(() => {
+        if (data) {
+            setAllBlogs((prev) => {
+            const newBlogs = data.filter(
+                (newBlog) => !prev.some((oldBlog) => oldBlog.id === newBlog.id)
+            );
+
+            return [...prev, ...newBlogs];
+            });
+        }
+    }, [data]);
+
     if(error) {
         return (
         <div className="flex flex-col items-center justify-center px-8 mx-auto min-h-screen space-y-6">
@@ -58,14 +78,14 @@ export default function History() {
     }
     
     return (
-        <section className="pb-12 pt-4 sm:py-14">
+        <section className="pb-8 pt-8 sm:py-14">
             <div className="max-w-7xl mx-auto sm:px-6 relative">
                 {data.length > 0 && <>
                     <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 px-4">
                             Your Seva Through Sacred Words
                         </h1>
-                        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+                        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed px-4">
                             View, manage, and revisit every blog you have written — a digital record of your service to Dharma and seekers.
                         </p>
                     </div>
@@ -80,7 +100,7 @@ export default function History() {
                         (
                             <div className = "flex flex-col items-center px-4 py-6">
                                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                    {data.map((blog) => (
+                                    {allBlogs.map((blog) => (
                                         <article
                                             className="rounded-xl border card-sacred" key={blog.id}
                                             >
@@ -143,12 +163,16 @@ export default function History() {
                                     ))}
                                 </div>
 
-                                {isUser && <Link href="/blogs/contribute">
-                                    <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10 cursor-pointer">
-                                        Write a Blog
-                                    </Button>
-                                </Link>}
-                                    
+                                {(
+                                    <button className="btn-secondary py-2 px-5 text-sm sm:text-md mt-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer" onClick={handleLoadMore} disabled={loading || !nextBlog}>
+                                        {loading
+                                            ? "Loading..."
+                                            : nextBlog
+                                                ? "View More"
+                                                : "No More Blogs"
+                                        }
+                                    </button>
+                                )}
                             </div>
                         )
                     }
@@ -166,17 +190,19 @@ export default function History() {
 
                     <div className="max-w-4xl">
                         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-                        Sacred Knowledge is Being Prepared
+                            Echoes of History Are Being Unveiled
                         </h1>
 
                         <p className="text-lg leading-relaxed mt-6 sm:mt-14 sm:mb-10 mb-6">
-                        Our team is working to bring authentic Sanatan Dharma articles,
-                        scriptures, and spiritual wisdom to this space.
-                        Soon, this page will be filled with knowledge that guides the seeker.
+                            Our team is curating well-researched historical narratives,
+                            forgotten civilizations, decisive battles, cultural evolutions,
+                            and the timeless stories that shaped humanity.
+                            Soon, this space will become a gateway to the past —
+                            helping you understand how yesterday defines today.
                         </p>
 
                         <blockquote className="italic ">
-                        “When the student is ready, the teacher appears.”
+                        “Those who cannot remember the past are condemned to repeat it.”
                         </blockquote>
                     </div>
                     <Link href="/blogs/contribute">

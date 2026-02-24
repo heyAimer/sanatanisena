@@ -7,13 +7,32 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 
 const BlogPage = () => {
-    const {data, loading, error, refetch} = usefetchblogs("/public/blogs?page=0");
+    const [page, setPage] = useState(0);
+    const [allBlogs, setAllBlogs] = useState([]);
+    
+    const {data, loading, error,nextBlog, refetch} = usefetchblogs(`/public/blogs?page=${page}`);
     const { isUser } = useAuth();
-
     const pathname = usePathname();
+    
+    const handleLoadMore = () => {
+        if (loading) return;
+        setPage((prev) => prev + 1);
+    };
+    
+   useEffect(() => {
+        if (data) {
+            setAllBlogs((prev) => {
+            const newBlogs = data.filter(
+                (newBlog) => !prev.some((oldBlog) => oldBlog.id === newBlog.id)
+            );
+
+            return [...prev, ...newBlogs];
+            });
+        }
+    }, [data]);
 
     useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,13 +60,13 @@ const BlogPage = () => {
     }
     
     return (
-        <section className="pb-12 pt-4 sm:py-14">
+        <section className="pb-8 pt-8 sm:py-14">
             <div className="absolute inset-0 pointer-events-none -z-10">
 
                 {/* Top Left */}
                 <div className="absolute top-40 left-20 w-60 h-60 rounded-full bg-[#ffb366] animate-float-slow" />
 
-                <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast" />
+                <div className="absolute top-2 left-64 w-36 h-36 rounded-full bg-[#f28c28] animate-float-fast md:flex hidden" />
 
                 {/* Bottom Right */}
                 <div className="absolute bottom-4 right-12 w-[400px] h-[120px] rounded-full bg-[#f28c28] animate-float-slow" />
@@ -56,15 +75,25 @@ const BlogPage = () => {
 
             </div>
             <div className="max-w-7xl mx-auto sm:px-6 relative">
-                <div className="text-center max-w-4xl mx-auto space-y-4 pb-10">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
-                        Sanatan Knowledge Vault
-                    </h1>
-                    <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-                        A curated collection of verified articles on Sanatan Dharma, yoga, scriptures, and timeless wisdom — written to guide, awaken, and inspire every seeker.
-                    </p>
+                <div className="flex flex-col md:flex-row justify-between items-center px-4 md:gap-6">
+                    <div className=" text-center md:text-start max-w-4xl space-y-4 md:pb-10 pb-6">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900">
+                            Sanatan Knowledge Vault
+                        </h1>
+                        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+                            A curated collection of verified articles on Sanatan Dharma, yoga, scriptures, and timeless wisdom — written to guide, awaken, and inspire every seeker.
+                        </p>
+                    </div>
+                
+                    <div className="md:mb-0 sm:mb-8 mb-6">
+                        {isUser && <Link href="/blogs/contribute">
+                            <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md cursor-pointer">
+                                Write a Blog
+                            </Button>
+                        </Link>}
+                    </div>
                 </div>
-
+                
                 {loading ?
                     (
                         <div className="flex flex-col items-center justify-center px-8 mx-auto space-y-6 py-40">
@@ -75,25 +104,23 @@ const BlogPage = () => {
                     (
                         <div className = "flex flex-col items-center px-4 py-6">
                             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                {data.map((blog) => (
+                                {allBlogs.map((blog) => (
                                     <Link href={`/blogs/${blog.id}`} key={blog.id}>
                                         <article
-                                            className="rounded-xl border card-sacred" key={blog.id}
+                                            className="rounded-xl border card-sacred"
                                         >
                                             <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
-
-                                                
-                                                    {blog.cover_image &&
-                                                        <div className="relative h-50 w-full">
-                                                            <Image
-                                                                src={blog.cover_image}
-                                                                alt="image"
-                                                                fill
-                                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                                                className="object-cover w-auto  rounded-t-lg"
-                                                            />
-                                                        </div>
-                                                    }
+                                                {blog.cover_image &&
+                                                    <div className="relative h-50 w-full">
+                                                        <Image
+                                                            src={blog.cover_image}
+                                                            alt="image"
+                                                            fill
+                                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                                            className="object-cover w-auto  rounded-t-lg"
+                                                        />
+                                                    </div>
+                                                }
                                                 <div className="py-4">
                                                     <div className="px-5 space-y-2">
                                                         <h3 className="text-lg font-semibold line-clamp-1">
@@ -122,12 +149,16 @@ const BlogPage = () => {
                                 ))}
                             </div>
 
-                            {isUser && <Link href="/blogs/contribute">
-                                <Button className="btn-primary sm:text-xl sm:py-6 sm:px-5 text-md mt-10">
-                                    Write a Blog
-                                </Button>
-                            </Link>}
-                                
+                            {(
+                                <button className="btn-secondary py-2 px-5 sm:text-md text-sm mt-10  transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer" onClick={handleLoadMore} disabled={loading || !nextBlog}>
+                                    {loading
+                                        ? "Loading..."
+                                        : nextBlog
+                                            ? "View More"
+                                            : "No More Blogs"
+                                    }
+                                </button>
+                            )}    
                         </div>
                     )
                 }

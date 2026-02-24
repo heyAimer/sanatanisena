@@ -251,9 +251,8 @@ const Contribute = () => {
                 </div>
 
                 <div className="flex justify-end">
-
                     <Button
-                        className="md:px-6 md:py-6 btn-primary md:text-lg text-sm"
+                        className="md:px-6 md:py-6 btn-primary md:text-lg text-sm cursor-pointer"
                         onClick={handleCreateBlog}
                         disabled={uploading || !coverUrl}
                     >
