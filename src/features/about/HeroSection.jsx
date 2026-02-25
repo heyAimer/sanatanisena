@@ -11,7 +11,6 @@ const HeroSection = () => {
                         alt="durga maa"
                         width={500}
                         height={500}
-                        priority
                         className="object-cover w-auto h-auto"
                     />
                 </div>

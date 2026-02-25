@@ -62,7 +62,6 @@ const WhatSection = () => {
                                         alt="Sanatani Sena logo"
                                         height={items.height}
                                         width={items.width}
-                                        priority
                                         className="absolute -top-8 left-2 w-auto h-auto"
                                     />
                                     <div className="border border-dullwhite px-4 py-6 rounded-md ">

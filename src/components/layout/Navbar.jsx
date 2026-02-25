@@ -89,7 +89,6 @@ export default function Navbar() {
                         alt="sanatanisena logo"
                         width={45}
                         height={40}
-                        priority
                         className="rounded-full w-auto h-auto"
                     />
                 </Link>
@@ -119,7 +118,6 @@ export default function Navbar() {
                                             alt="profile"
                                             width={25}
                                             height={20}
-                                            priority
                                             className="rounded-full w-auto h-auto cursor-pointer"
                                         />
                                     </DropdownMenuTrigger>

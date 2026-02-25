@@ -14,7 +14,6 @@ export default function SignInPage() {
           alt="sanatanisena logo"
           width={45}
           height={40}
-          priority
           className="rounded-full w-auto h-auto"
         />   
       </Link>

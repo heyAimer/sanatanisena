@@ -46,7 +46,7 @@ const membershipPlans = [
     subtitle: "The Dedicated Practitioner",
     description:
       "A dedicated practitioner on the Sanatani path contributing actively while accessing exclusive spiritual content.",
-    image: "upasak.png",
+    image: "/upasak.png",
     gradient: "from-purple-600/40 via-pink-500/20 to-transparent",
   },
   {
@@ -55,7 +55,7 @@ const membershipPlans = [
     subtitle: "The Spiritual Patron",
     description:
       "A respected patron on the Sanatani path sustaining missions while accessing exclusive spiritual content.",
-    image: "yajman.png",
+    image: "/yajman.png",
     gradient: "from-yellow-600/40 via-green-500/20 to-transparent",
   },
 ];

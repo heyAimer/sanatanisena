@@ -185,7 +185,6 @@ export default function History() {
                         alt="image"
                         width={200}
                         height={100}
-                        priority
                         className = "w-auto h-auto"
                     />
 

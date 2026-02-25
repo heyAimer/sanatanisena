@@ -76,12 +76,9 @@ export default function JoinDCsection() {
                             
                         </div>
                         <div className="lg:flex justify-center items-center hidden">
-                            <Image
+                            <img
                                 src="/discordImg.png"
                                 alt="discord"
-                                width={350}
-                                height={350}
-                                priority
                                 className="w-auto h-auto"
                             />
                         </div>

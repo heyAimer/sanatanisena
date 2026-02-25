@@ -12,7 +12,6 @@ const HeroSection = () => {
                     width={300}
                     height={300}
                     className="z-10 sm:hidden mb-8 w-auto h-auto"
-                    priority
                 />
                 <div className="leading-none flex flex-col gap-8 sm:p-8 sm:text-start text-center sm:items-start items-center">
                     <h2 className="font-sanskrit tracking-wide text-saffron md:text-5xl sm:text-3xl text-2xl font-semibold">सनातनी सेना</h2>
@@ -40,7 +39,6 @@ const HeroSection = () => {
                         md:w-96
                         lg:w-180
                         h-auto"
-                    priority
                 />
             </div>
         </section> 
