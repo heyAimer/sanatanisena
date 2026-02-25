@@ -117,13 +117,10 @@ export default function Footer() {
                 ))}
               </div>
               
-              <a
-                href="mailto:sanatanisenadiscord@gmail.com?subject=Hello%20Sanatani%20Sena&body=I%20want%20to%20join%20your%20community"
-              >
-                <p className="text-sm text-gray-400 sm:ml-[8px]">
-                  sanatanisenadiscord@gmail.com
-                </p>
-              </a>
+              <p className="text-sm text-gray-400 sm:ml-[8px]">
+                sanatanisenadiscord@gmail.com
+              </p>
+              
             </div>
           </div>
 

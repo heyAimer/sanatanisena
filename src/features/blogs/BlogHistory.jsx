@@ -99,18 +99,18 @@ const BlogHistory = ({ slug }) => {
 
     return (
       
-        <section className="w-full py-10 bg-neutral-100">
+      <section className="w-full py-10 bg-neutral-100">
         <div className="max-w-7xl mx-auto px-6">
 
-            {blog.cover_image && (
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-black">
-                <img
-                src={blog.cover_image}
-                alt={title}
-                className="w-full max-h-[500px] object-contain"
-                />
-            </div>
-            )}
+          {blog.cover_image && (
+          <div className="rounded-2xl overflow-hidden shadow-lg bg-black">
+              <img
+              src={blog.cover_image}
+              alt={title}
+              className="w-full max-h-[500px] object-contain"
+              />
+          </div>
+          )}
 
           {isAdmin || !verified && 
             <div className={`text-center space-y-4 flex justify-center items-center bg-[#ffffff] rounded-md px-6 py-4 mt-10 mb-4 gap-6`}>
@@ -150,14 +150,14 @@ const BlogHistory = ({ slug }) => {
           </div>
 
           <div className={`flex text-sm text-gray-500 mt-10 mb-4 justify-end items-end text-lg px-2`}>
-              <div className="flex flex-col items-end">
-                  <span>By {blog.author}</span>
-                  {blog.published_at
-                      && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
-                  }
+            <div className="flex flex-col items-end">
+              <span>By {blog.author}</span>
+              {blog.published_at
+                && <span className="ml-2">{useUTCtoIST(blog.published_at)} </span>
+              }
               </div>
           </div>
-              
+
 
           <div className={`pt-12 border-t border-neutral-300 text-center space-y-4 flex sm:flex-row flex-col ${!verified ? "justify-between" : "justify-center"} justify-between items-center`}>
           <div>
