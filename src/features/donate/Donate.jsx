@@ -120,7 +120,15 @@ export default function Donate() {
               />
             </div>
             
-
+            <div className="w-full flex justify-center items-center">
+              <a
+                href="upi://pay?pa=sanatanreveals@upi&pn=sanatanisena&cu=INR"
+                className="md:hidden block w-fit text-center bg-black text-white py-3 sm:px-20 px-18 rounded-full"
+              >
+                Pay via UPI
+              </a>
+            </div>
+            
             <p className="text-sm text-gray-500">
               Contribute any amount you feel comfortable with.  
               There is no minimum and no obligation.
