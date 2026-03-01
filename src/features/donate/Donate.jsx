@@ -1,4 +1,5 @@
 import MembershipCard from "@/utils/MemberShipCard";
+import Image from "next/image";
 
 const links = [
   {
@@ -110,10 +111,15 @@ export default function Donate() {
           <div className="bg-white border border-gray-200 rounded-2xl sm:p-10 p-8 shadow-sm text-center space-y-6">
             <p className="text-gray-500">Scan to offer your Seva</p>
 
-            {/* Replace with your QR image */}
-            <div className="max-w-56 h-56 mx-auto bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
-              QR Code
+            <div className="w-56 md:w-64 aspect-square mx-auto  overflow-hidden relative">
+              <Image
+                src="/qrcode.jpg"
+                alt="QR Code"
+                fill
+                className="object-cover scale-102"
+              />
             </div>
+            
 
             <p className="text-sm text-gray-500">
               Contribute any amount you feel comfortable with.  
