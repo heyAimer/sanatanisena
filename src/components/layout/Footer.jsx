@@ -1,3 +1,4 @@
+import { StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -116,7 +117,7 @@ export default function Footer() {
                 ))}
               </div>
               
-              <p className="text-sm text-gray-400 sm:ml-[8px]">
+              <p className="text-sm text-gray-400 sm:ml-[8px] ">
                 sanatanisenadiscord@gmail.com
               </p>
               
@@ -126,24 +127,28 @@ export default function Footer() {
         </div>
         
         {/* Bottom Bar */}
-        <div className="mt-10 border-t border-slate-200 pt-6 flex justify-center items-center">
+        <div className="flex justify-between  items-center mt-10 border-t border-slate-200 pb-4 pt-8">
+          <div className="font-semibold">
+            
+            <p className="text-sm text-slate-500">
+              © {new Date().getFullYear()} Sanatani Sena. All rights reserved.
+            </p>
           
-          <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} Sanatani Sena. All rights reserved.
+          </div>
+          <p className="text-sm text-slate-500 font-semibold flex items-center gap-1">
+            Built with care by
+            <a
+              href="https://risingdevs.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative font-semibold text-[#4f7dff] hover:text-[#2B62EF] transition-all duration-300 group"
+            >
+              
+              RisingDevs
+              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#2B62EF] transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </p>
-         
         </div>
-        {/* <div className="mt-6 text-center text-sm text-gray-500">
-          Built with care by{" "}
-          <a
-            href="https://risingdevs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-300 underline underline-offset-2"
-          >
-            RisingDevs
-          </a>
-        </div> */}
       </div>
     </footer>
   );
