@@ -128,7 +128,7 @@ const BlogInfoAdmin = ({ slug }) => {
             <img
             src={blog.cover_image}
             alt={title}
-            className="w-full max-h-[500px] object-contain"
+            className="w-full max-h-[500px] object-cover"
             />
         </div>
         )}

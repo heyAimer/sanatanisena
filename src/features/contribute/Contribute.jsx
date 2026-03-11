@@ -150,11 +150,11 @@ const Contribute = () => {
                     />
 
                     {coverUrl ? (
-                        <div className="w-full rounded-xl overflow-hidden border-2 border-neutral-500 shadow bg-black">
+                        <div className="w-full rounded-xl overflow-hidden border-1 border-neutral-400 shadow bg-black">
                             <img
                             src={coverUrl}
                             alt="Cover preview"
-                            className="w-full max-h-[500px] object-contain"
+                            className="w-full max-h-[500px] object-cover"
                             />
 
                             <label
@@ -177,51 +177,78 @@ const Contribute = () => {
                         Upload a relevant image (Shiva, scripture, temple, etc.)
                     </p>
 
-                    {showCrop && (
-                        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
-                            <div className="p-6 rounded-xl w-[90%] max-w-xl space-y-4">
-                                <div className="relative w-full h-[400px]">
-                                    <Cropper
-                                    image={imageSrc}
-                                    crop={crop}
-                                    zoom={zoom}
-                                    aspect={16 / 9}
-                                    onCropChange={setCrop}
-                                    onZoomChange={setZoom}
-                                    onCropComplete={(_, croppedPixels) => setCroppedAreaPixels(croppedPixels)}
-                                    />
-                                </div>
+                   {showCrop && (
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
 
-                                <input
-                                    type="range"
-                                    min={1}
-                                    max={3}
-                                    step={0.1}
-                                    value={zoom}
-                                    onChange={(e) => setZoom(e.target.value)}
+                            <div className="bg-white w-[95%] max-w-5xl rounded-2xl p-6 space-y-6 shadow-2xl">
+
+                            <h2 className="text-xl font-semibold">
+                                Adjust Cover Image
+                            </h2>
+
+                            <div className="relative w-full h-[500px] rounded-xl overflow-hidden">
+
+                                <Cropper
+                                image={imageSrc}
+                                crop={crop}
+                                zoom={zoom}
+                                aspect={16 / 9}
+                                onCropChange={setCrop}
+                                onZoomChange={setZoom}
+                                onCropComplete={(_, croppedPixels) =>
+                                    setCroppedAreaPixels(croppedPixels)
+                                }
                                 />
 
-                                <div className="flex justify-end gap-3">
-                                    <button
-                                    onClick={() => setShowCrop(false)}
-                                    className="px-4 py-2 rounded-md border"
-                                    >
-                                    Cancel
-                                    </button>
+                            </div>
 
-                                    <button
-                                    onClick={async () => {
-                                        const croppedFile = await getCroppedImg(imageSrc, croppedAreaPixels);
-                                        setCoverFile(croppedFile);
-                                        setShowCrop(false);
-                                    }}
-                                    className="px-4 py-2 bg-orange-600 text-white rounded-md"
-                                    >
-                                    Crop & Upload
-                                    </button>
-                                </div>
+                            <div className="flex items-center gap-4">
+
+                                <span className="text-sm text-neutral-600">
+                                Zoom
+                                </span>
+
+                                <input
+                                type="range"
+                                min={1}
+                                max={3}
+                                step={0.1}
+                                value={zoom}
+                                onChange={(e) => setZoom(e.target.value)}
+                                className="w-full"
+                                />
+
+                            </div>
+
+                            <div className="flex justify-end gap-3">
+
+                                <button
+                                onClick={() => setShowCrop(false)}
+                                className="px-4 py-2 rounded-lg border hover:bg-neutral-100"
+                                >
+                                Cancel
+                                </button>
+
+                                <button
+                                onClick={async () => {
+                                    const croppedFile = await getCroppedImg(
+                                    imageSrc,
+                                    croppedAreaPixels
+                                    );
+
+                                    setCoverFile(croppedFile);
+                                    setShowCrop(false);
+                                }}
+                                className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+                                >
+                                Crop & Upload
+                                </button>
+
+                            </div>
+
                             </div>
                         </div>
+                        
                     )}
 
                 </div>

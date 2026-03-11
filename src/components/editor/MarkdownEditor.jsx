@@ -21,7 +21,7 @@ export default function MarkdownEditor({ value, onChange }) {
   const H2 = { ...heading2, icon: <strong>H2</strong>, name: "H2" };
   const H3 = { ...heading3, icon: <strong>H3</strong>, name: "H3" };
 
-  const MAX_CHARS = 2000;
+  const MAX_CHARS = 10000;
   const countChars = (text = "") => text.length;
 
   return (

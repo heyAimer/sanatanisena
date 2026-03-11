@@ -127,7 +127,7 @@ export default function Footer() {
         </div>
         
         {/* Bottom Bar */}
-        <div className="flex justify-between  items-center mt-10 border-t border-slate-200 pb-4 pt-8">
+        <div className="flex md:flex-row flex-col justify-between items-center mt-10 border-t border-slate-200 pb-4 pt-8">
           <div className="font-semibold">
             
             <p className="text-sm text-slate-500">
@@ -143,7 +143,6 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="relative font-semibold text-[#4f7dff] hover:text-[#2B62EF] transition-all duration-300 group"
             >
-              
               RisingDevs
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#2B62EF] transition-all duration-300 group-hover:w-full"></span>
             </a>
