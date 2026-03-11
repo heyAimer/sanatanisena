@@ -138,7 +138,7 @@ export default function Footer() {
           <p className="text-sm text-slate-500 font-semibold flex items-center gap-1">
             Built with care by
             <a
-              href="https://risingdevs.dev"
+              href="https://www.therisingdevs.com"
               target="_blank"
               rel="noopener noreferrer"
               className="relative font-semibold text-[#4f7dff] hover:text-[#2B62EF] transition-all duration-300 group"
