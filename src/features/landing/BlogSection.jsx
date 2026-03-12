@@ -19,7 +19,7 @@ const blogs = [
     excerpt:
       "The Vedas, dharma is something which holds and supports the universe together and guides societal and individual conduct. The Upaniṣads, dharma is the inner realization of unity, living according to dharma aligns one’s actions with the Self (Ātman) and the ultimate reality (Brahman) to maintain cosmic harmony through right knowledge.",
     category: "Dharma",
-      published_at:"2026-02-01T16:17:39.961021Z",
+      published_at:"2026-02-28T01:17:39.961021Z",
     cover_image: "/basicdharma.png",
     author:"Andro_ez"
   },
@@ -29,7 +29,7 @@ const blogs = [
     excerpt:
       "The belief in and reverence for a supernatural power or powers, regarded as creating and governing the universe. A particular variety of belief in the supernatural , especially when organized into a system of doctrine and practice.",
     category: "Bhakti",
-      published_at:"2026-02-01T16:17:39.961021Z",
+      published_at:"2026-03-10T02:17:39.961021Z",
     cover_image: "/wayoflife.png",
     author:"Mad_max"
   },
@@ -81,8 +81,8 @@ const BlogSection = () => {
                                     
                                     <div className="px-4 flex items-center gap-2 py-2 mt-2">
                                         <img
-                                            src="./bholenath.png"
-                                            className="h-10 w-10 object-cover rounded-full"
+                                            src="./omDark.png"
+                                            className="h-10 w-10 object-cover rounded-full border-2 border-black"
                                         />
                                         <div className="leading-none text-[14px] space-y-1">
                                             <p className="font-semibold">{ blog.author}</p>
