@@ -19,7 +19,7 @@ const BlogInfo = ({ slug }) => {
         `${BASE_URL}/public/bloginfo?blogid=${slug}`,
         {withCredentials: true}
       );
-      
+      console.log(response)
       const blog = response.data.data;
 
       setBlog(blog);

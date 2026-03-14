@@ -3,36 +3,39 @@ import Image from "next/image";
 import Link from "next/link";
 
 const blogs = [
-  {
-    id: 1,
-    title: "Deva, Bhagwān, Iśvara – What’s the Difference?",
-    excerpt:
-      "In everyday conversations, we often use the terms Dev, Bhagwan, and Ishwar interchangeably to refer to the Divine.  But in the world of Sanātana Dharma, these words have very distinct meanings, rooted in deep philosophy and centuries of spiritual understanding.",
-    category: "classification",
-    cover_image: "/whatisdeva.png",
-    published_at:"2026-02-01T16:17:39.961021Z",
-    author:"Hey_aimer"
-  },
-  {
-    id: 2,
-    title: "Sanātana Dharma Basic Guide",
-    excerpt:
-      "The Vedas, dharma is something which holds and supports the universe together and guides societal and individual conduct. The Upaniṣads, dharma is the inner realization of unity, living according to dharma aligns one’s actions with the Self (Ātman) and the ultimate reality (Brahman) to maintain cosmic harmony through right knowledge.",
-    category: "Dharma",
-      published_at:"2026-02-28T01:17:39.961021Z",
-    cover_image: "/basicdharma.png",
-    author:"Andro_ez"
-  },
-  {
-    id: 3,
-    title: "Is Hinduism a religion or a way of life?",
-    excerpt:
-      "The belief in and reverence for a supernatural power or powers, regarded as creating and governing the universe. A particular variety of belief in the supernatural , especially when organized into a system of doctrine and practice.",
-    category: "Bhakti",
-      published_at:"2026-03-10T02:17:39.961021Z",
-    cover_image: "/wayoflife.png",
-    author:"Mad_max"
-  },
+    {
+        id: 1,
+        title: "Deva, Bhagwān, Iśvara – What’s the Difference?",
+        excerpt:
+        "In everyday conversations, we often use the terms Dev, Bhagwan, and Ishwar interchangeably to refer to the Divine.  But in the world of Sanātana Dharma, these words have very distinct meanings, rooted in deep philosophy and centuries of spiritual understanding.",
+        category: "classification",
+        cover_image: "/whatisdeva.png",
+        published_at:"2026-03-14T12:30:31.361253Z",
+            author: "Hey_aimer",
+        link: "94e2d59f-e42b-4e9a-a265-689555d232d6" 
+    },
+    {
+        id: 2,
+        title: "Sanātana Dharma Basic Guide",
+        excerpt:
+        "The Vedas, dharma is something which holds and supports the universe together and guides societal and individual conduct. The Upaniṣads, dharma is the inner realization of unity, living according to dharma aligns one’s actions with the Self (Ātman) and the ultimate reality (Brahman) to maintain cosmic harmony through right knowledge.",
+        category: "Dharma",
+        published_at:"2026-03-14T12:35:41.765863Z",
+        cover_image: "/basicdharma.png",
+        author: "Andro_ez",
+        link:"9057baaf-cb14-4718-907b-e1dc245485a9"
+    },
+    {
+        id: 3,
+        title: "Understanding the basic concept of Karmfal",
+        excerpt:
+        "This post is dedicated to understanding the basic concept of Karmfal — the fruit of action — as taught in our Darshanas. ",
+        category: "Bhakti",
+        published_at:"2026-03-14T12:53:04.958162Z",
+        cover_image: "/karmImg.jpg",
+        author: "Arush_",
+        link:"2caa7f73-a662-424d-b8d0-aec5f47be9da"
+    },
 ];
 
 const BlogSection = () => {
@@ -52,47 +55,49 @@ const BlogSection = () => {
 
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 my-10 ">
                         {blogs.map((blog) => (
-                        <article
-                            className="rounded-xl border card-sacred" key={blog.id}
-                        >
-                            <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
+                            <Link href={`/blogs/${blog.link}`} key={blog.id}>
+                                <article
+                                    className="rounded-xl border card-sacred"
+                                >
+                                    <div className="hover:shadow-lg transition rounded-lg h-90 bg-[#ffffff]">
 
-                                
-                                {blog.cover_image &&
-                                    <div className="relative h-50 w-full">
-                                        <Image
-                                            src={blog.cover_image}
-                                        alt="image"
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        className="object-cover w-auto  rounded-t-lg"
-                                    />
-                                    </div>
-                                }
-                                <div className="py-4">
-                                    <div className="px-5 space-y-2">
-                                        <h3 className="text-lg font-semibold line-clamp-1">
-                                            {blog.title}
-                                        </h3>
-                                    </div>
-                                    <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
-                                            {blog.excerpt}
-                                    </div>
-                                    
-                                    <div className="px-4 flex items-center gap-2 py-2 mt-2">
-                                        <img
-                                            src="./omDark.png"
-                                            className="h-10 w-10 object-cover rounded-full border-2 border-black"
-                                        />
-                                        <div className="leading-none text-[14px] space-y-1">
-                                            <p className="font-semibold">{ blog.author}</p>
-                                            <p>{ useUTCtoIST(blog.published_at)}</p>
+                                        
+                                        {blog.cover_image &&
+                                            <div className="relative h-50 w-full">
+                                                <Image
+                                                    src={blog.cover_image}
+                                                alt="image"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                className="object-cover w-auto  rounded-t-lg"
+                                            />
+                                            </div>
+                                        }
+                                        <div className="py-4">
+                                            <div className="px-5 space-y-2">
+                                                <h3 className="text-lg font-semibold line-clamp-1">
+                                                    {blog.title}
+                                                </h3>
+                                            </div>
+                                            <div className="px-5 space-y-2 text-sm line-clamp-2 leading-5 h-10">
+                                                    {blog.excerpt}
+                                            </div>
+                                            
+                                            <div className="px-4 flex items-center gap-2 py-2 mt-2">
+                                                <img
+                                                    src="./omDark.png"
+                                                    className="h-10 w-10 object-cover rounded-full border-2 border-black"
+                                                />
+                                                <div className="leading-none text-[14px] space-y-1">
+                                                    <p className="font-semibold">{ blog.author}</p>
+                                                    <p>{ useUTCtoIST(blog.published_at)}</p>
+                                                </div>
+                                            </div>
                                         </div>
+                                    
                                     </div>
-                                </div>
-                            
-                            </div>
-                        </article>
+                                </article>
+                            </Link>
                         ))}
                     </div>
                     <Link href="/blogs">

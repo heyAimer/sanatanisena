@@ -133,8 +133,8 @@ const BlogPage = () => {
                                                     
                                                     <div className="px-4 flex items-center gap-2 py-2 mt-2">
                                                         <img
-                                                            src="./bholenath.png"
-                                                            className="h-10 w-10 object-cover rounded-full"
+                                                            src="./omDark.png"
+                                                            className="h-10 w-10 object-cover rounded-full border-2 "
                                                         />
                                                         <div className="leading-none text-[14px] space-y-1">
                                                             <p className="font-semibold">{ blog.author}</p>
