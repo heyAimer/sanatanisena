@@ -20,7 +20,7 @@ export default function SignUpPage() {
       <div className="w-full max-w-md space-y-8 mt-16">
         <AuthHeader
           title="Create your account"
-          description="Run contract risk checks and keep your reports in one place."
+          description="Become a part of Sanatani Sena — a community dedicated to preserving and celebrating Sanatan Dharma."
         />
         <SignUpForm />
       </div>
